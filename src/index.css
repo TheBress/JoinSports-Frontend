@@ -11,3 +11,94 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.error{
+  position: relative;
+  color: red;
+  top: -2%;
+}
+
+.loginButton{
+  width: 250px;
+  border: none;
+  background-color: red;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.input{
+  width: 250px;
+  padding: 7px 0px 7px 25px;
+  font-size: 15px;
+  border-radius: 10px;
+  border:none;
+  background-color: rgb(214, 208, 208);
+}
+
+.input:focus{
+  border-color: greenyellow;
+  outline: none;
+}
+
+.fondo{
+  background-image: url("https://wallpaper.dog/large/10716235.jpg");
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  filter: contrast(70%);
+  z-index: 0;
+}
+
+.login{
+  position: relative;
+  top: -9%;
+}
+
+.showPassword{
+  border:none;
+  background-color: rgb(214, 208, 208);
+  border-radius: 10px;
+}
+
+.formControl{
+  position: relative;
+  top: -10%;
+}
+
+.iconLeft{
+  color: black;
+}
+
+.registrarse{
+  color: white;
+}
+
+.nuevaCuenta{
+  position: relative;
+  top: -5%;
+  font-size: 18px;
+}
+
+.form{
+  z-index: 1;
+}
+
+.descriptionLogin{
+  position: relative;
+  top: -12%;
+  font-size: 13px;
+}
+
+.iconUser{
+  margin-top: 6px;
+  margin-left: 3px;
+}
+
+.forgotPassword{
+  position: relative;
+  color: white;
+  font-size: 12px;
+  top: -16%;
+  left: 50%;
+}
