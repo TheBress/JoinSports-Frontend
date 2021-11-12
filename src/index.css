@@ -15,20 +15,34 @@ code {
 .error{
   position: relative;
   color: red;
+  font-size: 18px;
   top: -2%;
+}
+
+.errorRegister{
+  position: relative;
+  color: red;
+  font-size: 18px;
+  top: -5%;
 }
 
 .loginButton{
   width: 250px;
+  color: white;
   border: none;
-  background-color: red;
-  padding: 5px 15px;
+  background-color: rgb(192, 15, 15);
+  padding: 10px 18px;
   border-radius: 20px;
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.loginButton:hover{
+  background-color: rgb(224, 14, 14);
+  transition: .2s;
 }
 
 .input{
-  width: 250px;
+  width: 320px;
   padding: 7px 0px 7px 25px;
   font-size: 15px;
   border-radius: 10px;
@@ -37,7 +51,7 @@ code {
 }
 
 .input:focus{
-  border-color: greenyellow;
+  background-color: white;
   outline: none;
 }
 
@@ -46,18 +60,17 @@ code {
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  filter: contrast(70%);
-  z-index: 0;
 }
 
 .login{
   position: relative;
+  font-size: 29px;
   top: -9%;
 }
 
 .showPassword{
   border:none;
-  background-color: rgb(214, 208, 208);
+  background-color: transparent;
   border-radius: 10px;
 }
 
@@ -80,25 +93,41 @@ code {
   font-size: 18px;
 }
 
-.form{
-  z-index: 1;
-}
 
 .descriptionLogin{
   position: relative;
   top: -12%;
-  font-size: 13px;
+  font-size: 16px;
+}
+
+.descriptionRegister{
+  position: relative;
+  top: -12%;
+  font-size: 18px;
 }
 
 .iconUser{
   margin-top: 6px;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 
 .forgotPassword{
   position: relative;
   color: white;
-  font-size: 12px;
+  font-size: 14px;
   top: -16%;
-  left: 50%;
+  left: 53%;
+}
+
+.logo{
+  position: absolute;
+  top: 2%;
+}
+
+.blackWall{
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  opacity: .6;
 }
