@@ -1,25 +1,32 @@
-import React from 'react'
-import Header from '../components/Header'
-import {useQuery} from "@apollo/client"
-import { ISAUTH } from '../queries/isAuth';
-import {useHistory} from "react-router-dom"
-import {getToken} from "../config/auth"
-
+import {React} from 'react'
+import Header from '../components/Header/index';
+import { Authentication } from '../functions/authentication';
+import CompleteProfile from '../components/CompleteProfile';
+import IsAuth from '../hooks/isAuth';
+import {Heading} from "@chakra-ui/react"
 
 
 function Home() {
-    const history = useHistory();
-    const isAuthenticated=getToken();
-    const {data} = useQuery(ISAUTH);
-    
-    if(isAuthenticated===null) history.push("/login")
-    
-    
+
+    Authentication();
+
+    const {me}=IsAuth();
+
+
+    let dataUser=me?.meExtended
+
+
+
     return (
-        <div>
-            <Header/>
+        <>
+           <Header/>
            
-        </div>
+           {dataUser?.cityResidence===null || dataUser?.height===null
+           || dataUser?.weigth===null || dataUser?.nationality===null 
+           || dataUser?.favoriteSports.length===0 ||dataUser?.age===null ? <CompleteProfile dataUser={dataUser}/>:(
+            <Heading>Bienvenido de nuevo, {dataUser?.username}</Heading>
+           )}
+           </>
     )
 }
 

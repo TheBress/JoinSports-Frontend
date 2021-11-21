@@ -18,8 +18,9 @@ import { Formik, Form, Field } from "formik";
 import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
-import { REGISTER } from "../mutations/register";
-import {setToken} from "../config/auth"
+import { REGISTER } from "../graphql/mutations/register";
+import {setToken} from "../graphql/config/auth"
+
 
 
 function Register() {
@@ -47,6 +48,7 @@ function Register() {
             })
               .then((data) => {
                 if (data){
+                  setisError(false)
                   const token=data.data.register.jwt;
                   setToken(token);
                   history.push("/")
@@ -56,36 +58,32 @@ function Register() {
           } else setisError("error");
         }}
       >
-        {(props) => (
           <Form>
             <Stack
               justify="center"
               h="60vh"
-              w="50vh"
+              w="60vh"
               align="center"
-              className="form"
             >
-              <Heading className="login">
+              <Heading size="xl" color="white" zIndex="1">
                 Bienvenido a JoinSports
               </Heading>
-              <Text className="descriptionRegister">
-                Introduzca sus datos para crear su cuenta
+              <Text zIndex="1" fontSize="16px">
+                Introduzca sus datos para poder crear su cuenta
               </Text>
 
               <Field name="username">
                 {({ field, form }) => (
-                  <FormControl className="formControl">
-                    <FormLabel htmlFor="username" mb={5}>
+                  <FormControl>
+                    <FormLabel >
                       Nombre de usuario
                     </FormLabel>
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        children={
-                          <FaUserAlt color="black" className="iconUser" />
-                        }
-                      />
-                      <Input className="input" {...field} id="email" />
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<FaUserAlt color="black" />}
+                    />
+                    <Input mb={2} variant="outline" color="black" bg={"primary.300"} size="md" {...field} id="username" borderRadius="20" />
                     </InputGroup>
                   </FormControl>
                 )}
@@ -93,66 +91,38 @@ function Register() {
 
               <Field name="email">
                 {({ field, form }) => (
-                  <FormControl className="formControl">
-                    <FormLabel htmlFor="email" mb={5}>
+                  <FormControl >
+                    <FormLabel>
                       Email (@gmail.com)
                     </FormLabel>
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        children={
-                          <EmailIcon
-                            color="black"
-                            mt={8}
-                            ml={4}
-                            className="iconLeft"
-                          />
-                        }
-                      />
-                      <Input className="input" {...field} id="email" />
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<EmailIcon color="black" />}
+                    />
+                    <Input mb={2} variant="outline" color="black" bg={"primary.300"} size="md" {...field} id="email" borderRadius="20" />
                     </InputGroup>
                   </FormControl>
                 )}
               </Field>
 
               <Field name="password">
-                {({ field, form }) => (
-                  <FormControl className="formControl">
-                    <FormLabel htmlFor="password" mb={5}>
+                {({ field }) => (
+                  <FormControl>
+                    <FormLabel>
                       Contraseña (mín 8)
                     </FormLabel>
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        children={
-                          <LockIcon
-                            color="black"
-                            mt={7}
-                            ml={4}
-                            className="iconLeft"
-                          />
-                        }
-                      />
-                      <Input
-                        className="input"
-                        {...field}
-                        type={show ? "text" : "password"}
-                        id="password"
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button
-                          h="1.75rem"
-                          ml="18"
-                          className="showPassword"
-                          onClick={handleClick}
-                        >
-                          {!show ? (
-                            <ViewIcon mt={4} ml={20} />
-                          ) : (
-                            <ViewOffIcon mt={4} ml={20} />
-                          )}
-                        </Button>
-                      </InputRightElement>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      children={<LockIcon color="black" />}
+                    />
+                    <Input mb={6} type={show ? "text" : "password"} color="black" variant="outline" bg={"primary.300"} size="md" {...field} id="password" borderRadius="20" />
+                    <InputRightElement width="4.5rem">
+                      <Button h="1.50rem" size="md" onClick={handleClick}>
+                        {!show ? <ViewIcon color="black"/> : <ViewOffIcon color="black"/>}
+                      </Button>
+                    </InputRightElement>
                     </InputGroup>
                   </FormControl>
                 )}
@@ -162,12 +132,11 @@ function Register() {
               ) :isError === "error" ? (
                 <p className="errorRegister">Credenciales no permitidas</p>
               ):""}
-              <Button className="loginButton" mt={10} type="submit">
+              <Button color="white" fontSize="25" p="5" borderRadius="20" colorScheme="primary.100" variant="solid" bg="primary.200" type="submit">
                 Crear cuenta
               </Button>
             </Stack>
           </Form>
-        )}
       </Formik>
     </Center>
   );
