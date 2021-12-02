@@ -30,7 +30,7 @@ function Login() {
   const handleClick = () => setShow(!show)
 
   return (
-    <Fade left>
+    <Fade top>
     <Center h="100vh" className="fondo" color="white">
       <div className="blackWall"></div>
       <Image src="logo.png" alt="logo" h="100" className="logo" />

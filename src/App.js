@@ -5,6 +5,9 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import CreateAd from "./pages/CreateAd";
+import YourAds from "./pages/MyAds";
+import MyCalendar from "./pages/MyCalendar";
 
 
 
@@ -21,6 +24,9 @@ function App() {
           <Route component={Register} exact path="/register" />
           <Route component={ForgotPassword} exact path="/forgotPassword" />
           <Route component={Profile} exact path="/profile" />
+          <Route component={CreateAd} exact path="/createad" />
+          <Route component={YourAds} exact path="/yourads" />
+          <Route component={MyCalendar} exact path="/mycalendar" />
           <Redirect to="/" />
         </Switch>
       </Router>

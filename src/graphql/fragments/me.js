@@ -28,12 +28,10 @@ fragment MeExtendedParts on UsersPermissionsUser  {
     favoriteSports{
         ...SportsParts
     }
-    ad{
+    ads{
       ...AdParts
     }
-    image{
-      name
-    }
+    image
   }
   ${SPORTS_FRAGMENT}
   ${AD_FRAGMENT}

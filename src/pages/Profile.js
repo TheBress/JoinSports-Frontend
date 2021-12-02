@@ -96,28 +96,29 @@ function Profile() {
               bg={bg}
               color={color}
               justify="center"
-              h="80vh"
-              w={{base:"60vh",lg:"75vh"}}
+              h={{lg:"80vh",base:"80vh"}}
+              w={{lg:"73vh",base:"60vh"}}
               align="center"
             >
-              <Heading size="xl" zIndex="1" position="relative" top="90px" >
+              <Heading size="xl" zIndex="1" position="relative" top="-50px" >
                 Tu perfil
               </Heading>
               <Flex>
                 <Avatar
-                  position="relative"
-                 top="90px" 
+                position="relative" 
+                  top="-50px"
                   size="md"
                   right="3"
-                  name="Dan Abrahmov"
+                  name={dataUser?.username}
                   src={dataUser?.image?.name}
                 />
-                <Heading size="lg" zIndex="1"  position="relative" top="100px"  >
+                <Heading size="lg" zIndex="1" position="relative" top="-45px"  >
                   {dataUser?.username}
                 </Heading>
               </Flex>
 
-              <FormControl top={{base:"90px",lg:"98px"}} left={{base:"6",lg:"140px"}}>
+          <Flex position="relative" bottom="10">
+              <FormControl>
                 <FormLabel>Email</FormLabel>
                 <InputGroup>
                   <InputLeftElement
@@ -126,13 +127,14 @@ function Profile() {
                   />
                   <Input
                     value={dataUser?.email}
-                    w={{lg:"290px",base:"320px"}}
+                    w={{lg:"290px",base:"230px"}}
                     isDisabled={true}
                     variant="outline"
                     color="black"
                     bg="primary.300"
                     size="md"
                     id="email"
+                    mr="4"
                     borderRadius="20"
                   />
                 </InputGroup>
@@ -140,7 +142,7 @@ function Profile() {
 
               <Field name="cityResidence">
                 {({ field }) => (
-                  <FormControl  top={{base:"95px",lg:"110px"}} left={{base:"6"}}>
+                  <FormControl  >
                     <FormLabel>Ciudad de residencia</FormLabel>
                     <InputGroup>
                       <InputLeftElement
@@ -162,9 +164,11 @@ function Profile() {
                   </FormControl>
                 )}
               </Field>
+              </Flex>
 
-              <FormControl top={{base:"40px",lg:"-28px"}} left={{base:"6",lg:"225px"}}>
-                <FormLabel mt="58px">Edad</FormLabel>
+              <Flex position="relative" bottom="8">
+              <FormControl mr="10">
+                <FormLabel>Edad</FormLabel>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
@@ -194,8 +198,8 @@ function Profile() {
 
               <Field name="height">
                 {({ field }) => (
-                  <FormControl top={{base:"35px",lg:"-116px"}} left={{base:"6",lg:"400px"}}>
-                    <FormLabel mt="2">Altura</FormLabel>
+                  <FormControl >
+                    <FormLabel>Altura</FormLabel>
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
@@ -221,11 +225,13 @@ function Profile() {
                   </FormControl>
                 )}
               </Field>
+              </Flex>
 
+              <Flex position="relative" bottom="6">
               <Field name="weigth">
                 {({ field }) => (
-                  <FormControl top={{base:"35px",lg:"-120px"}} left={{base:"6",lg:"60px"}}>
-                    <FormLabel mt="4">Peso</FormLabel>
+                  <FormControl mr={{lg:"10",base:"4"}}>
+                    <FormLabel>Peso</FormLabel>
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
@@ -253,7 +259,7 @@ function Profile() {
                 )}
               </Field>
 
-              <FormControl top={{base:"35px",lg:"-200px"}} left={{base:"6",lg:"300px"}}>
+              <FormControl>
                 <FormLabel>País de nacimiento</FormLabel>
                 <InputGroup>
                   <InputLeftElement
@@ -272,14 +278,13 @@ function Profile() {
                   />
                 </InputGroup>
               </FormControl>
+              </Flex>
 
+                <Flex>
               <Field name="sports">
                 {({ field }) => (
-                  <FormControl
-                    className="formControl"
-                    top={{base:"35px",lg:"-200px"}} left={{base:"6",lg:"115px"}}
-                  >
-                    <FormLabel ml="6" mt="4">
+                  <FormControl>
+                    <FormLabel>
                       Deportes favoritos
                     </FormLabel>
                     <CheckboxGroup
@@ -302,7 +307,7 @@ function Profile() {
                   </FormControl>
                 )}
               </Field>
-
+                    </Flex>
               {isError ? (
                 <p className="errorComplete">Datos no permitidos</p>
               ) : (
@@ -312,7 +317,7 @@ function Profile() {
 
               <Button
               position="relative"
-              bottom={{lg:"135px"}}
+              top="30px"
               color="white"
               fontSize="25"
               p="5"

@@ -20,6 +20,8 @@ import { useHistory } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { REGISTER } from "../graphql/mutations/register";
 import {setToken} from "../graphql/config/auth"
+import Fade from 'react-reveal/Fade';
+
 
 
 
@@ -31,6 +33,7 @@ function Register() {
   const handleClick = () => setShow(!show);
 
   return (
+    <Fade right>
     <Center h="100vh" className="fondo" color="white">
        <div className="blackWall"></div>
           <Image src="logo.png" alt="logo" h="100"className="logo"/>
@@ -139,6 +142,7 @@ function Register() {
           </Form>
       </Formik>
     </Center>
+    </Fade>
   );
 }
 

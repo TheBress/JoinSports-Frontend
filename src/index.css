@@ -19,6 +19,7 @@ code {
   top: -2%;
 }
 
+
 .errorRegister{
   position: relative;
   color: red;
@@ -31,7 +32,7 @@ code {
   position: relative;
   color: red;
   font-size: 18px;
-  bottom:27%;
+  top:2%;
 }
 
 .errora{

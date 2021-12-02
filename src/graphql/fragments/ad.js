@@ -11,8 +11,16 @@ fragment AdParts on Ads {
     }
     Date
 
-    Image{
-        name
+    image
+    
+    user{
+        username
+        image
+    }
+
+    location{
+        Name
+        Direction
     }
   }
 

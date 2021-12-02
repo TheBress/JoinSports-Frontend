@@ -13,10 +13,10 @@ import {
   useDisclosure,
   Stack,
   Image,
-  useColorMode,
-  useColorModeValue
+  useColorModeValue,
+  useColorMode
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon,SunIcon,MoonIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon,SunIcon,MoonIcon,BellIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { removeToken } from "../../graphql/config/auth";
 import { useHistory } from "react-router-dom";
@@ -25,28 +25,37 @@ import IsAuth from "../../hooks/isAuth";
 export default function Header() {
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const Links = ["Inicio", "Projects", "Team"];
-  const { colorMode, toggleColorMode } = useColorMode();
   const color = useColorModeValue("white")
   const {me}=IsAuth();
+  const { colorMode, toggleColorMode } = useColorMode();
   let dataUser=me?.meExtended
+  const Links = {
+    links:[
+      {name:"Inicio",url:"/"},
+      {name:"Tu calendario",url:"/mycalendar"},
+      {name:"Tus equipos",url:"/"}
+    ]
+  }
 
   const logout = () => {
     removeToken();
     history.push("/login");
   };
 
-  const goProfile = () => {
-    history.push("/profile");
-  };
+  const goProfile = () => {history.push("/profile");};
+  const goCreateAd = () => {history.push("/createad");};
+  const goYourAds = () => {history.push("/yourads");};
+
+
   return (
     <>
       <Box bg="primary.100" px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
+          variant="none"
             bg="transparent"
             size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            icon={isOpen ? <CloseIcon color="white" /> : <HamburgerIcon color="white" />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
@@ -62,11 +71,10 @@ export default function Header() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((link) => (
-                <Link color="red" key={link} to={`/${link}`}>
-                  {link}
-                </Link>
+              {Links.links.map(link=>(
+                <Link to={link.url}>{link.name}</Link>
               ))}
+              <Button bg="primary.200" variant="none" onClick={goCreateAd}>Crear anuncio</Button>
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -74,6 +82,7 @@ export default function Header() {
             <Button mr={{base:"2",lg:"10"}} onClick={toggleColorMode} variant="none">
                 {colorMode === "light" ? <MoonIcon color="white"/> : <SunIcon  color="white"/>}
               </Button>
+            <Button color="white" variant="none" mr={{lg:"8"}} ><BellIcon/></Button>
 
               <MenuButton
                 as={Button}
@@ -82,10 +91,12 @@ export default function Header() {
                 cursor={"pointer"}
                 minW={0}
               >
-                <Avatar size={"sm"} src={dataUser?.image?.name} />
+                <Avatar name={dataUser?.username} src={dataUser?.image?.name} size={"sm"} />
               </MenuButton>
-              <MenuList  bg="primary.100" color="white">
+              <MenuList zIndex="3" bg="primary.100" color="white">
                 <MenuItem _hover={{bg:"primary.100"}} onClick={goProfile}>Tu perfil</MenuItem>
+                <MenuItem _hover={{bg:"primary.100"}} >Tus equipos</MenuItem>
+                <MenuItem _hover={{bg:"primary.100"}} onClick={goYourAds} >Tus anuncios</MenuItem>
                 <MenuDivider />
                 <MenuItem  _hover={{bg:"primary.100"}} onClick={logout}>Cerrar sesión</MenuItem>
               </MenuList>
@@ -95,12 +106,11 @@ export default function Header() {
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
-                <Link key={link} to={`/${link}`}>
-                  {link}
-                </Link>
+            <Stack color="white" as={"nav"} spacing={4}>
+            {Links.links.map(link=>(
+                <Link to={link.url}>{link.name}</Link>
               ))}
+              <Button bg="primary.200" variant="none" onClick={goCreateAd}>Crear anuncio</Button>
             </Stack>
           </Box>
         ) : null}
