@@ -28,9 +28,10 @@ function ForgotPassword() {
         initialValues={{ email: "" }}
         onSubmit={(values) => {
           forgotPassword({ variables: { email: values.email } })
-          .then(data=>{
-              if(data) console.log(data);
-          }).catch(error=>setisError(true))
+            .then((data) => {
+              if (data) console.log(data);
+            })
+            .catch((error) => setisError(true));
         }}
       >
         <Form>
@@ -42,25 +43,32 @@ function ForgotPassword() {
             className="form"
           >
             <Heading size="xl" color="white" zIndex="1">
-                Bienvenido a JoinSports
-              </Heading>
-              <Text zIndex="1" fontSize="16px">
-                Introduzca su correo y password para poder acceder
-              </Text>
+              Bienvenido a JoinSports
+            </Heading>
+            <Text zIndex="1" fontSize="16px">
+              Introduzca su correo y password para poder acceder
+            </Text>
 
             <Field name="email">
               {({ field }) => (
-                <FormControl >
-                  <FormLabel>
-                    Email
-                  </FormLabel>
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
                   <InputGroup>
                     <InputLeftElement
                       pointerEvents="none"
                       children={<EmailIcon color="black" />}
                     />
-                    <Input mb={4} variant="outline" color="black" bg={"primary.300"} size="md" {...field} id="email" borderRadius="20" />
-                    </InputGroup>
+                    <Input
+                      mb={4}
+                      variant="outline"
+                      color="black"
+                      bg={"primary.300"}
+                      size="md"
+                      {...field}
+                      id="email"
+                      borderRadius="20"
+                    />
+                  </InputGroup>
                 </FormControl>
               )}
             </Field>
@@ -71,9 +79,18 @@ function ForgotPassword() {
             ) : (
               ""
             )}
-            <Button color="white" fontSize="25" p="5" borderRadius="20" colorScheme="primary.100" variant="solid" bg="primary.200" type="submit">
-                Enviar
-              </Button>
+            <Button
+              color="white"
+              fontSize="25"
+              p="5"
+              borderRadius="20"
+              colorScheme="primary.100"
+              variant="solid"
+              bg="primary.200"
+              type="submit"
+            >
+              Enviar
+            </Button>
           </Stack>
         </Form>
       </Formik>

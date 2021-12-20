@@ -1,47 +1,45 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.error{
+.error {
   position: relative;
   color: red;
   font-size: 18px;
   top: -2%;
 }
 
-
-.errorRegister{
+.errorRegister {
   position: relative;
   color: red;
   font-size: 18px;
-  top:-2%;
+  top: -2%;
 }
 
-
-.errorComplete{
+.errorComplete {
   position: relative;
   color: red;
   font-size: 18px;
-  top:2%;
+  top: -2%;
 }
 
-.errora{
+.errora {
   color: red;
   position: absolute;
   font-size: 70px;
 }
 
-.loginButton{
+.loginButton {
   width: 250px;
   color: white;
   border: none;
@@ -49,91 +47,90 @@ code {
   padding: 10px 18px;
   border-radius: 20px;
   font-size: 25px;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.loginButton:hover{
+.loginButton:hover {
   background-color: rgb(224, 14, 14);
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.input{
+.input {
   width: 320px;
   padding: 7px 0px 7px 26px;
   font-size: 16px;
   border-radius: 10px;
-  border:none;
+  border: none;
   background-color: rgb(214, 208, 208);
 }
 
-.input:focus{
+.input:focus {
   background-color: white;
   outline: none;
 }
 
-.fondo{
+.fondo {
   background-image: url("https://wallpaper.dog/large/10716235.jpg");
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.login{
+.login {
   position: relative;
   font-size: 29px;
   top: -9%;
 }
 
-.showPassword{
-  border:none;
+.showPassword {
+  border: none;
   background-color: transparent;
   border-radius: 10px;
 }
 
-.formControl{
+.formControl {
   position: relative;
   top: -10%;
 }
 
-.iconLeft{
+.iconLeft {
   color: black;
 }
 
-.registrarse{
+.registrarse {
   color: white;
 }
 
-.nuevaCuenta{
+.nuevaCuenta {
   position: relative;
   top: -5%;
   font-size: 18px;
 }
 
-
-.descriptionLogin{
+.descriptionLogin {
   position: relative;
   top: -12%;
   font-size: 16px;
 }
 
-.descriptionRegister{
+.descriptionRegister {
   position: relative;
   top: -12%;
   font-size: 18px;
 }
 
-.descriptionPassword{
+.descriptionPassword {
   position: relative;
   top: -12%;
   font-size: 16px;
 }
 
-.iconUser{
+.iconUser {
   margin-top: 6px;
   margin-left: 5px;
 }
 
-.forgotPassword{
+.forgotPassword {
   position: relative;
   color: white;
   font-size: 14px;
@@ -141,26 +138,129 @@ code {
   left: 53%;
 }
 
-.logo{
+.logo {
   position: absolute;
   top: 3%;
 }
 
-.blackWall{
+.blackWall {
   position: absolute;
   height: 100vh;
   width: 100%;
   background-color: black;
-  opacity: .6;
+  opacity: 0.6;
 }
 
-.blackWallHome{
+.link {
+  text-decoration: underline white;
+}
+
+.blackWallHome {
   position: absolute;
   height: 100vh;
   width: 100%;
   background-color: black;
-  opacity: .4;
+  opacity: 0.4;
 }
-.fondoHome{
+.fondoHome {
   background-color: rgb(206, 202, 202);
+}
+
+.personal-image {
+  text-align: center;
+  position: relative;
+  bottom: 10px;
+}
+.personal-image input[type="file"] {
+  display: none;
+}
+.personal-figure {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+.personal-avatar {
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.3s;
+}
+
+.heart {
+  position: relative;
+  bottom: 46%;
+  left: 60%;
+}
+
+.location {
+  position: relative;
+  bottom: -25px;
+  left: 36%;
+}
+
+@media (min-width: 500px) and (max-width: 520px) {
+  .heart {
+    position: relative;
+    bottom: 38%;
+    left: 76%;
+  }
+  .location {
+    position: relative;
+    bottom: -25px;
+    left: 12%;
+  }
+}
+
+@media (min-width: 520px) and (max-width: 1150px) {
+  .heart {
+    position: relative;
+    bottom: 46%;
+    left: 70%;
+  }
+  .location {
+    position: relative;
+    bottom: -25px;
+    left: 22%;
+  }
+}
+.personal-avatar2 {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.3s;
+}
+.personal-avatar:hover {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+}
+.personal-figcaption {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out 0.3s;
+  width: 80px;
+  height: 80px;
+}
+.personal-figcaption:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.personal-figcaption > img {
+  position: relative;
+  top: 25px;
+  left: 23px;
+  width: 30px;
+  height: 30px;
 }

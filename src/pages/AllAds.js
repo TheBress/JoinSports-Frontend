@@ -1,18 +1,14 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, Center, Spinner } from "@chakra-ui/react";
 import React from "react";
+import { Fade } from "react-reveal";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
-import { Authentication } from "../functions/authentication";
-import IsAuth from "../hooks/isAuth";
 import { UserAds } from "../hooks/ads";
-import { Spinner, Center, Text } from "@chakra-ui/react";
-import { Fade, Flip } from "react-reveal";
-import { Link } from "react-router-dom";
+import IsAuth from "../hooks/isAuth";
 
-function MyAds() {
-  Authentication();
+function AllAds() {
   const { me } = IsAuth();
-  const { myAds, loading } = UserAds(me?.meExtended.id);
+  const { myAds, loading } = UserAds();
 
   if (loading)
     return (
@@ -37,12 +33,12 @@ function MyAds() {
         textAlign="center"
         gap={5}
       >
-        {myAds?.ads.length !== 0 ? (
-          myAds?.ads.map((ad) => {
+        {myAds?.ads.map((ad) => {
+          if (me?.meExtended.id !== ad.user.id) {
             return (
               <Fade left>
                 <AdCard
-                  edit={true}
+                  edit={false}
                   key={ad.id}
                   id={ad.id}
                   name={ad.Name}
@@ -62,29 +58,11 @@ function MyAds() {
                 />
               </Fade>
             );
-          })
-        ) : (
-          <Center
-            justifyContent="center"
-            textAlign="center"
-            h="91.5vh"
-            w="209.2vh"
-          >
-            <Flip left>
-              <Text fontSize="3xl">
-                No tienes anuncios (puedes crearlos pinchando{" "}
-                <Link className="link" to="/createad">
-                  {" "}
-                  aquí
-                </Link>
-                )
-              </Text>
-            </Flip>
-          </Center>
-        )}
+          }
+        })}
       </Grid>
     </>
   );
 }
 
-export default MyAds;
+export default AllAds;

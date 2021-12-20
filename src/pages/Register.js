@@ -11,7 +11,8 @@ import {
   InputRightElement,
   InputLeftElement,
   Text,
-  Image
+  Image,
+  Spinner,
 } from "@chakra-ui/react";
 import { EmailIcon, ViewIcon, ViewOffIcon, LockIcon } from "@chakra-ui/icons";
 import { Formik, Form, Field } from "formik";
@@ -19,29 +20,30 @@ import { useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { REGISTER } from "../graphql/mutations/register";
-import {setToken} from "../graphql/config/auth"
-import Fade from 'react-reveal/Fade';
-
-
-
+import { setToken } from "../graphql/config/auth";
+import Fade from "react-reveal/Fade";
 
 function Register() {
   let history = useHistory();
-  const [register] = useMutation(REGISTER);
+  const [register, { loading }] = useMutation(REGISTER);
   const [isError, setisError] = useState("");
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
   return (
-    <Fade right>
     <Center h="100vh" className="fondo" color="white">
-       <div className="blackWall"></div>
-          <Image src="logo.png" alt="logo" h="100"className="logo"/>
+      {loading && <Spinner size="xl" position="absolute" />}
+      <div className="blackWall"></div>
+      <Image src="logo.png" alt="logo" h="100" className="logo" />
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
         onSubmit={(values) => {
-          if (/[a-zA-Z0-9]@gmail.com/.test(values.email) && /[A-Z]{1,}[a-z]{1,}[0-9]{1,}/.test(values.password) 
-          && values.password.length>=8 && values.username.length>0) {
+          if (
+            /[a-zA-Z0-9]@gmail.com/.test(values.email) &&
+            /[A-Z]{1,}[a-z]{1,}[0-9]{1,}/.test(values.password) &&
+            values.password.length >= 8 &&
+            values.username.length > 0
+          ) {
             register({
               variables: {
                 email: values.email,
@@ -50,24 +52,20 @@ function Register() {
               },
             })
               .then((data) => {
-                if (data){
-                  setisError(false)
-                  const token=data.data.register.jwt;
+                if (data) {
+                  setisError(false);
+                  const token = data.data.register.jwt;
                   setToken(token);
-                  history.push("/")
-                } 
+                  history.push("/");
+                }
               })
               .catch((error) => setisError("existedUser"));
           } else setisError("error");
         }}
       >
+        <Fade right>
           <Form>
-            <Stack
-              justify="center"
-              h="60vh"
-              w="60vh"
-              align="center"
-            >
+            <Stack justify="center" h="60vh" w="60vh" align="center">
               <Heading size="xl" color="white" zIndex="1">
                 Bienvenido a JoinSports
               </Heading>
@@ -78,15 +76,22 @@ function Register() {
               <Field name="username">
                 {({ field, form }) => (
                   <FormControl>
-                    <FormLabel >
-                      Nombre de usuario
-                    </FormLabel>
+                    <FormLabel>Nombre de usuario</FormLabel>
                     <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<FaUserAlt color="black" />}
-                    />
-                    <Input mb={2} variant="outline" color="black" bg={"primary.300"} size="md" {...field} id="username" borderRadius="20" />
+                      <InputLeftElement
+                        pointerEvents="none"
+                        children={<FaUserAlt color="black" />}
+                      />
+                      <Input
+                        mb={2}
+                        variant="outline"
+                        color="black"
+                        bg={"primary.300"}
+                        size="md"
+                        {...field}
+                        id="username"
+                        borderRadius="20"
+                      />
                     </InputGroup>
                   </FormControl>
                 )}
@@ -94,16 +99,23 @@ function Register() {
 
               <Field name="email">
                 {({ field, form }) => (
-                  <FormControl >
-                    <FormLabel>
-                      Email (@gmail.com)
-                    </FormLabel>
+                  <FormControl>
+                    <FormLabel>Email (@gmail.com)</FormLabel>
                     <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<EmailIcon color="black" />}
-                    />
-                    <Input mb={2} variant="outline" color="black" bg={"primary.300"} size="md" {...field} id="email" borderRadius="20" />
+                      <InputLeftElement
+                        pointerEvents="none"
+                        children={<EmailIcon color="black" />}
+                      />
+                      <Input
+                        mb={2}
+                        variant="outline"
+                        color="black"
+                        bg={"primary.300"}
+                        size="md"
+                        {...field}
+                        id="email"
+                        borderRadius="20"
+                      />
                     </InputGroup>
                   </FormControl>
                 )}
@@ -112,37 +124,60 @@ function Register() {
               <Field name="password">
                 {({ field }) => (
                   <FormControl>
-                    <FormLabel>
-                      Contraseña (mín 8)
-                    </FormLabel>
+                    <FormLabel>Contraseña (mín 8)</FormLabel>
                     <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<LockIcon color="black" />}
-                    />
-                    <Input mb={6} type={show ? "text" : "password"} color="black" variant="outline" bg={"primary.300"} size="md" {...field} id="password" borderRadius="20" />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.50rem" size="md" onClick={handleClick}>
-                        {!show ? <ViewIcon color="black"/> : <ViewOffIcon color="black"/>}
-                      </Button>
-                    </InputRightElement>
+                      <InputLeftElement
+                        pointerEvents="none"
+                        children={<LockIcon color="black" />}
+                      />
+                      <Input
+                        mb={6}
+                        type={show ? "text" : "password"}
+                        color="black"
+                        variant="outline"
+                        bg={"primary.300"}
+                        size="md"
+                        {...field}
+                        id="password"
+                        borderRadius="20"
+                      />
+                      <InputRightElement width="4.5rem">
+                        <Button h="1.50rem" size="md" onClick={handleClick}>
+                          {!show ? (
+                            <ViewIcon color="black" />
+                          ) : (
+                            <ViewOffIcon color="black" />
+                          )}
+                        </Button>
+                      </InputRightElement>
                     </InputGroup>
                   </FormControl>
                 )}
               </Field>
               {isError === "existedUser" ? (
                 <p className="errorRegister">Usuario ya existente</p>
-              ) :isError === "error" ? (
+              ) : isError === "error" ? (
                 <p className="errorRegister">Credenciales no permitidas</p>
-              ):""}
-              <Button color="white" fontSize="25" p="5" borderRadius="20" colorScheme="primary.100" variant="solid" bg="primary.200" type="submit">
+              ) : (
+                ""
+              )}
+              <Button
+                color="white"
+                fontSize="25"
+                p="5"
+                borderRadius="20"
+                colorScheme="primary.100"
+                variant="solid"
+                bg="primary.200"
+                type="submit"
+              >
                 Crear cuenta
               </Button>
             </Stack>
           </Form>
+        </Fade>
       </Formik>
     </Center>
-    </Fade>
   );
 }
 

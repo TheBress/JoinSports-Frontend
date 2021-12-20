@@ -16,12 +16,19 @@ fragment AdParts on Ads {
     user{
         username
         image
+        id
+    }
+
+    requests{
+        id
     }
 
     location{
+        id
         Name
         Direction
     }
+    views
   }
 
   ${SPORTS_FRAGMENT}

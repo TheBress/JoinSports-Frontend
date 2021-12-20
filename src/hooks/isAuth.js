@@ -4,9 +4,8 @@ import { ISAUTH } from "../graphql/queries/isAuth";
 
 const IsAuth = () => {
   const { data, loading } = useQuery(ISAUTH);
-
   const me = useMemo(() => {
-       return data;
+     return data;
   }, [data]);
 
   return {

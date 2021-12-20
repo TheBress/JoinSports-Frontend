@@ -7,3 +7,4 @@ export const Authentication=()=>{
     const isAuthenticated=getToken();
     if(isAuthenticated===null) history.push("/login")
 }
+

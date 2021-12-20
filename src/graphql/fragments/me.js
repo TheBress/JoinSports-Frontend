@@ -19,7 +19,7 @@ fragment MeExtendedParts on UsersPermissionsUser  {
     email
     confirmed
     blocked
-    age
+    birthDate
     height
     weigth
     nationality
@@ -32,6 +32,7 @@ fragment MeExtendedParts on UsersPermissionsUser  {
       ...AdParts
     }
     image
+    description
   }
   ${SPORTS_FRAGMENT}
   ${AD_FRAGMENT}
