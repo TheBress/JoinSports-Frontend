@@ -24,3 +24,14 @@ export const sanitizeDate = (date) => {
     date?.substring(0, positionT) + " " + date?.substring(positionT + 1);
   return newDate;
 };
+
+export const calculateDate = (date) => {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};

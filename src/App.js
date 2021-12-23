@@ -15,6 +15,7 @@ import YourAds from "./pages/MyAds";
 import MyCalendar from "./pages/MyCalendar";
 import AllAds from "./pages/AllAds";
 import AdData from "./pages/AdData";
+import UsersProfiles from "./pages/UsersProfiles";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route component={MyCalendar} exact path="/mycalendar" />
           <Route component={AllAds} exact path="/allads" />
           <Route component={AdData} exact path="/ad/:id" />
+          <Route component={UsersProfiles} exact path="/user/:id" />
+
           <Redirect to="/" />
         </Switch>
       </Router>

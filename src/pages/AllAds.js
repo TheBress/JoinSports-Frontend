@@ -3,10 +3,12 @@ import React from "react";
 import { Fade } from "react-reveal";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
+import { Authentication } from "../functions/authentication";
 import { UserAds } from "../hooks/ads";
 import IsAuth from "../hooks/isAuth";
 
 function AllAds() {
+  Authentication();
   const { me } = IsAuth();
   const { myAds, loading } = UserAds();
 

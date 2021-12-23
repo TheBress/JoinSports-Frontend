@@ -22,10 +22,15 @@ import { FaUserAlt } from "react-icons/fa";
 import { REGISTER } from "../graphql/mutations/register";
 import { setToken } from "../graphql/config/auth";
 import Fade from "react-reveal/Fade";
+import { GET_LATEST_USERS } from "../graphql/queries/users";
+import { ISAUTH } from "../graphql/queries/isAuth";
+import { client } from "../graphql/config/apolloClient";
 
 function Register() {
   let history = useHistory();
-  const [register, { loading }] = useMutation(REGISTER);
+  const [register, { loading }] = useMutation(REGISTER, {
+    refetchQueries: [GET_LATEST_USERS, ISAUTH],
+  });
   const [isError, setisError] = useState("");
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -56,6 +61,7 @@ function Register() {
                   setisError(false);
                   const token = data.data.register.jwt;
                   setToken(token);
+                  client.resetStore();
                   history.push("/");
                 }
               })

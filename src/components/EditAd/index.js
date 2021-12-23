@@ -40,10 +40,10 @@ function EditAd(props) {
   const toast = useToast();
   const { locations } = useLocations();
   const [deleteAd] = useMutation(DELETEAD, {
-    refetchQueries: [{ query: GETADS, query: GET_LAST_ADS }],
+    refetchQueries: [GETADS, GET_LAST_ADS],
   });
   const [updateAd] = useMutation(UPDATEAD, {
-    refetchQueries: [{ query: GETADS, query: GET_LAST_ADS }],
+    refetchQueries: [GETADS, GET_LAST_ADS],
   });
   const [deleteEvent] = useMutation(DELETE_EVENT_CALENDAR, {
     refetchQueries: [{ query: GETEVENTSCALENDAR }],
