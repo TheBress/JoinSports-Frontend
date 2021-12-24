@@ -36,6 +36,7 @@ import Fade from "react-reveal/Fade";
 import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import AWS from "aws-sdk";
 import { GET_LAST_ADS } from "../graphql/queries/getAds";
+import { GetUser } from "../hooks/users";
 
 function CreateAd() {
   Authentication();
@@ -45,7 +46,7 @@ function CreateAd() {
   const { sports } = useSports();
   const { locations } = useLocations();
   const [createAd, { loading }] = useMutation(CREATEAD, {
-    refetchQueries: [{ query: GET_LAST_ADS }],
+    refetchQueries: [GET_LAST_ADS],
   });
   const [createEventCalendar] = useMutation(CREATE_EVENT_CALENDAR);
 
@@ -83,6 +84,7 @@ function CreateAd() {
 
   const { refetchAds } = UserAds(me?.meExtended.id);
   const { refetchEvents } = UserEventsCalendar(me?.meExtended.id);
+  const { refetchUser } = GetUser(me?.meExtended.id);
 
   const bg = useColorModeValue("black", "white");
   const color = useColorModeValue("white", "black");
@@ -161,6 +163,7 @@ function CreateAd() {
                     }).then(() => {
                       refetchEvents();
                       refetchAds();
+                      refetchUser();
                       history.push("/");
                     })
                   );

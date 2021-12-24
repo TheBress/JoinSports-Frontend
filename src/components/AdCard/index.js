@@ -40,7 +40,7 @@ export default function AdCard(props) {
         views: views,
       },
     });
-    history.push(`ad/${props.id}`);
+    history.push(`/ad/${props.id}`);
   };
 
   return (

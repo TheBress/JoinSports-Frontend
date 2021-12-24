@@ -199,28 +199,18 @@ code {
 .location {
   position: relative;
   bottom: -25px;
-  left: 36%;
+  left: 32%;
 }
 
 @media (min-width: 500px) and (max-width: 520px) {
-  .heart {
-    position: relative;
-    bottom: 38%;
-    left: 76%;
-  }
   .location {
     position: relative;
     bottom: -25px;
-    left: 12%;
+    left: 8%;
   }
 }
 
 @media (min-width: 520px) and (max-width: 1150px) {
-  .heart {
-    position: relative;
-    bottom: 46%;
-    left: 70%;
-  }
   .location {
     position: relative;
     bottom: -25px;

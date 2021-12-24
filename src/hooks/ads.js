@@ -5,7 +5,7 @@ import { GETAD, GETADS, GET_LAST_ADS } from "../graphql/queries/getAds";
 export const UserAds = (userId) => {
   const {
     data,
-    loading,
+    loading: loadingAd,
     refetch: refetchAds,
   } = useQuery(GETADS, { variables: { id: userId } });
 
@@ -15,13 +15,17 @@ export const UserAds = (userId) => {
 
   return {
     myAds,
-    loading,
+    loadingAd,
     refetchAds,
   };
 };
 
 export const UserAd = (userId) => {
-  const { data, loading } = useQuery(GETAD, { variables: { id: userId } });
+  const {
+    data,
+    loading,
+    refetch: refetchAd,
+  } = useQuery(GETAD, { variables: { id: userId } });
 
   const Ad = useMemo(() => {
     return data;
@@ -30,6 +34,7 @@ export const UserAd = (userId) => {
   return {
     Ad,
     loading,
+    refetchAd,
   };
 };
 

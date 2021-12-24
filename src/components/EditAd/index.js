@@ -30,20 +30,23 @@ import { UPDATEEVENT } from "../../graphql/mutations/updateEvent";
 import { UserAds } from "../../hooks/ads";
 import { validateDate } from "../../functions/functions";
 import { UserEventsCalendar } from "../../hooks/eventsCalendar";
+import { GetUser } from "../../hooks/users";
 
 function EditAd(props) {
   const { refetchAds } = UserAds(props.props.userId);
   const [isOpen, setisOpen] = useState(true);
   const [isOpenLocation, setisOpenLocation] = useState(false);
   const { refetchEvents } = UserEventsCalendar(props.props.userId);
+  const { refetchUser } = GetUser(props.props.userId);
+
   const { sports } = useSports();
   const toast = useToast();
   const { locations } = useLocations();
   const [deleteAd] = useMutation(DELETEAD, {
-    refetchQueries: [GETADS, GET_LAST_ADS],
+    refetchQueries: [{ query: GETADS }, { query: GET_LAST_ADS }],
   });
   const [updateAd] = useMutation(UPDATEAD, {
-    refetchQueries: [GETADS, GET_LAST_ADS],
+    refetchQueries: [{ query: GETADS }, { query: GET_LAST_ADS }],
   });
   const [deleteEvent] = useMutation(DELETE_EVENT_CALENDAR, {
     refetchQueries: [{ query: GETEVENTSCALENDAR }],
@@ -79,6 +82,7 @@ function EditAd(props) {
       setisOpen(false);
       refetchAds();
       refetchEvents();
+      refetchUser();
     });
   };
 
