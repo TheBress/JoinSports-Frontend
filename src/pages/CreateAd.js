@@ -127,7 +127,6 @@ function CreateAd() {
               onSubmit={(values) => {
                 let isDateValidate = validateDate(values.date);
                 const dotPosition = selectedFile?.name.lastIndexOf(".");
-                console.log(selectedFile);
                 if (
                   values.name !== "" &&
                   values.description !== "" &&

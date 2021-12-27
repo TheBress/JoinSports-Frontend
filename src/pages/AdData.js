@@ -52,6 +52,12 @@ function AdData() {
     onClose: onClose3,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpen4,
+    onOpen: onOpen4,
+    onClose: onClose4,
+  } = useDisclosure();
+
   const [createRequest] = useMutation(CREATEREQUEST);
   const [deleteRequest] = useMutation(DELETEREQUEST);
   const [createNotification] = useMutation(CREATENOTIFICATION);
@@ -138,6 +144,14 @@ function AdData() {
 
   const date = sanitizeDate(adData?.Date);
 
+  let isAcceptedUsers = 0,
+    notAcceptedUsers = 0;
+
+  adData?.requests?.forEach((request) => {
+    if (request?.isAccepted) isAcceptedUsers++;
+    else notAcceptedUsers++;
+  });
+
   if (loadingAd)
     return (
       <Center
@@ -211,7 +225,7 @@ function AdData() {
               {adData?.sport?.Name}
             </Text>
 
-            <Grid templateColumns="repeat(2, 30%)">
+            <Grid templateColumns="repeat(3, 1fr)">
               <Text textAlign="center" fontSize="xl" mt="2">
                 {adData?.views}
                 <ViewIcon ml="2" mr="3" />
@@ -224,8 +238,19 @@ function AdData() {
                 mt="2"
                 cursor="pointer"
               >
-                {adData?.requests?.length}{" "}
-                {adData?.requests?.length !== 1 ? "solicitudes" : "solicitud"}
+                {notAcceptedUsers}{" "}
+                {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
+              </Text>
+
+              <Text
+                textAlign="center"
+                onClick={onOpen4}
+                fontSize="xl"
+                mt="2"
+                cursor="pointer"
+              >
+                {isAcceptedUsers}{" "}
+                {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
               </Text>
             </Grid>
           </Grid>
@@ -319,16 +344,18 @@ function AdData() {
             <Text fontSize="xl" m="2">
               Usuarios inscritos
             </Text>
-            {adData?.requests?.length !== 0 ? (
+            {notAcceptedUsers !== 0 ? (
               adData?.requests.map((request) => {
-                return (
-                  <Text
-                    cursor="pointer"
-                    onClick={() => {
-                      history.push(`/user/${request?.user?.id}`);
-                    }}
-                  >{`${request?.user?.username} (${request?.user?.email})`}</Text>
-                );
+                if (!request?.isAccepted) {
+                  return (
+                    <Text
+                      cursor="pointer"
+                      onClick={() => {
+                        history.push(`/user/${request?.user?.id}`);
+                      }}
+                    >{`${request?.user?.username} (${request?.user?.email})`}</Text>
+                  );
+                }
               })
             ) : (
               <Text>No hay usuarios inscritos</Text>
@@ -336,6 +363,50 @@ function AdData() {
             <Button
               colorScheme="red"
               onClick={onClose3}
+              m="auto"
+              mt="5"
+              mb="5"
+              w="200px"
+            >
+              Cerrar
+            </Button>
+          </ModalContent>
+        </Modal>
+
+        <Modal isOpen={isOpen4} onClose={onClose4}>
+          <ModalContent
+            overflow="auto"
+            h="auto"
+            w="1000px"
+            textAlign="center"
+            position="relative"
+            top="25%"
+          >
+            <Text fontSize="xl" m="2">
+              Usuarios aceptados
+            </Text>
+            {isAcceptedUsers !== 0 ? (
+              adData?.requests?.map((request) => {
+                if (request?.isAccepted) {
+                  return (
+                    <Grid textAlign="center" mb="3" gap="4">
+                      <Text
+                        ml="3"
+                        cursor="pointer"
+                        onClick={() => {
+                          history.push(`/user/${request?.user?.id}`);
+                        }}
+                      >{`${request?.user?.username}`}</Text>
+                    </Grid>
+                  );
+                }
+              })
+            ) : (
+              <Text>No hay usuarios aceptados</Text>
+            )}
+            <Button
+              colorScheme="red"
+              onClick={onClose4}
               m="auto"
               mt="5"
               mb="5"

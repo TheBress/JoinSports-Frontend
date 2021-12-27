@@ -46,6 +46,14 @@ export default function AdCard(props) {
     history.push(`/ad/${props.id}`);
   };
 
+  let isAcceptedUsers = 0,
+    notAcceptedUsers = 0;
+
+  props.requests?.forEach((request) => {
+    if (request?.isAccepted) isAcceptedUsers++;
+    else notAcceptedUsers++;
+  });
+
   return (
     <Center py={6}>
       {isEdited && <EditAd props={props} setisEdited={setisEdited} />}
@@ -105,8 +113,13 @@ export default function AdCard(props) {
             </Text>
 
             <Text position="relative">
-              {props.requests.length}{" "}
-              {props?.requests?.length !== 1 ? "solicitudes" : "solicitud"}
+              {notAcceptedUsers}{" "}
+              {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
+            </Text>
+
+            <Text position="relative">
+              {isAcceptedUsers}{" "}
+              {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
             </Text>
           </Stack>
         </Stack>

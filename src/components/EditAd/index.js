@@ -27,15 +27,19 @@ import { GETADS, GET_LAST_ADS } from "../../graphql/queries/getAds";
 import { GETEVENTSCALENDAR } from "../../graphql/queries/getEventsCalendar";
 import { DELETE_EVENT_CALENDAR } from "../../graphql/mutations/deleteEventCalendar";
 import { UPDATEREQUEST } from "../../graphql/mutations/updateRequest";
+import { DELETEREQUEST } from "../../graphql/mutations/deleteRequest";
 
 import { UPDATEEVENT } from "../../graphql/mutations/updateEvent";
 import { UserAds } from "../../hooks/ads";
-import { validateDate } from "../../functions/functions";
+import { getRandomColor, validateDate } from "../../functions/functions";
 import { UserEventsCalendar } from "../../hooks/eventsCalendar";
 import { GetUser } from "../../hooks/users";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ViewIcon } from "@chakra-ui/icons";
 import { ImLocation } from "react-icons/im";
+import { CREATENOTIFICATION } from "../../graphql/mutations/createNotification";
+import { UserNotifications } from "../../hooks/notifications";
+import { CREATE_EVENT_CALENDAR } from "../../graphql/mutations/createEventCalendar";
 
 function EditAd(props) {
   const { refetchAds } = UserAds(props.userId);
@@ -62,7 +66,13 @@ function EditAd(props) {
   const [deleteAd] = useMutation(DELETEAD, {
     refetchQueries: [{ query: GETADS }, { query: GET_LAST_ADS }],
   });
+  const [createNotification] = useMutation(CREATENOTIFICATION);
+
   const [acceptRequest] = useMutation(UPDATEREQUEST, {
+    refetchQueries: [{ query: GETADS }],
+  });
+
+  const [deleteRequest] = useMutation(DELETEREQUEST, {
     refetchQueries: [{ query: GETADS }],
   });
   const [updateAd] = useMutation(UPDATEAD, {
@@ -82,13 +92,57 @@ function EditAd(props) {
   );
   const [isError, setisError] = useState(false);
 
+  const { refetchNotifications } = UserNotifications(props?.userId);
+  const [createEventCalendar] = useMutation(CREATE_EVENT_CALENDAR);
+
   let idEvent = eventsCalendar?.eventsCalendars[0]?.id;
 
-  const accept = (name, date, user, requestId) => {
+  const accept = (name, date, userId, userName, requestId) => {
+    const messageAccept = `!Tenemos muy buenas noticias para ti ${userName}¡.
+    El usuario ${props?.username} te ha aceptado en su anuncio ${name}.
+    Podrás consultar este evento en tu calendario y en tus anuncios.`;
+
+    let colorEvent = getRandomColor();
+
     acceptRequest({ variables: { id: requestId } });
+    createNotification({
+      variables: {
+        message: messageAccept,
+        userTransmitter: props?.userId,
+        userReceptor: userId,
+        ad: props?.id,
+      },
+    });
+
+    createEventCalendar({
+      variables: {
+        color: colorEvent,
+        to: date,
+        from: date,
+        title: name,
+        userId: userId,
+      },
+    });
+
+    refetchEvents();
+    refetchNotifications();
   };
 
-  const refuse = () => {};
+  const refuse = (requestId, name, userId) => {
+    const messageRefuse = `El usuario ${props?.username} ha considerado que no eres el perfil que busca para su anuncio ${name}.
+    Podrás seguir buscando otra oportunidad en otro anuncio en la sección todos los anuncios.`;
+    deleteRequest({ variables: { id: requestId } });
+
+    createNotification({
+      variables: {
+        message: messageRefuse,
+        userTransmitter: props?.userId,
+        userReceptor: userId,
+        ad: props?.id,
+      },
+    });
+    refetchNotifications();
+  };
 
   const deleteAds = () => {
     deleteEvent({
@@ -411,6 +465,7 @@ function EditAd(props) {
                           props?.name,
                           props?.date,
                           request?.user?.id,
+                          request?.user?.username,
                           request?.id
                         );
                       }}
@@ -421,7 +476,7 @@ function EditAd(props) {
                       colorScheme="red"
                       mr="3"
                       onClick={() => {
-                        refuse();
+                        refuse(request?.id, props?.name, request?.user?.id);
                       }}
                     >
                       Rechazar

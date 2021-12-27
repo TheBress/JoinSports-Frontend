@@ -63,9 +63,8 @@ function Home() {
             <Heading textAlign="center" mt="6" mb="6">
               Bienvenido de nuevo, {dataUser?.username}
             </Heading>
+            <CarouselHome />
           </Fade>
-          <CarouselHome />
-
           <Container maxW="container.xl">
             <Text fontSize="2xl" mt="5">
               Últimos anuncios
