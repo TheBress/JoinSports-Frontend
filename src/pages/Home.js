@@ -17,6 +17,7 @@ import CarouselHome from "../components/Carousel";
 import AdCard from "../components/AdCard";
 import { GetLatestUsers } from "../hooks/users";
 import ProfileCard from "../components/ProfileCard";
+import { UserNotifications } from "../hooks/notifications";
 
 function Home() {
   Authentication();
@@ -26,10 +27,12 @@ function Home() {
   const { LatestUsers } = GetLatestUsers();
   let dataUser = me?.meExtended;
 
+  const { loadingNotification } = UserNotifications(dataUser?.id);
+
   const ads = lastAds?.ads;
   const users = LatestUsers?.users;
 
-  if (loading)
+  if (loading || loadingNotification)
     return (
       <Center
         h="100vh"

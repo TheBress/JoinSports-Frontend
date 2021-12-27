@@ -23,6 +23,22 @@ export const AD_FRAGMENT = gql`
       id
       user {
         id
+        username
+        email
+        image
+      }
+    }
+
+    notifications {
+      id
+      userTransmitter {
+        id
+      }
+      userReceptor {
+        id
+      }
+      ad {
+        id
       }
     }
 

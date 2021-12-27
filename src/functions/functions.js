@@ -25,6 +25,17 @@ export const sanitizeDate = (date) => {
   return newDate;
 };
 
+export const sanitizeCompleteDate = (date) => {
+  const positionT = date?.indexOf("T");
+  const positionDot = date?.indexOf(".");
+
+  const newDate =
+    date?.substring(0, positionT) +
+    " " +
+    date?.substring(positionT + 1, positionDot);
+  return newDate;
+};
+
 export const calculateDate = (date) => {
   var today = new Date();
   var birthDate = new Date(date);

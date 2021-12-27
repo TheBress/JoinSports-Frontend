@@ -126,13 +126,16 @@ function CreateAd() {
               }}
               onSubmit={(values) => {
                 let isDateValidate = validateDate(values.date);
-
+                const dotPosition = selectedFile?.name.lastIndexOf(".");
+                console.log(selectedFile);
                 if (
                   values.name !== "" &&
                   values.description !== "" &&
                   values.sport !== "" &&
                   values.location !== "" &&
-                  isDateValidate
+                  isDateValidate &&
+                  (selectedFile?.name.substring(dotPosition + 1) === "png" ||
+                    selectedFile?.name.substring(dotPosition + 1) === "jpg")
                 ) {
                   // uploadFile(selectedFile); subir imagen a amazon s3
 

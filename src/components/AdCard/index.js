@@ -16,10 +16,12 @@ import { useMutation } from "@apollo/client";
 import { UPDATEAD } from "../../graphql/mutations/updateAd";
 import { GETADS } from "../../graphql/queries/getAds";
 import { sanitizeDate } from "../../functions/functions";
+import IsAuth from "../../hooks/isAuth";
 
 export default function AdCard(props) {
   const history = useHistory();
   const [isEdited, setisEdited] = useState(false);
+  const { me } = IsAuth();
   const { Ad } = UserAd(props.id);
   const [updateAd] = useMutation(UPDATEAD, {
     refetchQueries: [{ query: GETADS }],
@@ -28,18 +30,19 @@ export default function AdCard(props) {
   const newDate = sanitizeDate(props.date);
 
   const editAd = () => {
-    setisEdited(true);
+    history.push(`/ad/${props.id}`);
   };
 
   const goToAd = () => {
     let views = Ad?.ads[0].views + 1;
-
-    updateAd({
-      variables: {
-        id: props.id,
-        views: views,
-      },
-    });
+    if (me?.meExtended.id !== Ad?.ads[0]?.user?.id) {
+      updateAd({
+        variables: {
+          id: props.id,
+          views: views,
+        },
+      });
+    }
     history.push(`/ad/${props.id}`);
   };
 
@@ -101,7 +104,10 @@ export default function AdCard(props) {
               <ViewIcon ml="1" />
             </Text>
 
-            <Text position="relative">{props.requests.length} solicitudes</Text>
+            <Text position="relative">
+              {props.requests.length}{" "}
+              {props?.requests?.length !== 1 ? "solicitudes" : "solicitud"}
+            </Text>
           </Stack>
         </Stack>
       </Box>

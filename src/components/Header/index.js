@@ -14,6 +14,7 @@ import {
   Image,
   useColorModeValue,
   useColorMode,
+  Text,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -27,6 +28,7 @@ import { removeToken } from "../../graphql/config/auth";
 import { useHistory } from "react-router-dom";
 import IsAuth from "../../hooks/isAuth";
 import Bounce from "react-reveal/Bounce";
+import { UserNotifications } from "../../hooks/notifications";
 
 export default function Header() {
   const history = useHistory();
@@ -35,6 +37,7 @@ export default function Header() {
   const { me } = IsAuth();
   const { colorMode, toggleColorMode } = useColorMode();
   let dataUser = me?.meExtended;
+  const { myNotifications } = UserNotifications(dataUser?.id);
   const Links = {
     links: [
       { name: "Inicio", url: "/" },
@@ -57,6 +60,16 @@ export default function Header() {
   const goYourAds = () => {
     history.push("/yourads");
   };
+  const goNotifications = () => {
+    history.push("/notifications");
+  };
+
+  let notSeenNotifications = 0;
+
+  myNotifications?.notifications?.forEach((notification) => {
+    if (!notification?.isSeen) notSeenNotifications++;
+  });
+
   return (
     <>
       <Box bg="primary.100" px={4}>
@@ -112,8 +125,25 @@ export default function Header() {
                   <SunIcon color="white" />
                 )}
               </Button>
-              <Button color="white" variant="none" mr={{ lg: "8" }}>
+              <Button
+                color="white"
+                variant="none"
+                mr={{ lg: "8" }}
+                onClick={goNotifications}
+              >
                 <BellIcon />
+                {notSeenNotifications !== 0 && (
+                  <Text
+                    position="relative"
+                    bottom="2"
+                    bg="primary.200"
+                    p="1"
+                    fontSize="12px"
+                    borderRadius="20"
+                  >
+                    {notSeenNotifications}
+                  </Text>
+                )}
               </Button>
 
               <MenuButton
