@@ -21,6 +21,7 @@ export const AD_FRAGMENT = gql`
 
     requests {
       id
+      isAccepted
       user {
         id
         username

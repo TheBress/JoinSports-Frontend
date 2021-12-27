@@ -26,6 +26,8 @@ import { UPDATEAD } from "../../graphql/mutations/updateAd";
 import { GETADS, GET_LAST_ADS } from "../../graphql/queries/getAds";
 import { GETEVENTSCALENDAR } from "../../graphql/queries/getEventsCalendar";
 import { DELETE_EVENT_CALENDAR } from "../../graphql/mutations/deleteEventCalendar";
+import { UPDATEREQUEST } from "../../graphql/mutations/updateRequest";
+
 import { UPDATEEVENT } from "../../graphql/mutations/updateEvent";
 import { UserAds } from "../../hooks/ads";
 import { validateDate } from "../../functions/functions";
@@ -45,11 +47,23 @@ function EditAd(props) {
     onClose: onClose3,
   } = useDisclosure();
 
+  const {
+    isOpen: isOpen4,
+    onOpen: onOpen4,
+    onClose: onClose4,
+  } = useDisclosure();
+
+  let isAcceptedUsers = 0,
+    notAcceptedUsers = 0;
+
   const { sports } = useSports();
   const toast = useToast();
   const { locations } = useLocations();
   const [deleteAd] = useMutation(DELETEAD, {
     refetchQueries: [{ query: GETADS }, { query: GET_LAST_ADS }],
+  });
+  const [acceptRequest] = useMutation(UPDATEREQUEST, {
+    refetchQueries: [{ query: GETADS }],
   });
   const [updateAd] = useMutation(UPDATEAD, {
     refetchQueries: [{ query: GETADS }, { query: GET_LAST_ADS }],
@@ -69,6 +83,12 @@ function EditAd(props) {
   const [isError, setisError] = useState(false);
 
   let idEvent = eventsCalendar?.eventsCalendars[0]?.id;
+
+  const accept = (name, date, user, requestId) => {
+    acceptRequest({ variables: { id: requestId } });
+  };
+
+  const refuse = () => {};
 
   const deleteAds = () => {
     deleteEvent({
@@ -93,6 +113,11 @@ function EditAd(props) {
   const user = () => {
     history.push(`/user/${props.userId}`);
   };
+
+  props.requests?.forEach((request) => {
+    if (request?.isAccepted) isAcceptedUsers++;
+    else notAcceptedUsers++;
+  });
 
   return (
     <Container maxW="container.xl" h="50vh" justifyContent="center">
@@ -253,7 +278,7 @@ function EditAd(props) {
               )}
             </Field>
 
-            <Grid templateColumns="repeat(2, 30%)">
+            <Grid templateColumns="repeat(3, 1fr)">
               <Text textAlign="center" fontSize="xl" mt="2">
                 {props.views}
                 <ViewIcon ml="2" mr="3" />
@@ -266,8 +291,18 @@ function EditAd(props) {
                 mt="2"
                 cursor="pointer"
               >
-                {props.requests?.length}{" "}
-                {props.requests?.length !== 1 ? "solicitudes" : "solicitud"}
+                {notAcceptedUsers}{" "}
+                {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
+              </Text>
+
+              <Text
+                textAlign="center"
+                fontSize="xl"
+                mt="2"
+                cursor="pointer"
+                onClick={onOpen4}
+              >
+                {isAcceptedUsers} aceptados
               </Text>
             </Grid>
           </Grid>
@@ -342,6 +377,7 @@ function EditAd(props) {
 
       <Modal isOpen={isOpen3} onClose={onClose3}>
         <ModalContent
+          overflow="auto"
           h="auto"
           w="1000px"
           textAlign="center"
@@ -351,16 +387,48 @@ function EditAd(props) {
           <Text fontSize="xl" m="2">
             Usuarios inscritos
           </Text>
-          {props.requests?.length !== 0 ? (
+          {notAcceptedUsers !== 0 ? (
             props.requests?.map((request) => {
-              return (
-                <Text
-                  cursor="pointer"
-                  onClick={() => {
-                    history.push(`/user/${request?.user?.id}`);
-                  }}
-                >{`${request?.user?.username} (${request?.user?.email})`}</Text>
-              );
+              if (!request?.isAccepted) {
+                return (
+                  <Grid
+                    templateColumns="repeat(3,1fr)"
+                    textAlign="center"
+                    mb="3"
+                    gap="4"
+                  >
+                    <Text
+                      ml="3"
+                      cursor="pointer"
+                      onClick={() => {
+                        history.push(`/user/${request?.user?.id}`);
+                      }}
+                    >{`${request?.user?.username}`}</Text>
+                    <Button
+                      colorScheme="green"
+                      onClick={() => {
+                        accept(
+                          props?.name,
+                          props?.date,
+                          request?.user?.id,
+                          request?.id
+                        );
+                      }}
+                    >
+                      Aceptar
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      mr="3"
+                      onClick={() => {
+                        refuse();
+                      }}
+                    >
+                      Rechazar
+                    </Button>
+                  </Grid>
+                );
+              }
             })
           ) : (
             <Text>No hay usuarios inscritos</Text>
@@ -368,6 +436,50 @@ function EditAd(props) {
           <Button
             colorScheme="red"
             onClick={onClose3}
+            m="auto"
+            mt="5"
+            mb="5"
+            w="200px"
+          >
+            Cerrar
+          </Button>
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={isOpen4} onClose={onClose4}>
+        <ModalContent
+          overflow="auto"
+          h="auto"
+          w="1000px"
+          textAlign="center"
+          position="relative"
+          top="25%"
+        >
+          <Text fontSize="xl" m="2">
+            Usuarios aceptados
+          </Text>
+          {isAcceptedUsers !== 0 ? (
+            props.requests?.map((request) => {
+              if (request?.isAccepted) {
+                return (
+                  <Grid textAlign="center" mb="3" gap="4">
+                    <Text
+                      ml="3"
+                      cursor="pointer"
+                      onClick={() => {
+                        history.push(`/user/${request?.user?.id}`);
+                      }}
+                    >{`${request?.user?.username}`}</Text>
+                  </Grid>
+                );
+              }
+            })
+          ) : (
+            <Text>No hay usuarios aceptados</Text>
+          )}
+          <Button
+            colorScheme="red"
+            onClick={onClose4}
             m="auto"
             mt="5"
             mb="5"
