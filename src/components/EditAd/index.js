@@ -356,7 +356,8 @@ function EditAd(props) {
                 cursor="pointer"
                 onClick={onOpen4}
               >
-                {isAcceptedUsers} aceptados
+                {isAcceptedUsers}{" "}
+                {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
               </Text>
             </Grid>
           </Grid>

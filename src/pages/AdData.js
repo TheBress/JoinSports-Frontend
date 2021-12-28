@@ -86,6 +86,13 @@ function AdData() {
       idNotification = notification?.id;
   });
 
+  let isAccepted = false;
+
+  adData?.requests?.forEach((request) => {
+    if (request?.isAccepted && request?.user?.id === dataUser?.id)
+      isAccepted = true;
+  });
+
   const history = useHistory();
 
   const message = `¡Tenemos buenas noticias ${adData?.user?.username}!
@@ -261,7 +268,7 @@ function AdData() {
           </Text>
         </Container>
 
-        {dataUser?.id === adData?.user?.id ? (
+        {dataUser?.id === adData?.user?.id || isAccepted ? (
           ""
         ) : !isSolicited ? (
           <Button

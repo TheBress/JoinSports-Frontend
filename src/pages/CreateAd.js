@@ -133,6 +133,7 @@ function CreateAd() {
                   values.sport !== "" &&
                   values.location !== "" &&
                   isDateValidate &&
+                  selectedFile?.name !== null &&
                   (selectedFile?.name.substring(dotPosition + 1) === "png" ||
                     selectedFile?.name.substring(dotPosition + 1) === "jpg")
                 ) {
