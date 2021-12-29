@@ -16,7 +16,7 @@ import {
   InputLeftElement,
   useToast,
   Flex,
-  Textarea
+  Textarea,
 } from "@chakra-ui/react";
 import { GiWeight, GiPerson } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
@@ -85,9 +85,10 @@ function CompleteProfile(dataUser) {
               values.weigth < 170 &&
               values.sports.length > 0 &&
               values.country !== undefined &&
+              values.birthDate !== undefined &&
               age >= 18 &&
-              age <= 65
-              && values.description!==null
+              age <= 65 &&
+              values.description !== null
             ) {
               updateUserIncomplete({
                 variables: {
@@ -237,11 +238,7 @@ function CompleteProfile(dataUser) {
                   <FormLabel ml="6" mt="4">
                     Descripción personal y deportiva
                   </FormLabel>
-                <Textarea  ml="5"
-                    mr="5"
-                    bg="primary.300"
-                    w="90%"
-                     {...field}/> 
+                  <Textarea ml="5" mr="5" bg="primary.300" w="90%" {...field} />
                 </FormControl>
               )}
             </Field>

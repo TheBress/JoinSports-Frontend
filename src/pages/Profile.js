@@ -87,6 +87,8 @@ function Profile() {
 
   const age = calculateDate(dataUser?.birthDate);
 
+  if (!dataUser) return null;
+
   return (
     <>
       <Header />
@@ -94,11 +96,11 @@ function Profile() {
         <Bounce left>
           <Formik
             initialValues={{
-              cityResidence: dataUser?.cityResidence,
-              height: dataUser?.height,
-              weigth: dataUser?.weigth,
-              description: dataUser?.description,
-              sports: dataUser?.favoriteSports.map((fsport) => {
+              cityResidence: dataUser.cityResidence,
+              height: dataUser.height,
+              weigth: dataUser.weigth,
+              description: dataUser.description,
+              sports: dataUser.favoriteSports.map((fsport) => {
                 return fsport.id;
               }),
             }}

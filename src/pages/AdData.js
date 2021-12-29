@@ -159,7 +159,7 @@ function AdData() {
     else notAcceptedUsers++;
   });
 
-  if (loadingAd)
+  if (loadingAd || !Ad)
     return (
       <Center
         h="100vh"

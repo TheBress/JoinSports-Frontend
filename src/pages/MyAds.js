@@ -14,7 +14,7 @@ function MyAds() {
   const { me } = IsAuth();
   const { myAds, loading } = UserAds(me?.meExtended.id);
 
-  if (loading)
+  if (loading || !myAds)
     return (
       <Center
         h="100vh"

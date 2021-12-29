@@ -29,10 +29,13 @@ export const sanitizeCompleteDate = (date) => {
   const positionT = date?.indexOf("T");
   const positionDot = date?.indexOf(".");
 
+  const goodHour = parseInt(date?.substring(positionT + 1, positionT + 3)) + 1;
+
   const newDate =
     date?.substring(0, positionT) +
     " " +
-    date?.substring(positionT + 1, positionDot);
+    goodHour +
+    date?.substring(positionT + 3, positionDot);
   return newDate;
 };
 

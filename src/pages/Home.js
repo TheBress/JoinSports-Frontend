@@ -71,7 +71,10 @@ function Home() {
             </Text>
 
             <Grid
-              templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(1, 1fr)" }}
+              templateColumns={{
+                lg: "repeat(3, 1fr)",
+                base: "repeat(1, 1fr)",
+              }}
               justifyContent="center"
               textAlign="center"
               gap={5}
@@ -108,7 +111,10 @@ function Home() {
             </Text>
 
             <Grid
-              templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(1, 1fr)" }}
+              templateColumns={{
+                lg: "repeat(3, 1fr)",
+                base: "repeat(1, 1fr)",
+              }}
               justifyContent="center"
               textAlign="center"
               gap={5}

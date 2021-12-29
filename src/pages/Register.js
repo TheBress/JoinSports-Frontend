@@ -23,16 +23,18 @@ import { REGISTER } from "../graphql/mutations/register";
 import { setToken } from "../graphql/config/auth";
 import Fade from "react-reveal/Fade";
 import { GET_LATEST_USERS } from "../graphql/queries/users";
-import { ISAUTH } from "../graphql/queries/isAuth";
 import { client } from "../graphql/config/apolloClient";
+import IsAuth from "../hooks/isAuth";
 
 function Register() {
   let history = useHistory();
   const [register, { loading }] = useMutation(REGISTER, {
-    refetchQueries: [GET_LATEST_USERS, ISAUTH],
+    refetchQueries: [{ query: GET_LATEST_USERS }],
   });
   const [isError, setisError] = useState("");
   const [show, setShow] = React.useState(false);
+  const { refetchUser } = IsAuth();
+
   const handleClick = () => setShow(!show);
 
   return (
@@ -61,8 +63,10 @@ function Register() {
                   setisError(false);
                   const token = data.data.register.jwt;
                   setToken(token);
-                  client.resetStore();
-                  history.push("/");
+                  client.resetStore().then(() => {
+                    refetchUser();
+                    history.push("/");
+                  });
                 }
               })
               .catch((error) => setisError("existedUser"));

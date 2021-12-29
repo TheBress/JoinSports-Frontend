@@ -13,15 +13,17 @@ import AdCard from "../components/AdCard";
 import Header from "../components/Header";
 import { calculateDate } from "../functions/functions";
 import { GetUser } from "../hooks/users";
+import { Authentication } from "../functions/authentication";
 
 function UsersProfiles() {
+  Authentication();
   const { id } = useParams();
   const { User, loading } = GetUser(id);
 
   const user = User?.user;
   const age = calculateDate(user?.birthDate);
 
-  if (loading)
+  if (loading || !User)
     return (
       <Center
         h="100vh"

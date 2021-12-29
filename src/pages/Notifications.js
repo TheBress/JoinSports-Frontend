@@ -9,6 +9,7 @@ import {
   Checkbox,
   Center,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
 import React from "react";
 import Header from "../components/Header";
@@ -18,14 +19,16 @@ import { sanitizeCompleteDate } from "../functions/functions";
 import { useMutation } from "@apollo/client";
 import { UPDATENOTIFICATION } from "../graphql/mutations/updateNotification";
 import { Flip } from "react-reveal";
+import { Authentication } from "../functions/authentication";
 
 function Notifications() {
+  Authentication();
   const { me } = IsAuth();
   let dataUser = me?.meExtended;
 
   const [updateNotification] = useMutation(UPDATENOTIFICATION);
 
-  const { myNotifications, refetchNotifications } = UserNotifications(
+  const { myNotifications, refetchNotifications, loading } = UserNotifications(
     dataUser?.id
   );
 
@@ -42,6 +45,20 @@ function Notifications() {
       refetchNotifications();
     });
   };
+
+  if (loading || !myNotifications)
+    return (
+      <Center
+        h="100vh"
+        w="203.8vh"
+        zIndex="2"
+        position="absolute"
+        bg="black"
+        opacity={0.5}
+      >
+        <Spinner size="xl" />
+      </Center>
+    );
 
   if (myNotifications?.notifications?.length > 0)
     return (

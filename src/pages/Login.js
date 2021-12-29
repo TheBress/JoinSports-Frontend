@@ -22,11 +22,13 @@ import { useHistory, Link } from "react-router-dom";
 import { setToken } from "../graphql/config/auth";
 import { client } from "../graphql/config/apolloClient";
 import Fade from "react-reveal/Fade";
+import IsAuth from "../hooks/isAuth";
 
 function Login() {
   let history = useHistory();
   const [login, { loading }] = useMutation(LOGIN);
   const [isError, setisError] = useState(false);
+  const { refetchUser } = IsAuth();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -49,8 +51,10 @@ function Login() {
                 setisError(false);
                 const token = data.data.login.jwt;
                 setToken(token);
-                client.resetStore();
-                history.push("/");
+                client.resetStore().then(() => {
+                  refetchUser();
+                  history.push("/");
+                });
               }
             })
             .catch(() => setisError(true));
