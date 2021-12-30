@@ -168,7 +168,6 @@ export default function Header() {
                 <MenuItem _hover={{ bg: "primary.100" }} onClick={goProfile}>
                   Tu perfil
                 </MenuItem>
-                <MenuItem _hover={{ bg: "primary.100" }}>Tus equipos</MenuItem>
                 <MenuItem _hover={{ bg: "primary.100" }} onClick={goYourAds}>
                   Tus anuncios
                 </MenuItem>
