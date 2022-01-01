@@ -16,7 +16,7 @@ import {
   Modal,
   useToast,
 } from "@chakra-ui/react";
-import { sanitizeDate } from "../functions/functions";
+import { sanitizeDate, validateDate } from "../functions/functions";
 import { ViewIcon } from "@chakra-ui/icons";
 import { ImLocation } from "react-icons/im";
 import { Authentication } from "../functions/authentication";
@@ -58,8 +58,10 @@ function AdData() {
     onClose: onClose4,
   } = useDisclosure();
 
-  const [createRequest] = useMutation(CREATEREQUEST);
-  const [deleteRequest] = useMutation(DELETEREQUEST);
+  const [createRequest, { loading: loadingCreate }] =
+    useMutation(CREATEREQUEST);
+  const [deleteRequest, { loading: loadingDelete }] =
+    useMutation(DELETEREQUEST);
   const [createNotification] = useMutation(CREATENOTIFICATION);
   const [deleteNotification] = useMutation(DELETE_NOTIFICATION);
 
@@ -101,6 +103,7 @@ function AdData() {
   JoinSports`;
 
   const createNewRequest = () => {
+    onClose();
     createRequest({
       variables: { adId: adData?.id, userId: dataUser?.id },
     }).then(() => {
@@ -121,11 +124,11 @@ function AdData() {
 
       refetchAd();
       refetchNotifications();
-      onClose();
     });
   };
 
   const deleteNewRequest = () => {
+    onClose2();
     deleteRequest({
       variables: { id: idReuqest },
     }).then(() => {
@@ -141,7 +144,6 @@ function AdData() {
 
       refetchAd();
       refetchNotifications();
-      onClose2();
     });
   };
 
@@ -150,6 +152,8 @@ function AdData() {
   };
 
   const date = sanitizeDate(adData?.Date);
+
+  let isDateValidate = validateDate(date);
 
   let isAcceptedUsers = 0,
     notAcceptedUsers = 0;
@@ -177,7 +181,20 @@ function AdData() {
     return (
       <>
         <Header />
-
+        {loadingDelete || loadingCreate ? (
+          <Center
+            h="100%"
+            w="100%"
+            zIndex="2"
+            position="absolute"
+            bg="black"
+            opacity={0.5}
+          >
+            <Spinner size="xl" />
+          </Center>
+        ) : (
+          ""
+        )}
         <Container maxW="container.xl" h="50vh">
           <Image
             src={
@@ -268,7 +285,7 @@ function AdData() {
           </Text>
         </Container>
 
-        {dataUser?.id === adData?.user?.id || isAccepted ? (
+        {dataUser?.id === adData?.user?.id || isAccepted || !isDateValidate ? (
           ""
         ) : !isSolicited ? (
           <Button

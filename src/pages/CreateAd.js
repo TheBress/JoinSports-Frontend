@@ -104,6 +104,7 @@ function CreateAd() {
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
+            mt="5"
             borderRadius="20"
             bg={bg}
             color={color}

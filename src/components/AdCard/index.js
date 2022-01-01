@@ -23,7 +23,7 @@ export default function AdCard(props) {
   const [isEdited, setisEdited] = useState(false);
   const { me } = IsAuth();
   const { Ad } = UserAd(props.id);
-  const [updateAd] = useMutation(UPDATEAD, {
+  const [updateAd, { loading }] = useMutation(UPDATEAD, {
     refetchQueries: [{ query: GETADS }],
   });
 
@@ -43,7 +43,7 @@ export default function AdCard(props) {
         },
       });
     }
-    history.push(`/ad/${props.id}`);
+    if (!loading) history.push(`/ad/${props.id}`);
   };
 
   let isAcceptedUsers = 0,

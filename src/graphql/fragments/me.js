@@ -13,7 +13,7 @@ export const ME_FRAGMENT = gql`
 `;
 
 export const MEEXTENDED_FRAGMENT = gql`
-fragment MeExtendedParts on UsersPermissionsUser  {
+  fragment MeExtendedParts on UsersPermissionsUser {
     id
     username
     email
@@ -25,14 +25,20 @@ fragment MeExtendedParts on UsersPermissionsUser  {
     nationality
     isAdmin
     cityResidence
-    favoriteSports{
-        ...SportsParts
+    favoriteSports {
+      ...SportsParts
     }
-    ads{
+    ads {
       ...AdParts
     }
     image
     description
+    requests {
+      isAccepted
+      ad {
+        ...AdParts
+      }
+    }
   }
   ${SPORTS_FRAGMENT}
   ${AD_FRAGMENT}

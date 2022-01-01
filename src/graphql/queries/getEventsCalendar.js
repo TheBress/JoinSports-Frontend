@@ -14,3 +14,12 @@ export const GETEVENTSCALENDAR = gql`
   }
   ${EVENTS_CALENDAR_FRAGMENT}
 `;
+
+export const GETALLEVENTSCALENDAR = gql`
+  query getAllEventsCalendar {
+    eventsCalendars {
+      ...EventsCalendarFragment
+    }
+  }
+  ${EVENTS_CALENDAR_FRAGMENT}
+`;

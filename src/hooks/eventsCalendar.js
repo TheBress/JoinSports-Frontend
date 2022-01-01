@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { useQuery } from "@apollo/client";
-import { GETEVENTSCALENDAR } from "../graphql/queries/getEventsCalendar";
+import {
+  GETALLEVENTSCALENDAR,
+  GETEVENTSCALENDAR,
+} from "../graphql/queries/getEventsCalendar";
 
 export const UserEventsCalendar = (userId, from, to, title) => {
   const {
@@ -17,6 +20,24 @@ export const UserEventsCalendar = (userId, from, to, title) => {
 
   return {
     eventsCalendar,
+    loading,
+    refetchEvents,
+  };
+};
+
+export const AllEventsCalendar = () => {
+  const {
+    data,
+    loading,
+    refetch: refetchEvents,
+  } = useQuery(GETALLEVENTSCALENDAR);
+
+  const allEventsCalendar = useMemo(() => {
+    return data;
+  }, [data]);
+
+  return {
+    allEventsCalendar,
     loading,
     refetchEvents,
   };

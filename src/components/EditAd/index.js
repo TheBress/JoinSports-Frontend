@@ -32,7 +32,10 @@ import { DELETEREQUEST } from "../../graphql/mutations/deleteRequest";
 import { UPDATEEVENT } from "../../graphql/mutations/updateEvent";
 import { UserAds } from "../../hooks/ads";
 import { getRandomColor, validateDate } from "../../functions/functions";
-import { UserEventsCalendar } from "../../hooks/eventsCalendar";
+import {
+  AllEventsCalendar,
+  UserEventsCalendar,
+} from "../../hooks/eventsCalendar";
 import { GetUser } from "../../hooks/users";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ViewIcon } from "@chakra-ui/icons";
@@ -45,6 +48,8 @@ function EditAd(props) {
   const { refetchAds } = UserAds(props.userId);
   const { refetchEvents } = UserEventsCalendar(props.userId);
   const { refetchUser } = GetUser(props.userId);
+
+  const { allEventsCalendar } = AllEventsCalendar();
   const {
     isOpen: isOpen3,
     onOpen: onOpen3,
@@ -95,8 +100,6 @@ function EditAd(props) {
   const { refetchNotifications } = UserNotifications(props?.userId);
   const [createEventCalendar] = useMutation(CREATE_EVENT_CALENDAR);
 
-  let idEvent = eventsCalendar?.eventsCalendars[0]?.id;
-
   const accept = (name, date, userId, userName, requestId) => {
     const messageAccept = `!Tenemos muy buenas noticias para ti ${userName}¡.
     El usuario ${props?.username} te ha aceptado en su anuncio ${name}.
@@ -145,10 +148,23 @@ function EditAd(props) {
   };
 
   const deleteAds = () => {
-    deleteEvent({
-      variables: {
-        id: idEvent,
-      },
+    updateEvents?.forEach((event) => {
+      deleteEvent({
+        variables: {
+          id: event?.id,
+        },
+      });
+      const messageDelete = `El usuario ${props?.username} ha eliminado su anuncio ${props.name} al que estabas inscrito. 
+            Se ha elimninado de tu calendario y de tus anuncios.`;
+
+      createNotification({
+        variables: {
+          message: messageDelete,
+          userTransmitter: props?.userId,
+          userReceptor: event?.user?.id,
+          ad: props?.id,
+        },
+      });
     });
     deleteAd({
       variables: {
@@ -163,6 +179,12 @@ function EditAd(props) {
   };
 
   const history = useHistory();
+
+  let updateEvents = [];
+
+  allEventsCalendar?.eventsCalendars?.forEach((event) => {
+    if (event?.title === props.name) updateEvents.push(event);
+  });
 
   const user = () => {
     history.push(`/user/${props.userId}`);
@@ -222,13 +244,26 @@ function EditAd(props) {
             values.location !== "" &&
             isDateValidate
           ) {
-            updateEvent({
-              variables: {
-                id: idEvent,
-                from: values.date,
-                to: values.date,
-                title: values.name,
-              },
+            const messageUpdate = `El usuario ${props?.username} ha realizado cambios en su anuncio ${props.name}. 
+            Puedes consultarlos en el calendario o en tus anuncios`;
+            updateEvents?.forEach((event) => {
+              updateEvent({
+                variables: {
+                  id: event?.id,
+                  from: values.date,
+                  to: values.date,
+                  title: values.name,
+                },
+              });
+
+              createNotification({
+                variables: {
+                  message: messageUpdate,
+                  userTransmitter: props?.userId,
+                  userReceptor: event?.user?.id,
+                  ad: props?.id,
+                },
+              });
             });
             updateAd({
               variables: {

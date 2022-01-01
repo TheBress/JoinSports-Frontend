@@ -43,6 +43,8 @@ function CompleteProfile(dataUser) {
     sportsChecked.push(fsport.id);
   });
 
+  if (!datos) return null;
+
   return (
     <Modal isOpen={isOpen}>
       <ModalContent
@@ -84,7 +86,9 @@ function CompleteProfile(dataUser) {
               values.weigth >= 40 &&
               values.weigth < 170 &&
               values.sports.length > 0 &&
-              values.country !== undefined &&
+              values.country !== null &&
+              values.country !== "Elegir" &&
+              values.country !== "" &&
               values.birthDate !== undefined &&
               age >= 18 &&
               age <= 65 &&
@@ -297,7 +301,7 @@ function CompleteProfile(dataUser) {
             )}
             <Button
               position="relative"
-              bottom="-22px"
+              bottom="-10px"
               color="white"
               fontSize="25"
               p="5"
