@@ -82,7 +82,7 @@ function CreateAd() {
     });
   };
 
-  const { refetchAds } = UserAds(me?.meExtended.id);
+  const { refetchAds } = UserAds();
   const { refetchEvents } = UserEventsCalendar(me?.meExtended.id);
   const { refetchUser } = GetUser(me?.meExtended.id);
 

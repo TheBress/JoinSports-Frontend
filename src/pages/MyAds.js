@@ -78,7 +78,7 @@ function MyAds() {
           })}
       </Grid>
 
-      {myAds?.ads.length !== 0 && (
+      {isAcceptedAds.length !== 0 && (
         <Text fontSize="3xl" ml="10" mt="4">
           Anuncios aceptados
         </Text>
@@ -90,7 +90,7 @@ function MyAds() {
         textAlign="center"
         gap={5}
       >
-        {isAcceptedAds !== 0 &&
+        {isAcceptedAds.length !== 0 &&
           isAcceptedAds?.map((ad) => {
             return (
               <Fade left>
@@ -118,7 +118,7 @@ function MyAds() {
           })}
       </Grid>
 
-      {isAcceptedAds === 0 && myAds?.ads.length === 0 && (
+      {isAcceptedAds.length === 0 && myAds?.ads.length === 0 && (
         <Center
           justifyContent="center"
           textAlign="center"
