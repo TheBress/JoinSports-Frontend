@@ -194,8 +194,8 @@ function EditAd(props) {
   const REGION = "eu-west-3";
 
   AWS.config.update({
-    accessKeyId: "AKIARTTSFMLSFSLL6YER",
-    secretAccessKey: "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",
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
   });
 
   const myBucket = new AWS.S3({
