@@ -58,6 +58,11 @@ export default function AdCard(props) {
     <Center py={6}>
       {isEdited && <EditAd props={props} setisEdited={setisEdited} />}
       <Box
+        transition={".3s"}
+        _hover={{
+          transition: ".3s",
+          boxShadow: "7px 7px 20px rgba(33, 39, 24)",
+        }}
         onClick={props.edit ? editAd : goToAd}
         cursor="pointer"
         maxW={"445px"}
@@ -86,7 +91,11 @@ export default function AdCard(props) {
           >
             {props.name}
           </Heading>
-          <Text color={"gray.500"}>{props.description}</Text>
+          <Text color={"gray.500"}>
+            {props.description.length < 112
+              ? props.description
+              : `${props.description.substring(0, 112)}...`}
+          </Text>
         </Stack>
 
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>

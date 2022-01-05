@@ -80,6 +80,9 @@ function Login() {
                         children={<EmailIcon color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#F0F0EE",
+                        }}
                         mb={2}
                         variant="outline"
                         color="black"
@@ -115,6 +118,9 @@ function Login() {
                         children={<LockIcon color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#F0F0EE",
+                        }}
                         mb={6}
                         type={show ? "text" : "password"}
                         color="black"
@@ -130,7 +136,7 @@ function Login() {
                           {!show ? (
                             <ViewIcon color="black" bg="transparent" />
                           ) : (
-                            <ViewOffIcon color="black" />
+                            <ViewOffIcon color="black" bg="transparent" />
                           )}
                         </Button>
                       </InputRightElement>
@@ -157,6 +163,9 @@ function Login() {
                 variant="solid"
                 bg="primary.200"
                 type="submit"
+                _hover={{
+                  background: "red",
+                }}
               >
                 Iniciar sesión
               </Button>

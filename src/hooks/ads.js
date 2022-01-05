@@ -20,6 +20,20 @@ export const UserAds = (userId) => {
   };
 };
 
+export const AllAdsData = () => {
+  const { data, loading: loadingAd, refetch: refetchAllAds } = useQuery(GETADS);
+
+  const allAds = useMemo(() => {
+    return data;
+  }, [data]);
+
+  return {
+    allAds,
+    loadingAd,
+    refetchAllAds,
+  };
+};
+
 export const UserAd = (userId) => {
   const {
     data,

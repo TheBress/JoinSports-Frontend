@@ -93,6 +93,9 @@ function Register() {
                         children={<FaUserAlt color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#F0F0EE",
+                        }}
                         mb={2}
                         variant="outline"
                         color="black"
@@ -117,6 +120,9 @@ function Register() {
                         children={<EmailIcon color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#F0F0EE",
+                        }}
                         mb={2}
                         variant="outline"
                         color="black"
@@ -141,6 +147,9 @@ function Register() {
                         children={<LockIcon color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#F0F0EE",
+                        }}
                         mb={6}
                         type={show ? "text" : "password"}
                         color="black"
@@ -180,6 +189,9 @@ function Register() {
                 variant="solid"
                 bg="primary.200"
                 type="submit"
+                _hover={{
+                  background: "red",
+                }}
               >
                 Crear cuenta
               </Button>

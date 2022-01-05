@@ -9,6 +9,7 @@ export const UPDATEAD = gql`
     $sport: ID
     $location: ID
     $views: Int
+    $image: String
   ) {
     updateAd(
       input: {
@@ -20,6 +21,7 @@ export const UPDATEAD = gql`
           Description: $description
           location: $location
           views: $views
+          image: $image
         }
       }
     ) {

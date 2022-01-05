@@ -33,7 +33,6 @@ function CompleteProfile(dataUser) {
     refetchQueries: [ISAUTH],
   });
 
-  const [isError, setisError] = useState(false);
   const datos = dataUser.dataUser;
   const toast = useToast();
   const [isOpen, setisOpen] = useState(true);
@@ -51,10 +50,10 @@ function CompleteProfile(dataUser) {
         bg="white"
         color="black"
         textAlign="center"
-        h="700px"
+        h="97vh"
         borderRadius="20"
         position="relative"
-        top="10"
+        top="5"
       >
         <Heading as="h3" mt="3">
           Completa tu perfil
@@ -108,7 +107,6 @@ function CompleteProfile(dataUser) {
               })
                 .then((data) => {
                   if (data) {
-                    setisError(false);
                     setisOpen(false);
                     toast({
                       title: "Datos actualizados correctamente",
@@ -118,7 +116,13 @@ function CompleteProfile(dataUser) {
                   }
                 })
                 .catch((error) => console.log(error));
-            } else setisError(true);
+            } else {
+              toast({
+                title: "Datos erróneos",
+                status: "error",
+                duration: 2000,
+              });
+            }
           }}
         >
           <Form>
@@ -133,6 +137,9 @@ function CompleteProfile(dataUser) {
                         children={<FaCity />}
                       />
                       <Input
+                        _focus={{
+                          background: "#E0E0DE",
+                        }}
                         variant="outline"
                         color="black"
                         bg={"primary.300"}
@@ -152,11 +159,10 @@ function CompleteProfile(dataUser) {
                   <FormControl>
                     <FormLabel>Fecha de nacimiento</FormLabel>
                     <InputGroup>
-                      <InputLeftElement
-                        pointerEvents="none"
-                        children={<FaCity />}
-                      />
                       <Input
+                        _focus={{
+                          background: "#E0E0DE",
+                        }}
                         type="date"
                         variant="outline"
                         color="black"
@@ -184,6 +190,9 @@ function CompleteProfile(dataUser) {
                         children={<GiPerson />}
                       />
                       <Input
+                        _focus={{
+                          background: "#E0E0DE",
+                        }}
                         type="number"
                         variant="outline"
                         w="125px"
@@ -214,6 +223,9 @@ function CompleteProfile(dataUser) {
                         children={<GiWeight color="black" />}
                       />
                       <Input
+                        _focus={{
+                          background: "#E0E0DE",
+                        }}
                         type="number"
                         variant="outline"
                         w="125px"
@@ -242,7 +254,16 @@ function CompleteProfile(dataUser) {
                   <FormLabel ml="6" mt="4">
                     Descripción personal y deportiva
                   </FormLabel>
-                  <Textarea ml="5" mr="5" bg="primary.300" w="90%" {...field} />
+                  <Textarea
+                    ml="5"
+                    mr="5"
+                    bg="primary.300"
+                    w="90%"
+                    _focus={{
+                      background: "#E0E0DE",
+                    }}
+                    {...field}
+                  />
                 </FormControl>
               )}
             </Field>
@@ -294,11 +315,6 @@ function CompleteProfile(dataUser) {
               )}
             </Field>
 
-            {isError ? (
-              <p className="errorComplete">Datos no permitidos</p>
-            ) : (
-              ""
-            )}
             <Button
               position="relative"
               bottom="-10px"

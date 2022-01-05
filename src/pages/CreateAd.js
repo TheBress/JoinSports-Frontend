@@ -31,7 +31,7 @@ import { CREATE_EVENT_CALENDAR } from "../graphql/mutations/createEventCalendar"
 import { useHistory } from "react-router-dom";
 
 import { getRandomColor, validateDate } from "../functions/functions";
-import { UserAds } from "../hooks/ads";
+import { UserAds, AllAdsData } from "../hooks/ads";
 import Fade from "react-reveal/Fade";
 import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import AWS from "aws-sdk";
@@ -82,14 +82,14 @@ function CreateAd() {
     });
   };
 
-  const { refetchAds } = UserAds();
+  const { refetchAds } = UserAds(me?.meExtended.id);
+  const { refetchAllAds } = AllAdsData();
   const { refetchEvents } = UserEventsCalendar(me?.meExtended.id);
   const { refetchUser } = GetUser(me?.meExtended.id);
 
   const bg = useColorModeValue("black", "white");
   const color = useColorModeValue("white", "black");
   const [isOpen, setisOpen] = useState(false);
-  const [isError, setisError] = useState(false);
 
   const nLocation = () => {
     setisOpen(true);
@@ -100,11 +100,12 @@ function CreateAd() {
   return (
     <>
       <Header />
-      <Center h="90vh">
+      <Center h="92vh">
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
-            mt="5"
+            position="relative"
+            top="8vh"
             borderRadius="20"
             bg={bg}
             color={color}
@@ -168,10 +169,17 @@ function CreateAd() {
                       refetchEvents();
                       refetchAds();
                       refetchUser();
+                      refetchAllAds();
                       history.push("/");
                     })
                   );
-                } else setisError(true);
+                } else {
+                  toast({
+                    title: "Datos no permitidos",
+                    status: "error",
+                    duration: 2000,
+                  });
+                }
               }}
             >
               <Form>
@@ -186,6 +194,9 @@ function CreateAd() {
                             children={<EmailIcon color="black" />}
                           />
                           <Input
+                            _focus={{
+                              background: "#E0E0DE",
+                            }}
                             mb={2}
                             variant="outline"
                             color="black"
@@ -204,6 +215,9 @@ function CreateAd() {
                       <FormControl>
                         <FormLabel>Descripción</FormLabel>
                         <Textarea
+                          _focus={{
+                            background: "#E0E0DE",
+                          }}
                           variant="outline"
                           color="black"
                           bg={"primary.300"}
@@ -217,7 +231,11 @@ function CreateAd() {
 
                   <FormControl>
                     <FormLabel>Imagen</FormLabel>
-                    <Input type="file" onChange={handleFileInput} />
+                    <Input
+                      type="file"
+                      border="none"
+                      onChange={handleFileInput}
+                    />
                   </FormControl>
 
                   <Field name="date">
@@ -230,6 +248,9 @@ function CreateAd() {
                             children={<BsFillCalendarDateFill color="black" />}
                           />
                           <Input
+                            _focus={{
+                              background: "#E0E0DE",
+                            }}
                             type="datetime-local"
                             variant="outline"
                             color="black"
@@ -248,6 +269,7 @@ function CreateAd() {
                       <FormControl>
                         <FormLabel>Deporte</FormLabel>
                         <Select
+                          mb={2}
                           ml="5"
                           mr="5"
                           bg="primary.300"
@@ -283,6 +305,7 @@ function CreateAd() {
                         <Select
                           ml="5"
                           mr="5"
+                          mb={2}
                           bg="primary.300"
                           w="100"
                           color="black"
@@ -303,14 +326,6 @@ function CreateAd() {
                     )}
                   </Field>
 
-                  {isError ? (
-                    <Text color="red" textAlign="center">
-                      Datos no permitidos
-                    </Text>
-                  ) : (
-                    ""
-                  )}
-
                   <Button
                     color="white"
                     fontSize="25"
@@ -320,6 +335,9 @@ function CreateAd() {
                     variant="solid"
                     bg="primary.200"
                     type="submit"
+                    _hover={{
+                      background: "red",
+                    }}
                   >
                     Crear anuncio
                   </Button>

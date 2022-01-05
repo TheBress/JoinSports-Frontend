@@ -1,14 +1,8 @@
 import { gql } from "@apollo/client";
 
-
-
-export const SPORTS_FRAGMENT=gql`
-    fragment SportsParts on Sports{
-        id
-        Name
-        numberPlayers
-        Image{
-           name
-        }
-    }
-`
+export const SPORTS_FRAGMENT = gql`
+  fragment SportsParts on Sports {
+    id
+    Name
+  }
+`;

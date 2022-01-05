@@ -55,7 +55,7 @@ function UsersProfiles() {
             className="personal-avatar"
           />
 
-          <Text fontSize="4xl" w={{ base: "470%", lg: "1000%" }} ml="2" mt="4">
+          <Text fontSize="4xl" w={{ base: "380%", lg: "1000%" }} ml="2" mt="4">
             {user?.username} ({user?.email})
           </Text>
         </Grid>
@@ -92,9 +92,15 @@ function UsersProfiles() {
         </Grid>
 
         <Divider colorScheme="white" mt="4" />
-
+        <Text fontSize="2xl" mt="2" textAlign="center">
+          Deportes favoritos
+        </Text>
         <Grid
-          templateColumns={`repeat(${user?.favoriteSports?.length},1fr)`}
+          templateColumns={
+            user?.favoriteSports?.length <= 3
+              ? `repeat(${user?.favoriteSports?.length},auto)`
+              : "repeat(3,auto)"
+          }
           textAlign="center"
         >
           {user?.favoriteSports?.map((sport) => {

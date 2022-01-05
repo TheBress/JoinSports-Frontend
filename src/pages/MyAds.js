@@ -47,6 +47,8 @@ function MyAds() {
       <Grid
         templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(1, 1fr)" }}
         justifyContent="center"
+        ml={{ lg: "10" }}
+        p={{ base: "5", lg: "0" }}
         textAlign="center"
         gap={5}
       >
@@ -88,6 +90,8 @@ function MyAds() {
         templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(1, 1fr)" }}
         justifyContent="center"
         textAlign="center"
+        ml={{ lg: "10" }}
+        p={{ base: "5", lg: "0" }}
         gap={5}
       >
         {isAcceptedAds.length !== 0 &&
@@ -122,8 +126,8 @@ function MyAds() {
         <Center
           justifyContent="center"
           textAlign="center"
-          h="91.5vh"
-          w="209.2vh"
+          h={{ lg: "90.5vh", base: "70vh" }}
+          w="auto"
         >
           <Flip left>
             <Text fontSize="3xl">

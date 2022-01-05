@@ -8,6 +8,7 @@ import {
   Button,
   Badge,
   useColorModeValue,
+  Grid,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
@@ -21,7 +22,12 @@ export default function ProfileCard(props) {
   return (
     <Center py={6}>
       <Box
+        _hover={{
+          transition: ".3s",
+          boxShadow: "7px 7px 20px rgba(33, 39, 24)",
+        }}
         maxW={"320px"}
+        transition={".3s"}
         w={"full"}
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
@@ -51,17 +57,21 @@ export default function ProfileCard(props) {
           color={useColorModeValue("gray.700", "gray.400")}
           px={3}
         >
-          {props.description}
+          {props.description?.length < 60
+            ? props.description
+            : `${props.description?.substring(0, 60)}...`}
         </Text>
 
         <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
-          {props.sports.map((sport) => {
-            return (
-              <Badge px={2} py={1} fontWeight={"400"}>
-                {sport?.Name}
-              </Badge>
-            );
-          })}
+          <Grid templateColumns="repeat(3,auto)" gap="2">
+            {props.sports.map((sport) => {
+              return (
+                <Badge px={2} py={1} fontWeight={"400"}>
+                  {sport?.Name}
+                </Badge>
+              );
+            })}
+          </Grid>
         </Stack>
 
         <Stack mt={8} direction={"row"} spacing={4}>

@@ -30,7 +30,6 @@ code {
   position: relative;
   color: red;
   font-size: 18px;
-  top: 1%;
 }
 
 .errora {
@@ -169,7 +168,7 @@ code {
 .personal-image {
   text-align: center;
   position: relative;
-  bottom: 10px;
+  bottom: -5px;
 }
 .personal-image input[type="file"] {
   display: none;
@@ -179,6 +178,12 @@ code {
   width: 120px;
   height: 120px;
 }
+
+.personal-figure2 {
+  margin-top: 5px;
+  width: 100%;
+}
+
 .personal-avatar {
   cursor: pointer;
   width: 80px;
@@ -188,6 +193,13 @@ code {
   border: 2px solid transparent;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   transition: all ease-in-out 0.3s;
+}
+
+.personal-avatar3 {
+  cursor: pointer;
+
+  width: 100%;
+  height: 300px;
 }
 
 .heart {
@@ -202,21 +214,6 @@ code {
   left: 32%;
 }
 
-@media (min-width: 500px) and (max-width: 520px) {
-  .location {
-    position: relative;
-    bottom: -25px;
-    left: 8%;
-  }
-}
-
-@media (min-width: 520px) and (max-width: 1150px) {
-  .location {
-    position: relative;
-    bottom: -25px;
-    left: 22%;
-  }
-}
 .personal-avatar2 {
   cursor: pointer;
   width: 45px;
@@ -253,4 +250,44 @@ code {
   left: 23px;
   width: 30px;
   height: 30px;
+}
+
+.personal-figcaption2 {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  width: inherit;
+  height: inherit;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out 0.3s;
+  width: 100%;
+  height: 100%;
+}
+.personal-figcaption2:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.personal-figcaption2 > img {
+  position: relative;
+  top: 38%;
+  left: 45%;
+  width: 100px;
+  height: 100px;
+}
+
+@media (max-width: 575.98px) {
+  .personal-figcaption2 > img {
+    position: relative;
+    top: 34%;
+    left: 35%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .location {
+    position: relative;
+    bottom: -25px;
+    left: 0%;
+  }
 }

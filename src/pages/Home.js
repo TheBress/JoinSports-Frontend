@@ -65,6 +65,7 @@ function Home() {
             </Heading>
             <CarouselHome />
           </Fade>
+
           <Container maxW="container.xl">
             <Text fontSize="2xl" mt="5">
               Últimos anuncios
@@ -84,6 +85,7 @@ function Home() {
                   <Fade left>
                     <AdCard
                       edit={false}
+                      isHome={true}
                       key={ad.id}
                       id={ad.id}
                       name={ad.Name}

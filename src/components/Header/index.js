@@ -103,11 +103,27 @@ export default function Header() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.links.map((link) => (
-                <Link key={link.name} to={link.url}>
-                  {link.name}
+                <Link to={link.url}>
+                  <Text
+                    transition=".2s"
+                    color="white"
+                    _hover={{
+                      transition: ".3s",
+                      color: "#CACBC7",
+                    }}
+                  >
+                    {link.name}
+                  </Text>
                 </Link>
               ))}
-              <Button bg="primary.200" variant="none" onClick={goCreateAd}>
+              <Button
+                bg="primary.200"
+                _hover={{
+                  background: "red",
+                }}
+                variant="none"
+                onClick={goCreateAd}
+              >
                 Crear anuncio
               </Button>
             </HStack>
@@ -164,16 +180,44 @@ export default function Header() {
                   alt="avatar"
                 />
               </MenuButton>
-              <MenuList zIndex="3" bg="primary.100" color="white">
+              <MenuList zIndex="3" bg="primary.100" color="white" h="18.7vh">
                 <MenuItem _hover={{ bg: "primary.100" }} onClick={goProfile}>
-                  Tu perfil
+                  <Text
+                    transition=".3s"
+                    color="white"
+                    _hover={{
+                      transition: ".3s",
+                      color: "#CACBC7",
+                    }}
+                  >
+                    Tu perfil
+                  </Text>
                 </MenuItem>
                 <MenuItem _hover={{ bg: "primary.100" }} onClick={goYourAds}>
-                  Tus anuncios
+                  <Text
+                    transition=".2s"
+                    color="white"
+                    _hover={{
+                      transition: ".2s",
+                      color: "#CACBC7",
+                    }}
+                  >
+                    Tus anuncios
+                  </Text>
                 </MenuItem>
                 <MenuDivider />
-                <MenuItem _hover={{ bg: "primary.100" }} onClick={logout}>
-                  Cerrar sesión
+                <MenuItem
+                  position="relative"
+                  top="-1.3vh"
+                  bg="primary.200"
+                  transition=".3s"
+                  _hover={{
+                    transition: ".3s",
+                    background: "red",
+                  }}
+                  onClick={logout}
+                >
+                  <Text color="white">Cerrar sesión</Text>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -182,11 +226,30 @@ export default function Header() {
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack color="white" as={"nav"} spacing={4}>
+            <Stack as={"nav"} spacing={4}>
               {Links.links.map((link) => (
-                <Link to={link.url}>{link.name}</Link>
+                <Link to={link.url}>
+                  <Text
+                    transition=".3s"
+                    color="white"
+                    _hover={{
+                      transition: ".3s",
+                      color: "#CACBC7",
+                    }}
+                  >
+                    {link.name}
+                  </Text>
+                </Link>
               ))}
-              <Button bg="primary.200" variant="none" onClick={goCreateAd}>
+              <Button
+                bg="primary.200"
+                color="white"
+                _hover={{
+                  background: "red",
+                }}
+                variant="none"
+                onClick={goCreateAd}
+              >
                 Crear anuncio
               </Button>
             </Stack>

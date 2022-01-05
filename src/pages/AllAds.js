@@ -22,13 +22,13 @@ import { Fade } from "react-reveal";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
 import { Authentication } from "../functions/authentication";
-import { UserAds } from "../hooks/ads";
+import { AllAdsData } from "../hooks/ads";
 import IsAuth from "../hooks/isAuth";
 import { FaFilter } from "react-icons/fa";
 
 function AllAds() {
   Authentication();
-  const { myAds, loading } = UserAds();
+  const { allAds, loading } = AllAdsData();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const { me } = IsAuth();
@@ -58,11 +58,11 @@ function AllAds() {
   };
 
   useEffect(() => {
-    let myAdsList = myAds?.ads?.filter(
+    let myAdsList = allAds?.ads?.filter(
       (ad) => !isChecked && !ad?.user?.id?.includes(dataUser?.id)
     );
 
-    isChecked && (myAdsList = myAds?.ads);
+    isChecked && (myAdsList = allAds?.ads);
 
     const results = myAdsList?.filter(
       (ad) =>
@@ -99,9 +99,9 @@ function AllAds() {
     }
 
     setSearchResults(results);
-  }, [searchTerm, myAds?.ads, isChecked, dataUser?.id, value, value2]);
+  }, [searchTerm, allAds?.ads, isChecked, dataUser?.id, value, value2]);
 
-  if (loading || !myAds)
+  if (loading || !allAds)
     return (
       <Center
         h="100vh"
@@ -190,6 +190,7 @@ function AllAds() {
       </Drawer>
 
       <Grid
+        p="5"
         templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(1, 1fr)" }}
         justifyContent="center"
         textAlign="center"
@@ -225,7 +226,7 @@ function AllAds() {
           <Center
             h="86vh"
             textAlign="center"
-            w={{ base: "74.6vh", lg: "203.8vh" }}
+            w={{ base: "63.6vh", lg: "203.8vh" }}
           >
             <Text fontSize="4xl">No hay anuncios</Text>
           </Center>
