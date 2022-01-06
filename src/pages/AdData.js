@@ -16,6 +16,7 @@ import {
   Modal,
   useToast,
   Stack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { sanitizeDate, validateDate } from "../functions/functions";
 import { ViewIcon } from "@chakra-ui/icons";
@@ -123,6 +124,8 @@ function AdData() {
     });
   };
 
+  const color = useColorModeValue("black", "white");
+
   const deleteNewRequest = () => {
     onClose2();
     deleteRequest({
@@ -196,7 +199,7 @@ function AdData() {
           <Grid
             templateColumns="repeat(2,1fr)"
             cursor="pointer"
-            _hover={{ textDecoration: "underline white" }}
+            _hover={{ textDecoration: `underline ${color}` }}
             onClick={user}
           >
             <Image
@@ -228,7 +231,7 @@ function AdData() {
             h="90%"
           />
 
-          <Stack h={{ lg: "43vh", base: "52vh" }}>
+          <Stack h={{ lg: "43vh", base: "auto" }}>
             <Text textAlign="center" fontSize="5xl" mt="2">
               {adData?.Name}
             </Text>
@@ -241,7 +244,9 @@ function AdData() {
 
             <Divider colorScheme="white" mt="2" />
 
-            <Grid templateColumns="repeat(3, 1fr)">
+            <Grid
+              templateColumns={{ lg: "repeat(3, 1fr)", base: "repeat(2, 1fr)" }}
+            >
               <Text textAlign="center" fontSize="xl" mt="2">
                 {date}
               </Text>
@@ -252,11 +257,12 @@ function AdData() {
 
               <Grid
                 templateColumns="repeat(3, 1fr)"
+                w={{ base: "160%", lg: "auto" }}
                 gap={{ base: "5", lg: "1" }}
               >
                 <Text textAlign="center" fontSize="xl" mt="2">
                   {adData?.views}
-                  <ViewIcon ml={{ lg: "2" }} />
+                  <ViewIcon ml="2" />
                 </Text>
 
                 <Text textAlign="center" fontSize="xl" mt="2">
@@ -270,7 +276,7 @@ function AdData() {
                   fontSize="xl"
                   mt="2"
                   cursor="pointer"
-                  _hover={{ textDecoration: "underline white" }}
+                  _hover={{ textDecoration: `underline ${color}` }}
                 >
                   {isAcceptedUsers}{" "}
                   {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
@@ -380,7 +386,7 @@ function AdData() {
                   if (request?.isAccepted) {
                     return (
                       <Text
-                        _hover={{ textDecoration: "underline white" }}
+                        _hover={{ textDecoration: `underline ${color}` }}
                         ml="3"
                         cursor="pointer"
                         onClick={() => {

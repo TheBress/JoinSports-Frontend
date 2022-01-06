@@ -49,7 +49,8 @@ function Register() {
             /[a-zA-Z0-9]@gmail.com/.test(values.email) &&
             /[A-Z]{1,}[a-z]{1,}[0-9]{1,}/.test(values.password) &&
             values.password.length >= 8 &&
-            values.username.length > 0
+            values.username.length > 0 &&
+            values.username.length < 30
           ) {
             register({
               variables: {

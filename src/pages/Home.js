@@ -18,6 +18,7 @@ import AdCard from "../components/AdCard";
 import { GetLatestUsers } from "../hooks/users";
 import ProfileCard from "../components/ProfileCard";
 import { UserNotifications } from "../hooks/notifications";
+import Footer from "../components/Footer";
 
 function Home() {
   Authentication();
@@ -136,6 +137,7 @@ function Home() {
               })}
             </Grid>
           </Container>
+          <Footer />
         </>
       )}
     </>

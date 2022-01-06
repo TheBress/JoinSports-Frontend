@@ -47,6 +47,8 @@ function Notifications() {
     });
   };
 
+  console.log(myNotifications);
+
   if (loading || !myNotifications)
     return (
       <Center
@@ -90,7 +92,11 @@ function Notifications() {
                         }}
                       />
                     </Td>
-                    <Td>{notification?.ad?.Name}</Td>
+                    <Td>
+                      {notification?.ad !== null
+                        ? notification?.ad?.Name
+                        : "Anuncio eliminado"}
+                    </Td>
                     <Td>{notification?.Message}</Td>
                     <Td>{notification?.userTransmitter?.username}</Td>
                     <Td>{Date}</Td>

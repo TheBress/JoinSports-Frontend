@@ -93,7 +93,7 @@ function Profile() {
   return (
     <>
       <Header />
-      <Center h="90vh">
+      <Center h={{ lg: "90vh", base: "105vh" }}>
         <Bounce left>
           <Formik
             initialValues={{
@@ -155,16 +155,16 @@ function Profile() {
                 color={color}
                 position="relative"
                 justify="center"
-                h={{ lg: "auto", base: "100vh" }}
+                h="auto"
                 w={{ lg: "73vh", base: "62vh" }}
-                top={{ lg: "8vh", base: "8vh" }}
+                top={{ lg: "8vh", base: "-1vh" }}
                 align="center"
               >
                 <Heading
                   size="xl"
                   zIndex="1"
                   position="relative"
-                  top={{ lg: "12px", base: "10px" }}
+                  top={{ lg: "12px", base: "8px" }}
                 >
                   Tu perfil
                 </Heading>
@@ -194,10 +194,10 @@ function Profile() {
                   </div>
 
                   <Heading
-                    size="lg"
+                    size={dataUser?.username?.length < 25 ? "lg" : "md"}
                     zIndex="1"
                     position="relative"
-                    top="25px"
+                    top={dataUser?.username?.length < 25 ? "25px" : "35px"}
                     right="20px"
                   >
                     {dataUser?.username}
@@ -237,12 +237,11 @@ function Profile() {
                             children={<FaCity color="black" />}
                           />
                           <Input
-                            value={dataUser?.email}
                             variant="outline"
                             color="black"
                             bg={"primary.300"}
                             size="md"
-                            w="170px"
+                            w={{ lg: "170px", base: "160px" }}
                             {...field}
                             id="cityResidence"
                             borderRadius="20"
@@ -253,8 +252,14 @@ function Profile() {
                   </Field>
                 </Flex>
 
-                <Flex position="relative" bottom="9">
-                  <FormControl ml="3">
+                <Grid
+                  templateColumns="repeat(3,auto)"
+                  gap={{ lg: "3", base: "1" }}
+                  pl={{ base: "7px" }}
+                  position="relative"
+                  bottom="9"
+                >
+                  <FormControl>
                     <FormLabel>Edad</FormLabel>
                     <InputGroup>
                       <Input
@@ -264,7 +269,7 @@ function Profile() {
                         color="black"
                         bg="primary.300"
                         size="md"
-                        w={{ lg: "70px", base: "52px" }}
+                        w={{ lg: "70px", base: "50px" }}
                         isDisabled={true}
                         borderRadius="20"
                       />
@@ -279,7 +284,7 @@ function Profile() {
                     </InputGroup>
                   </FormControl>
 
-                  <FormControl mr="2" ml="3">
+                  <FormControl>
                     <FormLabel>Sexo</FormLabel>
                     <InputGroup>
                       <Input
@@ -307,7 +312,7 @@ function Profile() {
                           <Input
                             type="number"
                             variant="outline"
-                            w="90px"
+                            w={{ lg: "90px", base: "83px" }}
                             color="black"
                             bg={"primary.300"}
                             size="md"
@@ -325,7 +330,7 @@ function Profile() {
                       </FormControl>
                     )}
                   </Field>
-                </Flex>
+                </Grid>
 
                 <Flex position="relative" bottom="9">
                   <Field name="weigth">

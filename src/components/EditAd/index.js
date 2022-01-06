@@ -17,6 +17,7 @@ import {
   Modal,
   ModalContent,
   Stack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Form, Formik, Field } from "formik";
 import useSports from "../../hooks/sports";
@@ -181,6 +182,8 @@ function EditAd(props) {
     if (event?.title === props.name) updateEvents.push(event);
   });
 
+  const color = useColorModeValue("black", "white");
+
   const user = () => {
     history.push(`/user/${props.userId}`);
   };
@@ -228,7 +231,7 @@ function EditAd(props) {
         templateColumns="repeat(2,1fr)"
         cursor="pointer"
         onClick={user}
-        _hover={{ textDecoration: "underline white" }}
+        _hover={{ textDecoration: `underline ${color}` }}
       >
         <Image
           src={
@@ -440,7 +443,7 @@ function EditAd(props) {
                   fontSize="xl"
                   mt="3"
                   cursor="pointer"
-                  _hover={{ textDecoration: "underline white" }}
+                  _hover={{ textDecoration: `underline ${color}` }}
                 >
                   {notAcceptedUsers}{" "}
                   {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
@@ -465,7 +468,7 @@ function EditAd(props) {
                   mt="3"
                   cursor="pointer"
                   onClick={onOpen4}
-                  _hover={{ textDecoration: "underline white" }}
+                  _hover={{ textDecoration: `underline ${color}` }}
                 >
                   {isAcceptedUsers}{" "}
                   {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
@@ -569,7 +572,7 @@ function EditAd(props) {
                       gap="4"
                     >
                       <Text
-                        _hover={{ textDecoration: "underline white" }}
+                        _hover={{ textDecoration: `underline ${color}` }}
                         ml="3"
                         mt="2"
                         cursor="pointer"
@@ -644,7 +647,7 @@ function EditAd(props) {
                 if (request?.isAccepted) {
                   return (
                     <Text
-                      _hover={{ textDecoration: "underline white" }}
+                      _hover={{ textDecoration: `underline ${color}` }}
                       ml="3"
                       mt="2"
                       cursor="pointer"

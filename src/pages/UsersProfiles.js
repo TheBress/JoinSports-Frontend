@@ -156,7 +156,7 @@ function UsersProfiles() {
             </Grid>
           </>
         ) : (
-          <Text fontSize="2xl" ml="2" mt="4" textAlign="center">
+          <Text fontSize="2xl" ml="2" mt="4" h="10vh" textAlign="center">
             No tiene anuncios
           </Text>
         )}

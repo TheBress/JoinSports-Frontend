@@ -37,7 +37,7 @@ function MyCalendar() {
     <>
       <Header />
       <Fade left>
-        <Container maxW="container.xl" mt="5" bg="white">
+        <Container maxW="container.xxl" bg="white">
           <Calendar events={events} />
         </Container>
       </Fade>

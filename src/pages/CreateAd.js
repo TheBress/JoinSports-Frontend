@@ -101,12 +101,12 @@ function CreateAd() {
   return (
     <>
       <Header />
-      <Center h="92vh">
+      <Center h={{ lg: "92vh", base: "105vh" }}>
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
             position="relative"
-            top="8vh"
+            top={{ lg: "8vh", base: "-1vh" }}
             borderRadius="20"
             bg={bg}
             color={color}

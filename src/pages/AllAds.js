@@ -39,8 +39,6 @@ function AllAds() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isChecked, setisChecked] = useState(false);
   const [value, setValue] = useState("1");
-  const [value2, setValue2] = useState("");
-  const [value3, setValue3] = useState("");
 
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = (event) => {
@@ -54,8 +52,6 @@ function AllAds() {
 
   const restartFilters = () => {
     setValue("1");
-    setValue2("");
-    setValue3("");
     setSearchTerm("");
     setisChecked(false);
   };
@@ -75,42 +71,34 @@ function AllAds() {
         ad?.Name?.includes(searchTerm)
     );
 
-    console.log(
-      results?.sort(function (a, b) {
-        return new Date(a?.Date).getTime() - new Date(b?.Date).getTime();
-      })
-    );
-
     if (value === "1") {
-      if (value2 === "1") {
-        results?.sort(function (a, b) {
-          return b?.requests?.length - a?.requests?.length;
-        });
-        if (value3 === "1") {
-        }
-      } else if (value2 === "2") {
-        results?.sort(function (a, b) {
-          return a?.requests?.length - b?.requests?.length;
-        });
-      }
+      results?.sort(function (a, b) {
+        return b?.views - a?.views;
+      });
     } else if (value === "2") {
       results?.sort(function (a, b) {
         return a?.views - b?.views;
       });
-
-      if (value2 === "1") {
-        results?.sort(function (a, b) {
-          return b?.requests?.length - a?.requests?.length;
-        });
-      } else if (value2 === "2") {
-        results?.sort(function (a, b) {
-          return a?.requests?.length - b?.requests?.length;
-        });
-      }
+    } else if (value === "3") {
+      results?.sort(function (a, b) {
+        return b?.requests?.length - a?.requests?.length;
+      });
+    } else if (value === "4") {
+      results?.sort(function (a, b) {
+        return a?.requests?.length - b?.requests?.length;
+      });
+    } else if (value === "5") {
+      results?.sort(function (a, b) {
+        return new Date(a?.Date).getTime() - new Date(b?.Date).getTime();
+      });
+    } else if (value === "6") {
+      results?.sort(function (a, b) {
+        return new Date(b?.Date).getTime() - new Date(a?.Date).getTime();
+      });
     }
 
     setSearchResults(results);
-  }, [searchTerm, allAds?.ads, isChecked, dataUser?.id, value, value2]);
+  }, [searchTerm, allAds?.ads, isChecked, dataUser?.id, value]);
 
   if (loading || !allAds)
     return (
@@ -181,23 +169,23 @@ function AllAds() {
               </Radio>
             </RadioGroup>
 
-            <RadioGroup onChange={setValue2} value={value2} mb="5">
+            <RadioGroup onChange={setValue} value={value} mb="5">
               Solicitudes:
-              <Radio ml="2" value="1">
+              <Radio ml="2" value="3">
                 Desc.
               </Radio>
-              <Radio ml="2" value="2">
+              <Radio ml="2" value="4">
                 Asc.
               </Radio>
             </RadioGroup>
 
-            <RadioGroup onChange={setValue3} value={value3} mb="5">
-              Fecha:
-              <Radio ml="2" value="1">
-                Desc.
+            <RadioGroup onChange={setValue} value={value} mb="5">
+              Fecha evento:
+              <Radio ml="2" value="5">
+                Más cercano
               </Radio>
-              <Radio ml="2" value="2">
-                Asc.
+              <Radio ml="2" value="6">
+                Más lejano
               </Radio>
             </RadioGroup>
           </DrawerBody>
