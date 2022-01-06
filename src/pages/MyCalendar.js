@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header/index";
 import Calendar from "react-awesome-calendar";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import IsAuth from "../hooks/isAuth";
 import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import { Center, Container, Spinner } from "@chakra-ui/react";
@@ -9,6 +9,7 @@ import Fade from "react-reveal/Fade";
 
 function MyCalendar() {
   Authentication();
+  CompleteProfile();
   const { me } = IsAuth();
   let events = [];
   let { eventsCalendar, loading } = UserEventsCalendar(me?.meExtended?.id);
@@ -36,7 +37,7 @@ function MyCalendar() {
     <>
       <Header />
       <Fade left>
-        <Container maxW="container.xl" mt="5">
+        <Container maxW="container.xl" mt="5" bg="white">
           <Calendar events={events} />
         </Container>
       </Fade>

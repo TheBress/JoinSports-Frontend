@@ -21,13 +21,14 @@ import React, { useEffect, useState } from "react";
 import { Fade } from "react-reveal";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import { AllAdsData } from "../hooks/ads";
 import IsAuth from "../hooks/isAuth";
 import { FaFilter } from "react-icons/fa";
 
 function AllAds() {
   Authentication();
+  CompleteProfile();
   const { allAds, loading } = AllAdsData();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -39,6 +40,7 @@ function AllAds() {
   const [isChecked, setisChecked] = useState(false);
   const [value, setValue] = useState("1");
   const [value2, setValue2] = useState("");
+  const [value3, setValue3] = useState("");
 
   const [searchResults, setSearchResults] = useState([]);
   const handleChange = (event) => {
@@ -53,6 +55,7 @@ function AllAds() {
   const restartFilters = () => {
     setValue("1");
     setValue2("");
+    setValue3("");
     setSearchTerm("");
     setisChecked(false);
   };
@@ -72,11 +75,19 @@ function AllAds() {
         ad?.Name?.includes(searchTerm)
     );
 
+    console.log(
+      results?.sort(function (a, b) {
+        return new Date(a?.Date).getTime() - new Date(b?.Date).getTime();
+      })
+    );
+
     if (value === "1") {
       if (value2 === "1") {
         results?.sort(function (a, b) {
           return b?.requests?.length - a?.requests?.length;
         });
+        if (value3 === "1") {
+        }
       } else if (value2 === "2") {
         results?.sort(function (a, b) {
           return a?.requests?.length - b?.requests?.length;
@@ -172,6 +183,16 @@ function AllAds() {
 
             <RadioGroup onChange={setValue2} value={value2} mb="5">
               Solicitudes:
+              <Radio ml="2" value="1">
+                Desc.
+              </Radio>
+              <Radio ml="2" value="2">
+                Asc.
+              </Radio>
+            </RadioGroup>
+
+            <RadioGroup onChange={setValue3} value={value3} mb="5">
+              Fecha:
               <Radio ml="2" value="1">
                 Desc.
               </Radio>

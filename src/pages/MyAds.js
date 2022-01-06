@@ -2,7 +2,7 @@ import { Grid } from "@chakra-ui/react";
 import React from "react";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import IsAuth from "../hooks/isAuth";
 import { UserAds } from "../hooks/ads";
 import { Spinner, Center, Text } from "@chakra-ui/react";
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 function MyAds() {
   Authentication();
+  CompleteProfile();
   const { me } = IsAuth();
   const { myAds, loading } = UserAds(me?.meExtended.id);
 

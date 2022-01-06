@@ -276,7 +276,7 @@ code {
   height: 100px;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 600.98px) {
   .personal-figcaption2 > img {
     position: relative;
     top: 34%;

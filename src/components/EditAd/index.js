@@ -355,7 +355,6 @@ function EditAd(props) {
                     textAlign="center"
                     fontSize="5xl"
                     border="none"
-                    color="white"
                     bg="none"
                     size="md"
                     w="100%"
@@ -375,7 +374,6 @@ function EditAd(props) {
                     textAlign="center"
                     bg="none"
                     border="none"
-                    color="white"
                     w="100%"
                     {...field}
                   />
@@ -398,7 +396,6 @@ function EditAd(props) {
                         mb={2}
                         type="datetime-local"
                         variant="outline"
-                        color="white"
                         bg="none"
                         size="md"
                         border="none"
@@ -416,7 +413,6 @@ function EditAd(props) {
                       fontSize="xl"
                       mt="2"
                       bg="none"
-                      color="white"
                       placeholder="Selecciona un deporte"
                       {...field}
                       border="none"
@@ -488,7 +484,6 @@ function EditAd(props) {
                     bg="none"
                     w="100"
                     border="none"
-                    color="white"
                     placeholder="Selecciona una localización"
                     {...field}
                   >
@@ -555,56 +550,64 @@ function EditAd(props) {
           <Text fontSize="xl" m="2">
             Usuarios inscritos
           </Text>
-          {notAcceptedUsers !== 0 ? (
-            props.requests?.map((request) => {
-              if (!request?.isAccepted) {
-                return (
-                  <Grid
-                    templateColumns="repeat(3,1fr)"
-                    textAlign="center"
-                    mt="1"
-                    mb="3"
-                    gap="4"
-                  >
-                    <Text
-                      _hover={{ textDecoration: "underline white" }}
-                      ml="3"
-                      mt="2"
-                      cursor="pointer"
-                      onClick={() => {
-                        history.push(`/user/${request?.user?.id}`);
-                      }}
-                    >{`${request?.user?.username}`}</Text>
-                    <Button
-                      colorScheme="green"
-                      onClick={() => {
-                        accept(
-                          props?.name,
-                          props?.date,
-                          request?.user?.id,
-                          request?.user?.username,
-                          request?.id
-                        );
-                      }}
+          <Grid
+            textAlign="center"
+            mb="3"
+            gap="4"
+            h={notAcceptedUsers > 2 && "140px"}
+            overflow={notAcceptedUsers > 2 && "auto"}
+          >
+            {notAcceptedUsers !== 0 ? (
+              props.requests?.map((request) => {
+                if (!request?.isAccepted) {
+                  return (
+                    <Grid
+                      templateColumns="repeat(3,1fr)"
+                      textAlign="center"
+                      mt="1"
+                      mb="3"
+                      gap="4"
                     >
-                      Aceptar
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      mr="3"
-                      onClick={() => {
-                        refuse(request?.id, props?.name, request?.user?.id);
-                      }}
-                    >
-                      Rechazar
-                    </Button>
-                  </Grid>
-                );
-              }
-            })
-          ) : (
-            <Text>No hay usuarios inscritos</Text>
-          )}
+                      <Text
+                        _hover={{ textDecoration: "underline white" }}
+                        ml="3"
+                        mt="2"
+                        cursor="pointer"
+                        onClick={() => {
+                          history.push(`/user/${request?.user?.id}`);
+                        }}
+                      >{`${request?.user?.username}`}</Text>
+                      <Button
+                        colorScheme="green"
+                        onClick={() => {
+                          accept(
+                            props?.name,
+                            props?.date,
+                            request?.user?.id,
+                            request?.user?.username,
+                            request?.id
+                          );
+                        }}
+                      >
+                        Aceptar
+                      </Button>
+                      <Button
+                        colorScheme="red"
+                        mr="3"
+                        onClick={() => {
+                          refuse(request?.id, props?.name, request?.user?.id);
+                        }}
+                      >
+                        Rechazar
+                      </Button>
+                    </Grid>
+                  );
+                }
+              })
+            ) : (
+              <Text>No hay usuarios inscritos</Text>
+            )}
+          </Grid>
           <Button
             colorScheme="red"
             onClick={onClose3}
@@ -629,11 +632,17 @@ function EditAd(props) {
           <Text fontSize="xl" m="2">
             Usuarios aceptados
           </Text>
-          {isAcceptedUsers !== 0 ? (
-            props.requests?.map((request) => {
-              if (request?.isAccepted) {
-                return (
-                  <Grid textAlign="center" mb="3" gap="4">
+          <Grid
+            textAlign="center"
+            mb="3"
+            gap="4"
+            h={isAcceptedUsers > 2 && "100px"}
+            overflow={isAcceptedUsers > 2 && "auto"}
+          >
+            {isAcceptedUsers !== 0 ? (
+              props.requests?.map((request) => {
+                if (request?.isAccepted) {
+                  return (
                     <Text
                       _hover={{ textDecoration: "underline white" }}
                       ml="3"
@@ -643,13 +652,13 @@ function EditAd(props) {
                         history.push(`/user/${request?.user?.id}`);
                       }}
                     >{`${request?.user?.username}`}</Text>
-                  </Grid>
-                );
-              }
-            })
-          ) : (
-            <Text>No hay usuarios aceptados</Text>
-          )}
+                  );
+                }
+              })
+            ) : (
+              <Text>No hay usuarios aceptados</Text>
+            )}
+          </Grid>
           <Button
             colorScheme="red"
             onClick={onClose4}

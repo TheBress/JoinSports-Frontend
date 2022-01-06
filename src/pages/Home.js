@@ -55,7 +55,8 @@ function Home() {
       dataUser?.nationality === null ||
       dataUser?.favoriteSports.length === 0 ||
       dataUser?.birthDate === null ||
-      dataUser?.description === null ? (
+      dataUser?.description === null ||
+      dataUser?.sex === null ? (
         <CompleteProfile dataUser={dataUser} />
       ) : (
         <>

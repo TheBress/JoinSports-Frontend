@@ -19,10 +19,11 @@ import { sanitizeCompleteDate } from "../functions/functions";
 import { useMutation } from "@apollo/client";
 import { UPDATENOTIFICATION } from "../graphql/mutations/updateNotification";
 import { Flip } from "react-reveal";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 
 function Notifications() {
   Authentication();
+  CompleteProfile();
   const { me } = IsAuth();
   let dataUser = me?.meExtended;
 

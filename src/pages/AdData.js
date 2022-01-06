@@ -15,11 +15,12 @@ import {
   ModalContent,
   Modal,
   useToast,
+  Stack,
 } from "@chakra-ui/react";
 import { sanitizeDate, validateDate } from "../functions/functions";
 import { ViewIcon } from "@chakra-ui/icons";
 import { ImLocation } from "react-icons/im";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import { CREATEREQUEST } from "../graphql/mutations/createRequest";
 
 import { useHistory } from "react-router-dom";
@@ -34,6 +35,7 @@ import { UserNotifications } from "../hooks/notifications";
 
 function AdData() {
   Authentication();
+  CompleteProfile();
   const { me } = IsAuth();
   const { id } = useParams();
   const { Ad, loadingAd, refetchAd } = UserAd(id);
@@ -226,56 +228,61 @@ function AdData() {
             h="90%"
           />
 
-          <Text textAlign="center" fontSize="5xl" mt="2">
-            {adData?.Name}
-          </Text>
-
-          <Divider colorScheme="white" mt="2" />
-
-          <Text textAlign="center" fontSize="2xl" mt="2">
-            {adData?.Description}
-          </Text>
-
-          <Divider colorScheme="white" mt="2" />
-
-          <Grid templateColumns="repeat(3, 1fr)">
-            <Text textAlign="center" fontSize="xl" mt="2">
-              {date}
+          <Stack h={{ lg: "43vh", base: "52vh" }}>
+            <Text textAlign="center" fontSize="5xl" mt="2">
+              {adData?.Name}
             </Text>
 
-            <Text textAlign="center" fontSize="xl" mt="2">
-              {adData?.sport?.Name}
+            <Divider colorScheme="white" mt="2" />
+
+            <Text textAlign="center" fontSize="2xl" mt="2">
+              {adData?.Description}
             </Text>
 
-            <Grid templateColumns="repeat(3, 1fr)" gap={{ base: "5", lg: "1" }}>
+            <Divider colorScheme="white" mt="2" />
+
+            <Grid templateColumns="repeat(3, 1fr)">
               <Text textAlign="center" fontSize="xl" mt="2">
-                {adData?.views}
-                <ViewIcon ml={{ lg: "2" }} />
+                {date}
               </Text>
 
               <Text textAlign="center" fontSize="xl" mt="2">
-                {notAcceptedUsers}{" "}
-                {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
+                {adData?.sport?.Name}
               </Text>
 
-              <Text
-                textAlign="center"
-                onClick={onOpen4}
-                fontSize="xl"
-                mt="2"
-                cursor="pointer"
-                _hover={{ textDecoration: "underline white" }}
+              <Grid
+                templateColumns="repeat(3, 1fr)"
+                gap={{ base: "5", lg: "1" }}
               >
-                {isAcceptedUsers}{" "}
-                {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
-              </Text>
+                <Text textAlign="center" fontSize="xl" mt="2">
+                  {adData?.views}
+                  <ViewIcon ml={{ lg: "2" }} />
+                </Text>
+
+                <Text textAlign="center" fontSize="xl" mt="2">
+                  {notAcceptedUsers}{" "}
+                  {notAcceptedUsers !== 1 ? "solicitudes" : "solicitud"}
+                </Text>
+
+                <Text
+                  textAlign="center"
+                  onClick={onOpen4}
+                  fontSize="xl"
+                  mt="2"
+                  cursor="pointer"
+                  _hover={{ textDecoration: "underline white" }}
+                >
+                  {isAcceptedUsers}{" "}
+                  {isAcceptedUsers !== 1 ? "aceptados" : "aceptado"}
+                </Text>
+              </Grid>
             </Grid>
-          </Grid>
-          <Divider colorScheme="white" mt="2" />
-          <Text textAlign="center" fontSize="xl" h="12vh">
-            <ImLocation className="location" />
-            {`${adData?.location?.Direction} (${adData?.location?.Name})`}
-          </Text>
+            <Divider colorScheme="white" mt="2" />
+            <Text textAlign="center" fontSize="xl" h="12vh">
+              <ImLocation className="location" />
+              {`${adData?.location?.Direction} (${adData?.location?.Name})`}
+            </Text>
+          </Stack>
         </Container>
 
         {dataUser?.id === adData?.user?.id || isAccepted || !isDateValidate ? (
@@ -354,7 +361,6 @@ function AdData() {
           <ModalContent
             overflow="auto"
             h="auto"
-            w="1000px"
             textAlign="center"
             position="relative"
             top="25%"
@@ -362,11 +368,17 @@ function AdData() {
             <Text fontSize="xl" m="2">
               Usuarios aceptados
             </Text>
-            {isAcceptedUsers !== 0 ? (
-              adData?.requests?.map((request) => {
-                if (request?.isAccepted) {
-                  return (
-                    <Grid textAlign="center" mb="3" gap="4">
+            <Grid
+              textAlign="center"
+              mb="3"
+              gap="4"
+              h={isAcceptedUsers > 2 && "100px"}
+              overflow={isAcceptedUsers > 2 && "auto"}
+            >
+              {isAcceptedUsers !== 0 ? (
+                adData?.requests?.map((request) => {
+                  if (request?.isAccepted) {
+                    return (
                       <Text
                         _hover={{ textDecoration: "underline white" }}
                         ml="3"
@@ -375,13 +387,13 @@ function AdData() {
                           history.push(`/user/${request?.user?.id}`);
                         }}
                       >{`${request?.user?.username}`}</Text>
-                    </Grid>
-                  );
-                }
-              })
-            ) : (
-              <Text>No hay usuarios aceptados</Text>
-            )}
+                    );
+                  }
+                })
+              ) : (
+                <Text>No hay usuarios aceptados</Text>
+              )}
+            </Grid>
             <Button
               colorScheme="red"
               onClick={onClose4}

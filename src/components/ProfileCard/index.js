@@ -19,12 +19,14 @@ export default function ProfileCard(props) {
     history.push(`/user/${props.id}`);
   };
 
+  const color = useColorModeValue("rgba(33, 39, 24)", "rgba(78, 78, 78)");
+
   return (
     <Center py={6}>
       <Box
         _hover={{
           transition: ".3s",
-          boxShadow: "7px 7px 20px rgba(33, 39, 24)",
+          boxShadow: `7px 7px 20px ${color}`,
         }}
         maxW={"320px"}
         transition={".3s"}

@@ -13,10 +13,11 @@ import AdCard from "../components/AdCard";
 import Header from "../components/Header";
 import { calculateDate } from "../functions/functions";
 import { GetUser } from "../hooks/users";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 
 function UsersProfiles() {
   Authentication();
+  CompleteProfile();
   const { id } = useParams();
   const { User, loading } = GetUser(id);
 
@@ -82,9 +83,12 @@ function UsersProfiles() {
 
         <Divider colorScheme="white" mt="4" />
 
-        <Grid templateColumns="repeat(2,1fr)" textAlign="center">
+        <Grid templateColumns="repeat(3,1fr)" textAlign="center">
           <Text fontSize="2xl" ml="2" mt="4">
             Peso: {user?.weigth} kg
+          </Text>
+          <Text fontSize="2xl" ml="2" mt="4">
+            Sexo: {user?.sex}
           </Text>
           <Text fontSize="2xl" ml="2" mt="4">
             Altura: {user?.height} cm

@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import Header from "../components/Header/index";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import {
   Center,
   Stack,
@@ -36,6 +36,7 @@ import { calculateDate } from "../functions/functions";
 
 function Profile() {
   Authentication();
+  CompleteProfile();
   const { sports } = useSports();
   const { me } = IsAuth();
   const toast = useToast();
@@ -233,7 +234,7 @@ function Profile() {
                         <InputGroup>
                           <InputLeftElement
                             pointerEvents="none"
-                            children={<FaCity />}
+                            children={<FaCity color="black" />}
                           />
                           <Input
                             value={dataUser?.email}
@@ -253,18 +254,17 @@ function Profile() {
                 </Flex>
 
                 <Flex position="relative" bottom="9">
-                  <FormControl mr="10">
+                  <FormControl ml="3">
                     <FormLabel>Edad</FormLabel>
                     <InputGroup>
                       <Input
                         value={age}
-                        left={{ base: "0px" }}
                         type="number"
                         variant="outline"
                         color="black"
                         bg="primary.300"
                         size="md"
-                        w="70px"
+                        w={{ lg: "70px", base: "52px" }}
                         isDisabled={true}
                         borderRadius="20"
                       />
@@ -274,18 +274,35 @@ function Profile() {
                         bg="primary.400"
                         right="3"
                         borderRadius="20"
+                        color="black"
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <FormControl mr="2" ml="3">
+                    <FormLabel>Sexo</FormLabel>
+                    <InputGroup>
+                      <Input
+                        value={dataUser?.sex}
+                        variant="outline"
+                        color="black"
+                        bg="primary.300"
+                        size="md"
+                        w="150px"
+                        isDisabled={true}
+                        borderRadius="20"
                       />
                     </InputGroup>
                   </FormControl>
 
                   <Field name="height">
                     {({ field }) => (
-                      <FormControl>
+                      <FormControl mr={{ base: "2" }}>
                         <FormLabel>Altura</FormLabel>
                         <InputGroup>
                           <InputLeftElement
                             pointerEvents="none"
-                            children={<GiPerson />}
+                            children={<GiPerson color="black" />}
                           />
                           <Input
                             type="number"
@@ -300,6 +317,7 @@ function Profile() {
                           <InputRightAddon
                             children="cm"
                             bg="primary.300"
+                            color="black"
                             right="3"
                             borderRadius="20"
                           />
@@ -369,6 +387,7 @@ function Profile() {
                         Descripción personal y deportiva
                       </FormLabel>
                       <Textarea
+                        color="black"
                         ml="5"
                         mr="5"
                         bg="primary.300"

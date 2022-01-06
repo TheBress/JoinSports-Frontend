@@ -17,6 +17,8 @@ import {
   useToast,
   Flex,
   Textarea,
+  useColorModeValue,
+  Grid,
 } from "@chakra-ui/react";
 import { GiWeight, GiPerson } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
@@ -32,6 +34,8 @@ function CompleteProfile(dataUser) {
   const [updateUserIncomplete] = useMutation(UPDATEUSERINCOMPLETE, {
     refetchQueries: [ISAUTH],
   });
+
+  const color = useColorModeValue("primary.300", "black");
 
   const datos = dataUser.dataUser;
   const toast = useToast();
@@ -54,6 +58,7 @@ function CompleteProfile(dataUser) {
         borderRadius="20"
         position="relative"
         top="5"
+        boxShadow="7px 7px 20px rgba(33, 39, 24)"
       >
         <Heading as="h3" mt="3">
           Completa tu perfil
@@ -70,6 +75,7 @@ function CompleteProfile(dataUser) {
             }),
             birthDate: datos.birthDate,
             description: datos.description,
+            sex: datos.sex,
           }}
           onSubmit={(values) => {
             var today = new Date();
@@ -79,6 +85,7 @@ function CompleteProfile(dataUser) {
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
               age--;
             }
+            console.log(values);
             if (
               values.height >= 145 &&
               values.height <= 230 &&
@@ -88,10 +95,11 @@ function CompleteProfile(dataUser) {
               values.country !== null &&
               values.country !== "Elegir" &&
               values.country !== "" &&
-              values.birthDate !== undefined &&
+              values.birthDate !== null &&
               age >= 18 &&
               age <= 65 &&
-              values.description !== null
+              values.description !== null &&
+              values.sex !== null
             ) {
               updateUserIncomplete({
                 variables: {
@@ -103,6 +111,7 @@ function CompleteProfile(dataUser) {
                   nationality: values.country,
                   birthDate: values.birthDate,
                   description: values.description,
+                  sex: values.sex,
                 },
               })
                 .then((data) => {
@@ -179,7 +188,7 @@ function CompleteProfile(dataUser) {
               </Field>
             </Flex>
 
-            <Flex p="4">
+            <Grid templateColumns="repeat(3,auto)" pl="4" pr="4">
               <Field name="height">
                 {({ field }) => (
                   <FormControl>
@@ -195,7 +204,7 @@ function CompleteProfile(dataUser) {
                         }}
                         type="number"
                         variant="outline"
-                        w="125px"
+                        w="90px"
                         color="black"
                         bg={"primary.300"}
                         size="md"
@@ -209,6 +218,29 @@ function CompleteProfile(dataUser) {
                         borderRadius="20"
                       />
                     </InputGroup>
+                  </FormControl>
+                )}
+              </Field>
+
+              <Field name="sex">
+                {({ field }) => (
+                  <FormControl>
+                    <FormLabel>Sexo</FormLabel>
+                    <Select
+                      ml="5"
+                      mr="5"
+                      bg="primary.300"
+                      w="100px"
+                      placeholder="Selecciona tu sexo"
+                      {...field}
+                    >
+                      <option value="Hombre">Hombre</option>
+                      <option value="Mujer">Mujer</option>
+                      <option value="Prefiero no decirlo">
+                        Prefiero no decirlo
+                      </option>
+                      <option value="Otro">Otro</option>
+                    </Select>
                   </FormControl>
                 )}
               </Field>
@@ -228,7 +260,7 @@ function CompleteProfile(dataUser) {
                         }}
                         type="number"
                         variant="outline"
-                        w="125px"
+                        w="90px"
                         color="black"
                         bg={"primary.300"}
                         size="md"
@@ -246,7 +278,7 @@ function CompleteProfile(dataUser) {
                   </FormControl>
                 )}
               </Field>
-            </Flex>
+            </Grid>
 
             <Field name="description">
               {({ field }) => (
@@ -295,7 +327,7 @@ function CompleteProfile(dataUser) {
                     Deportes favoritos
                   </FormLabel>
                   <CheckboxGroup
-                    colorScheme="primary.300"
+                    colorScheme={color}
                     defaultValue={sportsChecked}
                   >
                     {data?.sports.map((sport) => {

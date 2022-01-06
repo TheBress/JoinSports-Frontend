@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import { Authentication } from "../functions/authentication";
+import { Authentication, CompleteProfile } from "../functions/authentication";
 import {
   Center,
   Stack,
@@ -40,6 +40,7 @@ import { GetUser } from "../hooks/users";
 
 function CreateAd() {
   Authentication();
+  CompleteProfile();
   let history = useHistory();
   const toast = useToast();
   const { me } = IsAuth();

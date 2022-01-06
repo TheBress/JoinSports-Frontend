@@ -33,6 +33,7 @@ export const MEEXTENDED_FRAGMENT = gql`
     }
     image
     description
+    sex
     requests {
       isAccepted
       ad {

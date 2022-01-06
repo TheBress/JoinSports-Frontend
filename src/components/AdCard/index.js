@@ -54,6 +54,8 @@ export default function AdCard(props) {
     else notAcceptedUsers++;
   });
 
+  const color = useColorModeValue("rgba(33, 39, 24)", "rgba(78, 78, 78)");
+
   return (
     <Center py={6}>
       {isEdited && <EditAd props={props} setisEdited={setisEdited} />}
@@ -61,7 +63,7 @@ export default function AdCard(props) {
         transition={".3s"}
         _hover={{
           transition: ".3s",
-          boxShadow: "7px 7px 20px rgba(33, 39, 24)",
+          boxShadow: `7px 7px 20px ${color}`,
         }}
         onClick={props.edit ? editAd : goToAd}
         cursor="pointer"
