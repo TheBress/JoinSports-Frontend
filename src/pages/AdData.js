@@ -23,6 +23,7 @@ import { ViewIcon } from "@chakra-ui/icons";
 import { ImLocation } from "react-icons/im";
 import { Authentication, CompleteProfile } from "../functions/authentication";
 import { CREATEREQUEST } from "../graphql/mutations/createRequest";
+import Footer from "../components/Footer";
 
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
@@ -288,6 +289,7 @@ function AdData() {
               <ImLocation className="location" />
               {`${adData?.location?.Direction} (${adData?.location?.Name})`}
             </Text>
+            <Footer />
           </Stack>
         </Container>
 

@@ -37,6 +37,8 @@ import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import AWS from "aws-sdk";
 import { GET_LAST_ADS } from "../graphql/queries/getAds";
 import { GetUser } from "../hooks/users";
+import Footer from "../components/Footer";
+import { FaFileUpload } from "react-icons/fa";
 
 function CreateAd() {
   Authentication();
@@ -101,12 +103,12 @@ function CreateAd() {
   return (
     <>
       <Header />
-      <Center h={{ lg: "92vh", base: "105vh" }}>
+      <Center h={{ lg: "92vh", base: "123vh" }} mb={{ lg: "30vh" }}>
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
             position="relative"
-            top={{ lg: "8vh", base: "-1vh" }}
+            top={{ lg: "15vh", base: "-1vh" }}
             borderRadius="20"
             bg={bg}
             color={color}
@@ -232,11 +234,32 @@ function CreateAd() {
 
                   <FormControl>
                     <FormLabel>Imagen</FormLabel>
-                    <Input
-                      type="file"
-                      border="none"
-                      onChange={handleFileInput}
-                    />
+
+                    <div className="file">
+                      <div className="fileborder">
+                        <FaFileUpload className="iconupload" />
+                        <p className="filep">
+                          Arrastra o clicka aquí para subir una imagen.
+                        </p>
+                      </div>
+
+                      <p className="filename">
+                        {selectedFile?.name !== undefined
+                          ? selectedFile?.name
+                          : "No hay archivo subido"}
+                      </p>
+                      <Input
+                        cursor="pointer"
+                        type="file"
+                        position="absolute"
+                        top="25%"
+                        h="100px"
+                        border="none"
+                        outline="none"
+                        opacity="0"
+                        onChange={handleFileInput}
+                      />
+                    </div>
                   </FormControl>
 
                   <Field name="date">
@@ -348,6 +371,7 @@ function CreateAd() {
           </Stack>
         </Fade>
       </Center>
+      <Footer ad={true} />
     </>
   );
 }

@@ -35,7 +35,8 @@ function CompleteProfile(dataUser) {
     refetchQueries: [ISAUTH],
   });
 
-  const color = useColorModeValue("primary.300", "black");
+  const color = useColorModeValue("white", "black");
+  const bg = useColorModeValue("black", "white");
 
   const datos = dataUser.dataUser;
   const toast = useToast();
@@ -51,14 +52,14 @@ function CompleteProfile(dataUser) {
   return (
     <Modal isOpen={isOpen}>
       <ModalContent
-        bg="white"
-        color="black"
+        bg={bg}
+        color={color}
         textAlign="center"
         h="97vh"
+        w={{ base: "63vh", lg: "80vh" }}
         borderRadius="20"
         position="relative"
         top="5"
-        boxShadow="7px 7px 20px rgba(33, 39, 24)"
       >
         <Heading as="h3" mt="3">
           Completa tu perfil
@@ -143,7 +144,7 @@ function CompleteProfile(dataUser) {
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
-                        children={<FaCity />}
+                        children={<FaCity color="black" />}
                       />
                       <Input
                         _focus={{
@@ -196,7 +197,7 @@ function CompleteProfile(dataUser) {
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
-                        children={<GiPerson />}
+                        children={<GiPerson color="black" />}
                       />
                       <Input
                         _focus={{
@@ -204,7 +205,7 @@ function CompleteProfile(dataUser) {
                         }}
                         type="number"
                         variant="outline"
-                        w="90px"
+                        w={{ lg: "90px", base: "84px" }}
                         color="black"
                         bg={"primary.300"}
                         size="md"
@@ -212,6 +213,7 @@ function CompleteProfile(dataUser) {
                         borderRadius="20"
                       />
                       <InputRightAddon
+                        color="black"
                         children="cm"
                         bg="primary.300"
                         right="3"
@@ -227,6 +229,7 @@ function CompleteProfile(dataUser) {
                   <FormControl>
                     <FormLabel>Sexo</FormLabel>
                     <Select
+                      color="black"
                       ml="5"
                       mr="5"
                       bg="primary.300"
@@ -260,7 +263,7 @@ function CompleteProfile(dataUser) {
                         }}
                         type="number"
                         variant="outline"
-                        w="90px"
+                        w={{ lg: "90px", base: "76px" }}
                         color="black"
                         bg={"primary.300"}
                         size="md"
@@ -269,6 +272,7 @@ function CompleteProfile(dataUser) {
                         borderRadius="20"
                       />
                       <InputRightAddon
+                        color="black"
                         children="kg"
                         bg="primary.300"
                         right="3"
@@ -287,6 +291,7 @@ function CompleteProfile(dataUser) {
                     Descripción personal y deportiva
                   </FormLabel>
                   <Textarea
+                    color="black"
                     ml="5"
                     mr="5"
                     bg="primary.300"
@@ -307,6 +312,7 @@ function CompleteProfile(dataUser) {
                     País de nacimiento
                   </FormLabel>
                   <Select
+                    color="black"
                     ml="5"
                     mr="5"
                     bg="primary.300"
@@ -327,7 +333,7 @@ function CompleteProfile(dataUser) {
                     Deportes favoritos
                   </FormLabel>
                   <CheckboxGroup
-                    colorScheme={color}
+                    colorScheme="primary.300"
                     defaultValue={sportsChecked}
                   >
                     {data?.sports.map((sport) => {

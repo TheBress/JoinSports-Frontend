@@ -154,6 +154,45 @@ code {
   text-decoration: underline white;
 }
 
+.link2 {
+  text-decoration: underline black;
+}
+
+.file {
+  background-color: #d6d0d0;
+  border: 4px dashed black;
+  height: 150px;
+}
+
+.filep {
+  color: black;
+  font-weight: 2px;
+  text-align: center;
+  position: relative;
+  top: 28%;
+}
+
+.filename {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  top: 14%;
+}
+
+.fileborder {
+  margin: 10px 10px 2px 10px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.iconupload {
+  color: black;
+  font-size: 35px;
+  position: relative;
+  left: 42%;
+}
+
 .blackWallHome {
   position: absolute;
   height: 100vh;

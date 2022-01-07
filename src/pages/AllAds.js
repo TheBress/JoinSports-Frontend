@@ -25,6 +25,7 @@ import { Authentication, CompleteProfile } from "../functions/authentication";
 import { AllAdsData } from "../hooks/ads";
 import IsAuth from "../hooks/isAuth";
 import { FaFilter } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 function AllAds() {
   Authentication();
@@ -241,6 +242,7 @@ function AllAds() {
           </Center>
         )}
       </Grid>
+      <Footer />
     </>
   );
 }

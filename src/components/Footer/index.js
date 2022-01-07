@@ -1,8 +1,10 @@
-import { Box, Image, Stack } from "@chakra-ui/react";
+import { Box, Image, Stack, useColorModeValue } from "@chakra-ui/react";
 import * as React from "react";
 import { Copyright } from "./Copyrigth";
 
-function Footer() {
+function Footer(props) {
+  const color = useColorModeValue("white", "black");
+
   return (
     <Box
       as="footer"
@@ -19,7 +21,10 @@ function Footer() {
           align="center"
           justify="space-between"
         >
-          <Image src="logo.png" w="200px" />
+          <Image
+            src={color !== "white" ? "logo.png" : "logodark.png"}
+            w="200px"
+          />
         </Stack>
         <Copyright alignSelf="start" />
       </Stack>

@@ -33,6 +33,7 @@ import { ISAUTH } from "../graphql/queries/isAuth";
 import { Bounce } from "react-reveal";
 import { GET_LATEST_USERS } from "../graphql/queries/users";
 import { calculateDate } from "../functions/functions";
+import Footer from "../components/Footer";
 
 function Profile() {
   Authentication();
@@ -93,7 +94,7 @@ function Profile() {
   return (
     <>
       <Header />
-      <Center h={{ lg: "90vh", base: "105vh" }}>
+      <Center h={{ lg: "90vh", base: "105vh" }} mb={{ lg: "10vh" }}>
         <Bounce left>
           <Formik
             initialValues={{
@@ -354,6 +355,7 @@ function Profile() {
                             borderRadius="20"
                           />
                           <InputRightAddon
+                            color="black"
                             children="kg"
                             bg="primary.300"
                             right="3"
@@ -453,6 +455,7 @@ function Profile() {
           </Formik>
         </Bounce>
       </Center>
+      <Footer />
     </>
   );
 }

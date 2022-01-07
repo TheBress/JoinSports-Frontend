@@ -20,6 +20,7 @@ import { useMutation } from "@apollo/client";
 import { UPDATENOTIFICATION } from "../graphql/mutations/updateNotification";
 import { Flip } from "react-reveal";
 import { Authentication, CompleteProfile } from "../functions/authentication";
+import Footer from "../components/Footer";
 
 function Notifications() {
   Authentication();
@@ -106,6 +107,7 @@ function Notifications() {
             </Tbody>
           </Table>
         </Container>
+        <Footer />
       </>
     );
   else
@@ -115,9 +117,12 @@ function Notifications() {
 
         <Center h="91vh">
           <Flip left>
-            <Text fontSize="4xl">No tienes notificaciones todavía</Text>
+            <Text fontSize={{ lg: "4xl", base: "2xl" }}>
+              No tienes notificaciones todavía
+            </Text>
           </Flip>
         </Center>
+        <Footer />
       </>
     );
 }

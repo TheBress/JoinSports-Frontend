@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import AdCard from "../components/AdCard";
 import Header from "../components/Header";
@@ -8,20 +8,20 @@ import { UserAds } from "../hooks/ads";
 import { Spinner, Center, Text } from "@chakra-ui/react";
 import { Fade, Flip } from "react-reveal";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function MyAds() {
   Authentication();
   CompleteProfile();
   const { me } = IsAuth();
   const { myAds, loading } = UserAds(me?.meExtended.id);
+  const color = useColorModeValue("white", "black");
 
   let isAcceptedAds = [];
 
   me?.meExtended?.requests?.forEach((request) => {
     if (request?.isAccepted) isAcceptedAds.push(request?.ad);
   });
-
-  console.log(isAcceptedAds);
 
   if (loading || !myAds)
     return (
@@ -133,7 +133,10 @@ function MyAds() {
           <Flip left>
             <Text fontSize="3xl">
               No tienes anuncios (puedes crearlos pinchando{" "}
-              <Link className="link" to="/createad">
+              <Link
+                className={color !== "white" ? "link" : "link2"}
+                to="/createad"
+              >
                 {" "}
                 aquí
               </Link>
@@ -142,6 +145,7 @@ function MyAds() {
           </Flip>
         </Center>
       )}
+      <Footer />
     </>
   );
 }

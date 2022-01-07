@@ -6,6 +6,7 @@ import IsAuth from "../hooks/isAuth";
 import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import { Center, Container, Spinner } from "@chakra-ui/react";
 import Fade from "react-reveal/Fade";
+import Footer from "../components/Footer";
 
 function MyCalendar() {
   Authentication();
@@ -41,6 +42,7 @@ function MyCalendar() {
           <Calendar events={events} />
         </Container>
       </Fade>
+      <Footer />
     </>
   );
 }

@@ -14,6 +14,7 @@ import Header from "../components/Header";
 import { calculateDate } from "../functions/functions";
 import { GetUser } from "../hooks/users";
 import { Authentication, CompleteProfile } from "../functions/authentication";
+import Footer from "../components/Footer";
 
 function UsersProfiles() {
   Authentication();
@@ -160,6 +161,7 @@ function UsersProfiles() {
             No tiene anuncios
           </Text>
         )}
+        <Footer />
       </Container>
     </>
   );

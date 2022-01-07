@@ -46,6 +46,7 @@ import { CREATENOTIFICATION } from "../../graphql/mutations/createNotification";
 import { UserNotifications } from "../../hooks/notifications";
 import { CREATE_EVENT_CALENDAR } from "../../graphql/mutations/createEventCalendar";
 import AWS from "aws-sdk";
+import Footer from "../../components/Footer";
 
 function EditAd(props) {
   const { refetchAds } = UserAds(props.userId);
@@ -538,6 +539,7 @@ function EditAd(props) {
               </Button>
             </Flex>
           </Stack>
+          <Footer />
         </Form>
       </Formik>
 
