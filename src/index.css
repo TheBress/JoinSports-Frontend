@@ -180,6 +180,11 @@ code {
   top: 14%;
 }
 
+.iconArrow {
+  position: relative;
+  left: 80%;
+}
+
 .fileborder {
   margin: 10px 10px 2px 10px;
   padding: 10px;

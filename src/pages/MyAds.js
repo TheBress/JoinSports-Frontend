@@ -59,29 +59,29 @@ function MyAds() {
               <Fade left>
                 <AdCard
                   edit={true}
-                  key={ad.id}
-                  id={ad.id}
-                  name={ad.Name}
-                  userId={ad.user.id}
-                  user={ad.user.username}
+                  key={ad?.id}
+                  id={ad?.id}
+                  name={ad?.Name}
+                  userId={ad?.user.id}
+                  user={ad?.user.username}
                   image="logo.png"
-                  // image={`https://joinsports.s3.eu-west-3.amazonaws.com/${ad.image}`} ruta buena de amazon s3
-                  userImage={ad.user.image}
-                  description={ad.Description}
-                  locationId={ad.location.id}
-                  fullLocation={`${ad.location.Direction} (${ad.location.Name})`}
-                  requests={ad.requests}
-                  date={ad.Date}
-                  sport={ad.sport.Name}
-                  sportId={ad.sport.id}
-                  views={ad.views}
+                  // image={`https://joinsports.s3.eu-west-3.amazonaws.com/${ad?.image}`} ruta buena de amazon s3
+                  userImage={ad?.user.image}
+                  description={ad?.Description}
+                  locationId={ad?.location.id}
+                  fullLocation={`${ad?.location.Direction} (${ad?.location.Name})`}
+                  requests={ad?.requests}
+                  date={ad?.Date}
+                  sport={ad?.sport.Name}
+                  sportId={ad?.sport.id}
+                  views={ad?.views}
                 />
               </Fade>
             );
           })}
       </Grid>
 
-      {isAcceptedAds.length !== 0 && (
+      {isAcceptedAds?.length !== 0 && (
         <Text fontSize="3xl" ml="10" mt="4">
           Anuncios aceptados
         </Text>
@@ -95,35 +95,35 @@ function MyAds() {
         p={{ base: "5", lg: "0" }}
         gap={5}
       >
-        {isAcceptedAds.length !== 0 &&
+        {isAcceptedAds?.length !== 0 &&
           isAcceptedAds?.map((ad) => {
             return (
               <Fade left>
                 <AdCard
                   edit={true}
-                  key={ad.id}
-                  id={ad.id}
-                  name={ad.Name}
-                  userId={ad.user.id}
-                  user={ad.user.username}
+                  key={ad?.id}
+                  id={ad?.id}
+                  name={ad?.Name}
+                  userId={ad?.user.id}
+                  user={ad?.user.username}
                   image="logo.png"
                   // image={`https://joinsports.s3.eu-west-3.amazonaws.com/${ad.image}`} ruta buena de amazon s3
-                  userImage={ad.user.image}
-                  description={ad.Description}
-                  locationId={ad.location.id}
-                  fullLocation={`${ad.location.Direction} (${ad.location.Name})`}
-                  requests={ad.requests}
-                  date={ad.Date}
-                  sport={ad.sport.Name}
-                  sportId={ad.sport.id}
-                  views={ad.views}
+                  userImage={ad?.user.image}
+                  description={ad?.Description}
+                  locationId={ad?.location.id}
+                  fullLocation={`${ad?.location.Direction} (${ad?.location.Name})`}
+                  requests={ad?.requests}
+                  date={ad?.Date}
+                  sport={ad?.sport.Name}
+                  sportId={ad?.sport.id}
+                  views={ad?.views}
                 />
               </Fade>
             );
           })}
       </Grid>
 
-      {isAcceptedAds.length === 0 && myAds?.ads.length === 0 && (
+      {isAcceptedAds?.length === 0 && myAds?.ads.length === 0 && (
         <Center
           justifyContent="center"
           textAlign="center"

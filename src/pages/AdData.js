@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import { UserAd } from "../hooks/ads";
@@ -68,8 +68,7 @@ function AdData() {
   const dataUser = me?.meExtended;
   const { refetchNotifications } = UserNotifications(dataUser?.id);
 
-  let idNotification;
-
+  const [idNotification, setidNotification] = useState("");
   adData?.requests?.forEach((request) => {
     if (request?.user?.id === dataUser?.id) {
       idReuqest = request?.id;
@@ -77,14 +76,17 @@ function AdData() {
     }
   });
 
-  adData?.notifications?.forEach((notification) => {
-    if (
-      notification?.ad?.id === adData?.id &&
-      notification?.userReceptor?.id === adData?.user?.id &&
-      notification?.userTransmitter?.id === dataUser?.id
-    )
-      idNotification = notification?.id;
-  });
+  useEffect(() => {
+    adData?.notifications?.forEach((notification) => {
+      if (
+        notification?.ad?.id === adData?.id &&
+        notification?.userReceptor?.id === adData?.user?.id &&
+        notification?.userTransmitter?.id === dataUser?.id
+      ) {
+        setidNotification(notification?.id);
+      }
+    });
+  }, [adData?.notifications, idNotification]);
 
   let isAccepted = false;
 
@@ -118,10 +120,10 @@ function AdData() {
           userReceptor: adData?.user?.id,
           ad: adData?.id,
         },
+      }).then(() => {
+        refetchNotifications();
+        refetchAd();
       });
-
-      refetchAd();
-      refetchNotifications();
     });
   };
 
@@ -140,10 +142,10 @@ function AdData() {
 
       deleteNotification({
         variables: { id: idNotification },
+      }).then(() => {
+        refetchAd();
+        refetchNotifications();
       });
-
-      refetchAd();
-      refetchNotifications();
     });
   };
 
@@ -184,7 +186,7 @@ function AdData() {
 
         {loadingDelete || loadingCreate ? (
           <Center
-            h="97vh"
+            h="180vh"
             w="100%"
             zIndex="2"
             position="absolute"

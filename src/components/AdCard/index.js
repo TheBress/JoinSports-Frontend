@@ -94,9 +94,9 @@ export default function AdCard(props) {
             {props.name}
           </Heading>
           <Text color={"gray.500"}>
-            {props.description.length < 112
-              ? props.description
-              : `${props.description.substring(0, 112)}...`}
+            {props?.description?.length < 112
+              ? props?.description
+              : `${props?.description?.substring(0, 112)}...`}
           </Text>
         </Stack>
 
