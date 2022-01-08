@@ -83,7 +83,7 @@ export default function AdCard(props) {
           mb={6}
           pos={"relative"}
         >
-          <Image src={props.image} w="445px" h="210px" />
+          <Image src={props.image} w="100%" h="210px" />
         </Box>
         <Stack>
           <Heading

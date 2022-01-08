@@ -29,6 +29,7 @@ import { Flip } from "react-reveal";
 import { Authentication, CompleteProfile } from "../functions/authentication";
 import Footer from "../components/Footer";
 import { DELETE_NOTIFICATION } from "../graphql/mutations/deleteNotification";
+import { useHistory } from "react-router-dom";
 
 function Notifications() {
   Authentication();
@@ -62,6 +63,8 @@ function Notifications() {
 
   const [Notifications, setNotifications] = useState([]);
 
+  const history = useHistory();
+
   const updateIsSeen = (isSeen, id) => {
     let isSeenVariable;
     if (isSeen) isSeenVariable = false;
@@ -75,7 +78,6 @@ function Notifications() {
       refetchNotifications();
     });
   };
-  let notifications;
   const toast = useToast();
 
   const deleteSennNotifications = () => {
@@ -124,6 +126,8 @@ function Notifications() {
   };
 
   useEffect(() => {
+    let notifications;
+
     if (value === "1") {
       notifications = myNotifications?.notifications
         ?.slice()
@@ -227,15 +231,34 @@ function Notifications() {
                         }}
                       />
                     </Td>
-                    <Td textAlign="center">
-                      {notification?.ad !== null
-                        ? notification?.ad?.Name
-                        : "Anuncio eliminado"}
-                    </Td>
+                    {notification?.ad !== null ? (
+                      <Td
+                        cursor="pointer"
+                        textAlign="center"
+                        _hover={{ textDecoration: `underline ${color}` }}
+                        onClick={() => {
+                          history.push(`/ad/${notification?.ad?.id}`);
+                        }}
+                      >
+                        {notification?.ad?.Name}
+                      </Td>
+                    ) : (
+                      <Td textAlign="center">Anuncio eliminado</Td>
+                    )}
                     <Td textAlign="center" p="2">
                       {notification?.Message}
                     </Td>
-                    <Td textAlign="center" p="2">
+                    <Td
+                      cursor="pointer"
+                      textAlign="center"
+                      p="2"
+                      _hover={{ textDecoration: `underline ${color}` }}
+                      onClick={() => {
+                        history.push(
+                          `/user/${notification?.userTransmitter?.id}`
+                        );
+                      }}
+                    >
                       {notification?.userTransmitter?.username}
                     </Td>
                     <Td textAlign="center">{Date}</Td>

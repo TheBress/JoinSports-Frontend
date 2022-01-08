@@ -6,6 +6,7 @@ export const NOTIFICATION_FRAGMENT = gql`
     id
     Message
     ad {
+      id
       Name
     }
     userTransmitter {

@@ -647,6 +647,7 @@ function EditAd(props) {
                       </Grid>
                     );
                   }
+                  return "a";
                 })
               ) : (
                 <Text>No hay usuarios inscritos</Text>
@@ -720,6 +721,7 @@ function EditAd(props) {
                       >{`${request?.user?.username}`}</Text>
                     );
                   }
+                  return "a";
                 })
               ) : (
                 <Text>No hay usuarios aceptados</Text>

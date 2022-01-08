@@ -144,7 +144,7 @@ export default function Header() {
               <Button
                 color="white"
                 variant="none"
-                mr={{ lg: "8" }}
+                mr={{ lg: "8", base: "3" }}
                 onClick={goNotifications}
               >
                 <BellIcon />

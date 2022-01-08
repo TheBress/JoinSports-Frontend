@@ -86,7 +86,13 @@ function AdData() {
         setidNotification(notification?.id);
       }
     });
-  }, [adData?.notifications, idNotification]);
+  }, [
+    adData?.notifications,
+    idNotification,
+    adData?.id,
+    adData?.user?.id,
+    dataUser?.id,
+  ]);
 
   let isAccepted = false;
 
@@ -399,6 +405,7 @@ function AdData() {
                       >{`${request?.user?.username}`}</Text>
                     );
                   }
+                  return "a";
                 })
               ) : (
                 <Text>No hay usuarios aceptados</Text>
