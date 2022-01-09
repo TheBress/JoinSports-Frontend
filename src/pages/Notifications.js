@@ -225,6 +225,7 @@ function Notifications() {
                   <Tr>
                     <Td textAlign="center">
                       <Checkbox
+                        colorScheme={color !== "white" ? "blackAlpha" : "cyan"}
                         isChecked={notification?.isSeen}
                         onChange={() => {
                           updateIsSeen(notification?.isSeen, notification?.id);

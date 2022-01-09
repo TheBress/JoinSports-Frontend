@@ -142,7 +142,7 @@ function CreateAd() {
                   (selectedFile?.name.substring(dotPosition + 1) === "png" ||
                     selectedFile?.name.substring(dotPosition + 1) === "jpg")
                 ) {
-                  // uploadFile(selectedFile); subir imagen a amazon s3
+                  uploadFile(selectedFile);
 
                   createAd({
                     variables: {
@@ -319,9 +319,11 @@ function CreateAd() {
                         <Text
                           visibility={!isOpen ? "visible" : "hidden"}
                           cursor="pointer"
+                          A
                           mt={-8}
                           ml="50%"
                           onClick={nLocation}
+                          _hover={{ textDecoration: `underline ${color}` }}
                         >
                           Añadir nueva localización
                         </Text>

@@ -247,20 +247,18 @@ function EditAd(props) {
 
   return (
     <>
-      {loadingUpdate ||
-        loadingDelete ||
-        (loadingAccept && (
-          <Center
-            h="130vh"
-            w="100%"
-            zIndex="2"
-            position="absolute"
-            bg="black"
-            opacity={0.5}
-          >
-            <Spinner size="xl" />
-          </Center>
-        ))}
+      {(loadingUpdate || loadingDelete || loadingAccept) && (
+        <Center
+          h="233%"
+          w="100%"
+          zIndex="2"
+          position="absolute"
+          bg="black"
+          opacity={0.5}
+        >
+          <Spinner size="xl" />
+        </Center>
+      )}
       <Container maxW="container.xl" h="50vh" justifyContent="center">
         <Grid
           templateColumns="repeat(2,1fr)"
@@ -331,7 +329,7 @@ function EditAd(props) {
               const messageUpdate = `El usuario ${props?.username} ha realizado cambios en su anuncio ${values.name}. 
             Puedes consultarlos en el calendario o en tus anuncios`;
 
-              //uploadFile(selectedFile);
+              uploadFile(selectedFile);
               let image;
 
               selectedFile?.name === undefined
@@ -348,7 +346,14 @@ function EditAd(props) {
                   },
                 });
 
-                if (event?.user?.id !== props.userId) {
+                if (
+                  (event?.user?.id !== props.userId &&
+                    props.name !== values.name) ||
+                  props.description !== values.description ||
+                  props.sportId !== values.sport ||
+                  props.locationId !== values.location ||
+                  props.date !== values.date
+                ) {
                   createNotification({
                     variables: {
                       message: messageUpdate,

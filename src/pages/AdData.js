@@ -192,7 +192,7 @@ function AdData() {
 
         {loadingDelete || loadingCreate ? (
           <Center
-            h="180vh"
+            h="220%"
             w="100%"
             zIndex="2"
             position="absolute"
