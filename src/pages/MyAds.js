@@ -64,8 +64,11 @@ function MyAds() {
                   name={ad?.Name}
                   userId={ad?.user.id}
                   user={ad?.user.username}
-                  image="logo.png"
-                  // image={`https://joinsports.s3.eu-west-3.amazonaws.com/${ad?.image}`} ruta buena de amazon s3
+                  image={
+                    ad.image !== ""
+                      ? `https://joinsports.s3.eu-west-3.amazonaws.com/${ad.image}`
+                      : `https://joinsports.s3.eu-west-3.amazonaws.com/logo.png`
+                  }
                   userImage={ad?.user.image}
                   description={ad?.Description}
                   locationId={ad?.location.id}
@@ -106,8 +109,11 @@ function MyAds() {
                   name={ad?.Name}
                   userId={ad?.user.id}
                   user={ad?.user.username}
-                  image="logo.png"
-                  // image={`https://joinsports.s3.eu-west-3.amazonaws.com/${ad.image}`} ruta buena de amazon s3
+                  image={
+                    ad.image !== ""
+                      ? `https://joinsports.s3.eu-west-3.amazonaws.com/${ad.image}`
+                      : `https://joinsports.s3.eu-west-3.amazonaws.com/logo.png`
+                  }
                   userImage={ad?.user.image}
                   description={ad?.Description}
                   locationId={ad?.location.id}

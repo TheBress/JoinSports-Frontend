@@ -258,9 +258,16 @@ code {
   left: 32%;
 }
 
+.option1 {
+  color: white;
+}
+.option2 {
+  color: black;
+}
+
 .personal-avatar2 {
   cursor: pointer;
-  width: 45px;
+  width: 55px;
   height: 45px;
   box-sizing: border-box;
   border-radius: 100%;

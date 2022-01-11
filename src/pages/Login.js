@@ -36,7 +36,12 @@ function Login() {
     <Center h="100vh" className="fondo" color="white">
       {loading && <Spinner size="xl" position="absolute" />}
       <div className="blackWall"></div>
-      <Image src="logo.png" alt="logo" h="100" className="logo" />
+      <Image
+        src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
+        alt="logo"
+        h="100"
+        className="logo"
+      />
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
@@ -100,18 +105,12 @@ function Login() {
               <Field name="password">
                 {({ field }) => (
                   <FormControl>
-                    <FormLabel position="relative" bottom={{ lg: "-20px" }}>
-                      Contraseña
-                    </FormLabel>
+                    <FormLabel>Contraseña</FormLabel>
                     <Text
                       position="relative"
                       left={{ lg: "260px" }}
                       bottom="10px"
-                    >
-                      <Link to="/forgotPassword">
-                        ¿Olvidaste tu contraseña?
-                      </Link>
-                    </Text>
+                    ></Text>
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"

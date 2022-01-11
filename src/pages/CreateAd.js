@@ -304,7 +304,14 @@ function CreateAd() {
                         >
                           {sports?.sports.map((sport) => {
                             return (
-                              <option value={sport.id}>{sport.Name}</option>
+                              <option
+                                className={
+                                  color !== "white" ? "option1" : "option2"
+                                }
+                                value={sport.id}
+                              >
+                                {sport.Name}
+                              </option>
                             );
                           })}
                         </Select>
@@ -319,7 +326,6 @@ function CreateAd() {
                         <Text
                           visibility={!isOpen ? "visible" : "hidden"}
                           cursor="pointer"
-                          A
                           mt={-8}
                           ml="50%"
                           onClick={nLocation}
@@ -340,7 +346,12 @@ function CreateAd() {
                         >
                           {locations?.locations.map((location) => {
                             return (
-                              <option value={location.id}>
+                              <option
+                                className={
+                                  color !== "white" ? "option1" : "option2"
+                                }
+                                value={location.id}
+                              >
                                 {location.Direction} ({location.Name})
                               </option>
                             );

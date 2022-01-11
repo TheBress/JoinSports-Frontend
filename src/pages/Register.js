@@ -41,7 +41,12 @@ function Register() {
     <Center h="100vh" className="fondo" color="white">
       {loading && <Spinner size="xl" position="absolute" />}
       <div className="blackWall"></div>
-      <Image src="logo.png" alt="logo" h="100" className="logo" />
+      <Image
+        src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
+        alt="logo"
+        h="100"
+        className="logo"
+      />
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
         onSubmit={(values) => {
