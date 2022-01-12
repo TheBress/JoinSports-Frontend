@@ -22,7 +22,11 @@ function Footer(props) {
           justify="space-between"
         >
           <Image
-            src={color !== "white" ? "logo.png" : "logodark.png"}
+            src={
+              color !== "white"
+                ? "https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
+                : "https://joinsports.s3.eu-west-3.amazonaws.com/logodark.png"
+            }
             w="200px"
           />
         </Stack>
