@@ -233,9 +233,15 @@ function CompleteProfile(dataUser) {
                       mr="5"
                       bg="primary.300"
                       w="100px"
-                      placeholder="Selecciona tu sexo"
                       {...field}
                     >
+                      <option
+                        disabled={true}
+                        className={color !== "white" ? "option1" : "option2"}
+                        value="Elegir"
+                      >
+                        Selecciona tu sexo
+                      </option>
                       <option
                         className={color !== "white" ? "option1" : "option2"}
                         value="Hombre"
@@ -254,7 +260,12 @@ function CompleteProfile(dataUser) {
                       >
                         Prefiero no decirlo
                       </option>
-                      <option value="Otro">Otro</option>
+                      <option
+                        className={color !== "white" ? "option1" : "option2"}
+                        value="Otro"
+                      >
+                        Otro
+                      </option>
                     </Select>
                   </FormControl>
                 )}
@@ -329,7 +340,6 @@ function CompleteProfile(dataUser) {
                     mr="5"
                     bg="primary.300"
                     w="100"
-                    placeholder="Selecciona tu país"
                     {...field}
                   >
                     <SelectCountries />
