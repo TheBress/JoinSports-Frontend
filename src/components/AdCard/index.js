@@ -55,7 +55,6 @@ export default function AdCard(props) {
   });
 
   const color = useColorModeValue("rgba(33, 39, 24)", "rgba(78, 78, 78)");
-  console.log(props.image);
   return (
     <Center py={6}>
       {isEdited && <EditAd props={props} setisEdited={setisEdited} />}

@@ -83,7 +83,6 @@ function Home() {
               gap={5}
             >
               {ads?.map((ad) => {
-                console.log(ad.image);
                 return (
                   <Fade left>
                     <AdCard

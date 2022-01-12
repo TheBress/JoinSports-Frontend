@@ -86,7 +86,6 @@ function CompleteProfile(dataUser) {
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
               age--;
             }
-            console.log(values);
             if (
               values.height >= 145 &&
               values.height <= 230 &&
@@ -237,9 +236,22 @@ function CompleteProfile(dataUser) {
                       placeholder="Selecciona tu sexo"
                       {...field}
                     >
-                      <option value="Hombre">Hombre</option>
-                      <option value="Mujer">Mujer</option>
-                      <option value="Prefiero no decirlo">
+                      <option
+                        className={color !== "white" ? "option1" : "option2"}
+                        value="Hombre"
+                      >
+                        Hombre
+                      </option>
+                      <option
+                        className={color !== "white" ? "option1" : "option2"}
+                        value="Mujer"
+                      >
+                        Mujer
+                      </option>
+                      <option
+                        className={color !== "white" ? "option1" : "option2"}
+                        value="Prefiero no decirlo"
+                      >
                         Prefiero no decirlo
                       </option>
                       <option value="Otro">Otro</option>

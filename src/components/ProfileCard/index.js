@@ -21,8 +21,6 @@ export default function ProfileCard(props) {
 
   const color = useColorModeValue("rgba(33, 39, 24)", "rgba(78, 78, 78)");
 
-  console.log(props);
-
   return (
     <Center py={6}>
       <Box
