@@ -7,7 +7,6 @@ function SelectCountries() {
   return (
     <>
       <option
-        disabled={true}
         className={color !== "white" ? "option1" : "option2"}
         value="Elegir"
         id="AF"

@@ -96,8 +96,8 @@ export default function Header() {
                   <Image
                     src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
                     alt="a"
-                    h="70"
-                    p="3"
+                    h="90px"
+                    p="1"
                   />
                 </Link>
               </Bounce>

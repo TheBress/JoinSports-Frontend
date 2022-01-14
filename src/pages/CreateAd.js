@@ -136,11 +136,14 @@ function CreateAd() {
                   values.name !== "" &&
                   values.description !== "" &&
                   values.sport !== "" &&
+                  values.sport !== "Elegir" &&
                   values.location !== "" &&
+                  values.location !== "Elegir" &&
                   isDateValidate &&
                   selectedFile?.name !== null &&
                   (selectedFile?.name.substring(dotPosition + 1) === "png" ||
-                    selectedFile?.name.substring(dotPosition + 1) === "jpg")
+                    selectedFile?.name.substring(dotPosition + 1) === "jpg" ||
+                    selectedFile?.name.substring(dotPosition + 1) === "jpeg")
                 ) {
                   uploadFile(selectedFile);
 
@@ -299,9 +302,16 @@ function CreateAd() {
                           bg="primary.300"
                           color="black"
                           w="100"
-                          placeholder="Selecciona un deporte"
                           {...field}
                         >
+                          <option
+                            className={
+                              color !== "white" ? "option1" : "option2"
+                            }
+                            value="Elegir"
+                          >
+                            Selecciona un deporte
+                          </option>
                           {sports?.sports.map((sport) => {
                             return (
                               <option
@@ -340,10 +350,16 @@ function CreateAd() {
                           mb={2}
                           bg="primary.300"
                           w="100"
-                          color="black"
-                          placeholder="Selecciona una localización"
                           {...field}
                         >
+                          <option
+                            className={
+                              color !== "white" ? "option1" : "option2"
+                            }
+                            value="Elegir"
+                          >
+                            Selecciona una localización
+                          </option>
                           {locations?.locations.map((location) => {
                             return (
                               <option

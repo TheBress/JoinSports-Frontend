@@ -99,7 +99,8 @@ function CompleteProfile(dataUser) {
               age >= 18 &&
               age <= 65 &&
               values.description !== null &&
-              values.sex !== null
+              values.sex !== null &&
+              values.sex !== "Elegir"
             ) {
               updateUserIncomplete({
                 variables: {
@@ -236,7 +237,6 @@ function CompleteProfile(dataUser) {
                       {...field}
                     >
                       <option
-                        disabled={true}
                         className={color !== "white" ? "option1" : "option2"}
                         value="Elegir"
                       >

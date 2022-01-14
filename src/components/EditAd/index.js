@@ -249,7 +249,7 @@ function EditAd(props) {
     <>
       {(loadingUpdate || loadingDelete || loadingAccept) && (
         <Center
-          h="233%"
+          h="280%"
           w="100%"
           zIndex="2"
           position="absolute"

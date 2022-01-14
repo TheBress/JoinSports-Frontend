@@ -44,7 +44,7 @@ function Register() {
       <Image
         src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
         alt="logo"
-        h="100"
+        h="300"
         className="logo"
       />
       <Formik
@@ -52,7 +52,6 @@ function Register() {
         onSubmit={(values) => {
           if (
             /[a-zA-Z0-9]@gmail.com/.test(values.email) &&
-            /[A-Z]{1,}[a-z]{1,}[0-9]{1,}/.test(values.password) &&
             values.password.length >= 8 &&
             values.username.length > 0 &&
             values.username.length < 30
@@ -82,8 +81,8 @@ function Register() {
         <Fade right>
           <Form>
             <Stack justify="center" h="60vh" w="60vh" align="center">
-              <Heading size="xl" color="white" zIndex="1">
-                Bienvenido a JoinSports
+              <Heading size="lg" color="white" zIndex="1">
+                Bienvenido a WeJoinSports
               </Heading>
               <Text zIndex="1" fontSize="16px">
                 Introduzca sus datos para poder crear su cuenta
@@ -146,7 +145,7 @@ function Register() {
               <Field name="password">
                 {({ field }) => (
                   <FormControl>
-                    <FormLabel>Contraseña (mín 8)</FormLabel>
+                    <FormLabel>Contraseña (mín 8 caracteres)</FormLabel>
                     <InputGroup>
                       <InputLeftElement
                         pointerEvents="none"
