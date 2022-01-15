@@ -31,11 +31,10 @@ import { CREATE_EVENT_CALENDAR } from "../graphql/mutations/createEventCalendar"
 import { useHistory } from "react-router-dom";
 
 import { getRandomColor, validateDate } from "../functions/functions";
-import { UserAds, AllAdsData } from "../hooks/ads";
+import { UserAds, AllAdsData, LastAds } from "../hooks/ads";
 import Fade from "react-reveal/Fade";
 import { UserEventsCalendar } from "../hooks/eventsCalendar";
 import AWS from "aws-sdk";
-import { GET_LAST_ADS } from "../graphql/queries/getAds";
 import { GetUser } from "../hooks/users";
 import Footer from "../components/Footer";
 import { FaFileUpload } from "react-icons/fa";
@@ -48,9 +47,7 @@ function CreateAd() {
   const { me } = IsAuth();
   const { sports } = useSports();
   const { locations } = useLocations();
-  const [createAd, { loading }] = useMutation(CREATEAD, {
-    refetchQueries: [GET_LAST_ADS],
-  });
+  const [createAd, { loading }] = useMutation(CREATEAD);
   const [createEventCalendar] = useMutation(CREATE_EVENT_CALENDAR);
 
   const S3_BUCKET = "joinsports";
@@ -89,6 +86,7 @@ function CreateAd() {
   const { refetchAllAds } = AllAdsData();
   const { refetchEvents } = UserEventsCalendar(me?.meExtended.id);
   const { refetchUser } = GetUser(me?.meExtended.id);
+  const { refetchLastAds } = LastAds();
 
   const bg = useColorModeValue("black", "white");
   const color = useColorModeValue("white", "black");
@@ -176,7 +174,9 @@ function CreateAd() {
                       refetchAds();
                       refetchUser();
                       refetchAllAds();
-                      history.push("/");
+                      refetchLastAds().then(() => {
+                        history.push("/");
+                      });
                     })
                   );
                 } else {

@@ -53,13 +53,14 @@ export const UserAd = (userId) => {
 };
 
 export const LastAds = () => {
-  const { data, loading } = useQuery(GET_LAST_ADS);
+  const { data, loading, refetch: refetchLastAds } = useQuery(GET_LAST_ADS);
 
   const lastAds = useMemo(() => {
     return data;
   }, [data]);
 
   return {
+    refetchLastAds,
     lastAds,
     loading,
   };

@@ -189,8 +189,9 @@ function EditAd(props) {
     }).then(() => {
       refetchAds();
       refetchEvents();
-      refetchUser();
-      history.push(`/yourads`);
+      refetchUser().then(() => {
+        history.push(`/yourads`);
+      });
     });
   };
 
