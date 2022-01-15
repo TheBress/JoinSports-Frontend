@@ -5,7 +5,7 @@ export const CREATENOTIFICATION = gql`
     $message: String!
     $userTransmitter: ID!
     $userReceptor: ID!
-    $ad: ID!
+    $ad: ID
   ) {
     createNotification(
       input: {

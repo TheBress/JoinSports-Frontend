@@ -177,7 +177,6 @@ function EditAd(props) {
             message: messageDelete,
             userTransmitter: props?.userId,
             userReceptor: event?.user?.id,
-            ad: props?.id,
           },
         });
       }
