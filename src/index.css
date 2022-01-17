@@ -161,7 +161,7 @@ code {
 .file {
   background-color: #d6d0d0;
   border: 4px dashed black;
-  height: 150px;
+  height: auto;
 }
 
 .filep {
@@ -178,6 +178,7 @@ code {
   text-align: center;
   position: relative;
   top: 14%;
+  padding: 10px;
 }
 
 .iconArrow {

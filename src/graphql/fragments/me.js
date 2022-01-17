@@ -23,7 +23,6 @@ export const MEEXTENDED_FRAGMENT = gql`
     height
     weigth
     nationality
-    isAdmin
     cityResidence
     favoriteSports {
       ...SportsParts

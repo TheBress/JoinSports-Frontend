@@ -58,9 +58,11 @@ function AllAds() {
   };
 
   useEffect(() => {
-    let myAdsList = allAds?.ads?.filter(
-      (ad) => !isChecked && !ad?.user?.id?.includes(dataUser?.id)
-    );
+    let myAdsList = [];
+    allAds?.ads?.forEach((ad) => {
+      console.log(ad.user.id);
+      if (ad.user.id !== dataUser.id && !isChecked) myAdsList.push(ad);
+    });
 
     isChecked && (myAdsList = allAds?.ads);
 

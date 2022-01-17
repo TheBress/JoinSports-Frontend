@@ -278,6 +278,7 @@ function EditAd(props) {
 
           <Text
             mt="2"
+            ml="2"
             right={{ base: "74%", lg: "91%" }}
             fontSize="3xl"
             position="relative"
@@ -346,12 +347,12 @@ function EditAd(props) {
                 });
 
                 if (
-                  (event?.user?.id !== props.userId &&
-                    props.name !== values.name) ||
-                  props.description !== values.description ||
-                  props.sportId !== values.sport ||
-                  props.locationId !== values.location ||
-                  props.date !== values.date
+                  event?.user?.id !== props.userId &&
+                  (props.name !== values.name ||
+                    props.description !== values.description ||
+                    props.sportId !== values.sport ||
+                    props.locationId !== values.location ||
+                    props.date !== values.date)
                 ) {
                   createNotification({
                     variables: {
@@ -739,7 +740,7 @@ function EditAd(props) {
                       >{`${request?.user?.username}`}</Text>
                     );
                   }
-                  return "a";
+                  return "";
                 })
               ) : (
                 <Text>No hay usuarios aceptados</Text>

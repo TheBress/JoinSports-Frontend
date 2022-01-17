@@ -184,7 +184,7 @@ export default function Header() {
                   alt="avatar"
                 />
               </MenuButton>
-              <MenuList zIndex="3" bg="primary.100" color="white" h="18.7vh">
+              <MenuList zIndex="3" bg="primary.100" color="white">
                 <MenuItem _hover={{ bg: "primary.100" }} onClick={goProfile}>
                   <Text
                     transition=".3s"
@@ -210,18 +210,17 @@ export default function Header() {
                   </Text>
                 </MenuItem>
                 <MenuDivider />
-                <MenuItem
-                  position="relative"
-                  top="-1.3vh"
-                  bg="primary.200"
-                  transition=".3s"
-                  _hover={{
-                    transition: ".3s",
-                    background: "red",
-                  }}
-                  onClick={logout}
-                >
-                  <Text color="white">Cerrar sesión</Text>
+                <MenuItem _hover={{ bg: "primary.100" }} onClick={logout}>
+                  <Text
+                    color="#FA3535"
+                    transition=".3s"
+                    _hover={{
+                      transition: ".3s",
+                      color: "#FE5858",
+                    }}
+                  >
+                    Cerrar sesión
+                  </Text>
                 </MenuItem>
               </MenuList>
             </Menu>

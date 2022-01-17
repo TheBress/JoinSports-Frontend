@@ -37,6 +37,7 @@ function Login() {
       {loading && <Spinner size="xl" position="absolute" />}
       <div className="blackWall"></div>
       <Image
+        mt="2%"
         src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
         alt="logo"
         h="300"
@@ -67,8 +68,8 @@ function Login() {
       >
         <Fade top>
           <Form>
-            <Stack justify="center" h="60vh" w="60vh" align="center">
-              <Heading size="lg" color="white" zIndex="1">
+            <Stack justify="center" align="center">
+              <Heading size="xl" color="white" zIndex="1">
                 Bienvenido a WeJoinSports
               </Heading>
               <Text zIndex="1" fontSize="16px">

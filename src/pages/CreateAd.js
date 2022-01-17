@@ -101,12 +101,12 @@ function CreateAd() {
   return (
     <>
       <Header />
-      <Center h="123vh" mb={{ lg: "-1vh" }}>
+      <Center h="123vh" mb={{ lg: "-14vh" }}>
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
             position="relative"
-            top="1vh"
+            top={{ base: "-4vh", lg: "-6vh" }}
             borderRadius="20"
             bg={bg}
             color={color}
@@ -350,14 +350,10 @@ function CreateAd() {
                           mb={2}
                           bg="primary.300"
                           w="100"
+                          color="black"
                           {...field}
                         >
-                          <option
-                            className={
-                              color !== "white" ? "option1" : "option2"
-                            }
-                            value="Elegir"
-                          >
+                          <option className={"option1"} value="Elegir">
                             Selecciona una localización
                           </option>
                           {locations?.locations.map((location) => {

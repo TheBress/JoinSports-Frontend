@@ -86,7 +86,7 @@ function MyAds() {
 
       {isAcceptedAds?.length !== 0 && (
         <Text fontSize="3xl" ml="10" mt="4">
-          Anuncios aceptados
+          Anuncios en los que has sido aceptado
         </Text>
       )}
 

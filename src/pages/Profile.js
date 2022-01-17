@@ -95,7 +95,7 @@ function Profile() {
   return (
     <>
       <Header />
-      <Center h={{ lg: "90vh", base: "105vh" }} mb={{ lg: "10vh" }}>
+      <Center h={{ lg: "90vh", base: "105vh" }} mb={{ lg: "10vh" }} mt="-4vh">
         {loading && (
           <Center
             h="170vh"
@@ -129,7 +129,8 @@ function Profile() {
                 values.cityResidence !== "" &&
                 values.description !== ""
               ) {
-                uploadFile(selectedFile);
+
+                if (selectedFile !== null) uploadFile(selectedFile);
                 let image;
 
                 selectedFile?.name === undefined

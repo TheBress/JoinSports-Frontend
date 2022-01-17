@@ -303,8 +303,32 @@ function AdData() {
           </Stack>
         </Container>
 
-        {dataUser?.id === adData?.user?.id || isAccepted || !isDateValidate ? (
+        {dataUser?.id === adData?.user?.id ? (
           ""
+        ) : isAccepted ? (
+          <Button
+            p="5"
+            colorScheme="red"
+            fontSize="20px"
+            disabled="true"
+            position="fixed"
+            left={{ base: "50%", lg: "82%" }}
+            mt={{ base: "45%", lg: "15.5%" }}
+          >
+            Ya has sido aceptado
+          </Button>
+        ) : !isDateValidate ? (
+          <Button
+            p="5"
+            colorScheme="red"
+            fontSize="20px"
+            disabled="true"
+            position="fixed"
+            left={{ base: "45%", lg: "82%" }}
+            mt={{ base: "45%", lg: "15.5%" }}
+          >
+            Anuncio fuera de fecha
+          </Button>
         ) : !isSolicited ? (
           <Button
             onClick={onOpen}

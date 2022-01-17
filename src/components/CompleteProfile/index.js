@@ -19,6 +19,7 @@ import {
   Textarea,
   useColorModeValue,
   Grid,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { GiWeight, GiPerson } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
@@ -55,8 +56,6 @@ function CompleteProfile(dataUser) {
         bg={bg}
         color={color}
         textAlign="center"
-        h="97vh"
-        w={{ base: "63vh", lg: "80vh" }}
         borderRadius="20"
         position="relative"
         top="5"
@@ -375,20 +374,20 @@ function CompleteProfile(dataUser) {
               )}
             </Field>
 
-            <Button
-              position="relative"
-              bottom="-10px"
-              color="white"
-              fontSize="25"
-              p="5"
-              borderRadius="20"
-              colorScheme="primary.100"
-              variant="solid"
-              bg="primary.200"
-              type="submit"
-            >
-              Guardar
-            </Button>
+            <ModalFooter textAlign={"center"} justifyContent={"center"}>
+              <Button
+                color="white"
+                fontSize="25"
+                p="5"
+                borderRadius="20"
+                colorScheme="primary.100"
+                variant="solid"
+                bg="primary.200"
+                type="submit"
+              >
+                Guardar
+              </Button>
+            </ModalFooter>
           </Form>
         </Formik>
       </ModalContent>
