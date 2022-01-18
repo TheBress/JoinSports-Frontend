@@ -129,7 +129,6 @@ function Profile() {
                 values.cityResidence !== "" &&
                 values.description !== ""
               ) {
-
                 if (selectedFile !== null) uploadFile(selectedFile);
                 let image;
 

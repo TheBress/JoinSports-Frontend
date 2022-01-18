@@ -42,7 +42,7 @@ function MyCalendar() {
           <Calendar events={events} />
         </Container>
       </Fade>
-      <Footer />
+      <Footer isCalendar={true} />
     </>
   );
 }
