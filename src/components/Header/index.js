@@ -8,7 +8,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
   useDisclosure,
   Stack,
   Image,
@@ -33,7 +32,9 @@ import { UserNotifications } from "../../hooks/notifications";
 export default function Header() {
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const color = useColorModeValue("white");
+  const color = useColorModeValue("white", "black");
+
+  const bg = useColorModeValue("primary.100", "white");
   const { me } = IsAuth();
   const { colorMode, toggleColorMode } = useColorMode();
   let dataUser = me?.meExtended;
@@ -72,7 +73,7 @@ export default function Header() {
 
   return (
     <>
-      <Box bg="primary.100" px={4}>
+      <Box bg={bg} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             variant="none"
@@ -80,9 +81,9 @@ export default function Header() {
             size={"md"}
             icon={
               isOpen ? (
-                <CloseIcon color="white" />
+                <CloseIcon color={color} />
               ) : (
-                <HamburgerIcon color="white" />
+                <HamburgerIcon color={color} />
               )
             }
             aria-label={"Open Menu"}
@@ -94,7 +95,11 @@ export default function Header() {
               <Bounce>
                 <Link to="/">
                   <Image
-                    src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
+                    src={
+                      color === "white"
+                        ? "https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
+                        : "https://joinsports.s3.eu-west-3.amazonaws.com/logodark.png"
+                    }
                     alt="a"
                     h="90px"
                     p="1"
@@ -111,7 +116,7 @@ export default function Header() {
                 <Link to={link.url}>
                   <Text
                     transition=".2s"
-                    color="white"
+                    color={color}
                     _hover={{
                       transition: ".3s",
                       color: "#CACBC7",
@@ -141,18 +146,18 @@ export default function Header() {
                 variant="none"
               >
                 {colorMode === "light" ? (
-                  <MoonIcon color="white" />
+                  <MoonIcon color={color} />
                 ) : (
-                  <SunIcon color="white" />
+                  <SunIcon color={color} />
                 )}
               </Button>
               <Button
-                color="white"
+                color={color}
                 variant="none"
                 mr={{ lg: "8", base: "3" }}
                 onClick={goNotifications}
               >
-                <BellIcon />
+                <BellIcon color={color} />
                 {notSeenNotifications !== 0 && (
                   <Text
                     position="relative"
@@ -184,11 +189,16 @@ export default function Header() {
                   alt="avatar"
                 />
               </MenuButton>
-              <MenuList zIndex="3" bg="primary.100" color="white">
-                <MenuItem _hover={{ bg: "primary.100" }} onClick={goProfile}>
+              <MenuList zIndex="3" bg={bg} color={"white"}>
+                <MenuItem
+                  _hover={
+                    bg !== "white" ? { bg: "primary.100" } : { bg: "white" }
+                  }
+                  onClick={goProfile}
+                >
                   <Text
                     transition=".3s"
-                    color="white"
+                    color={color}
                     _hover={{
                       transition: ".3s",
                       color: "#CACBC7",
@@ -197,10 +207,15 @@ export default function Header() {
                     Tu perfil
                   </Text>
                 </MenuItem>
-                <MenuItem _hover={{ bg: "primary.100" }} onClick={goYourAds}>
+                <MenuItem
+                  _hover={
+                    bg !== "white" ? { bg: "primary.100" } : { bg: "white" }
+                  }
+                  onClick={goYourAds}
+                >
                   <Text
                     transition=".2s"
-                    color="white"
+                    color={color}
                     _hover={{
                       transition: ".2s",
                       color: "#CACBC7",
@@ -209,8 +224,14 @@ export default function Header() {
                     Tus anuncios
                   </Text>
                 </MenuItem>
-                <MenuDivider />
-                <MenuItem _hover={{ bg: "primary.100" }} onClick={logout}>
+                <hr color={color} mt="2" />
+                <MenuItem
+                  mt="1"
+                  _hover={
+                    bg !== "white" ? { bg: "primary.100" } : { bg: "white" }
+                  }
+                  onClick={logout}
+                >
                   <Text
                     color="#FA3535"
                     transition=".3s"
@@ -234,7 +255,7 @@ export default function Header() {
                 <Link to={link.url}>
                   <Text
                     transition=".3s"
-                    color="white"
+                    color={color}
                     _hover={{
                       transition: ".3s",
                       color: "#CACBC7",
@@ -246,7 +267,7 @@ export default function Header() {
               ))}
               <Button
                 bg="primary.200"
-                color="white"
+                color={color}
                 _hover={{
                   background: "red",
                 }}

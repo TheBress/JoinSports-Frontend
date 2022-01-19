@@ -45,6 +45,7 @@ function Register() {
         mt="2%"
         src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
         alt="logo"
+        p="5"
         h="300"
         className="logo"
       />

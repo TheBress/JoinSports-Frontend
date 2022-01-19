@@ -37,12 +37,14 @@ function Login() {
       {loading && <Spinner size="xl" position="absolute" />}
       <div className="blackWall"></div>
       <Image
+        className="logo"
         mt="2%"
         src="https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
         alt="logo"
         h="300"
-        className="logo"
+        p="5"
       />
+
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {

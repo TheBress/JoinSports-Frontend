@@ -3,25 +3,14 @@ import * as React from "react";
 import { Copyright } from "./Copyrigth";
 
 function Footer(props) {
-  let color1,
-    color2 = "";
-
-  if (props.isCalendar) {
-    color1 = "white";
-    color2 = "white";
-  } else {
-    color1 = "white";
-    color2 = "black";
-  }
-  const color = useColorModeValue(color1, color2);
+  const color = useColorModeValue("white", "black");
 
   return (
     <Box
       as="footer"
       role="contentinfo"
       mx="auto"
-      bg={props.isCalendar && "white"}
-      maxW={props.isCalendar ? "" : "7xl"}
+      maxW="7xl"
       py="12"
       px={{ base: "4", md: "8" }}
     >
@@ -33,8 +22,6 @@ function Footer(props) {
           justify="space-between"
         >
           <Image
-            position={props.isCalendar && "relative"}
-            left={props.isCalendar && "6%"}
             src={
               color !== "white"
                 ? "https://joinsports.s3.eu-west-3.amazonaws.com/logo.png"
@@ -43,7 +30,7 @@ function Footer(props) {
             w="200px"
           />
         </Stack>
-        <Copyright alignSelf="start" color={props.isCalendar && "black"} />
+        <Copyright alignSelf="start" />
       </Stack>
     </Box>
   );

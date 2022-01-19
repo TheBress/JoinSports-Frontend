@@ -318,13 +318,17 @@ function EditAd(props) {
             location: props.locationId,
           }}
           onSubmit={(values) => {
+            const dotPosition = selectedFile?.name.lastIndexOf(".");
             let isDateValidate = validateDate(values.date);
             if (
               values.name !== "" &&
               values.description !== "" &&
               values.sport !== "" &&
               values.location !== "" &&
-              isDateValidate
+              isDateValidate &&
+              (selectedFile?.name.substring(dotPosition + 1) === "png" ||
+                selectedFile?.name.substring(dotPosition + 1) === "jpg" ||
+                selectedFile?.name.substring(dotPosition + 1) === "jpeg")
             ) {
               const messageUpdate = `El usuario ${props?.username} ha realizado cambios en su anuncio ${values.name}. 
             Puedes consultarlos en el calendario o en tus anuncios`;

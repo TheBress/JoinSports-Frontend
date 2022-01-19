@@ -18,7 +18,6 @@ import {
   Button,
   Spinner,
 } from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
 import { Form, Formik, Field } from "formik";
 import useSports from "../hooks/sports";
 import useLocations from "../hooks/locations";
@@ -101,18 +100,18 @@ function CreateAd() {
   return (
     <>
       <Header />
-      <Center h="123vh" mb={{ lg: "-14vh" }}>
+      <Center h="123vh" mb={{ lg: "-14vh", base: "-20vh" }}>
         {loading && <Spinner size="xl" position="absolute" />}
         <Fade left>
           <Stack
             position="relative"
-            top={{ base: "-4vh", lg: "-6vh" }}
+            top={{ base: "-10vh", lg: "-6vh" }}
             borderRadius="20"
             bg={bg}
             color={color}
             justify="center"
             h="auto"
-            w={{ lg: "73vh", base: "60vh" }}
+            w={{ lg: "73vh", base: "55vh" }}
             align="center"
             p="5"
           >
@@ -195,10 +194,6 @@ function CreateAd() {
                       <FormControl>
                         <FormLabel>Nombre</FormLabel>
                         <InputGroup>
-                          <InputLeftElement
-                            pointerEvents="none"
-                            children={<EmailIcon color="black" />}
-                          />
                           <Input
                             _focus={{
                               background: "#E0E0DE",

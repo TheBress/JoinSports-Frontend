@@ -38,11 +38,11 @@ function MyCalendar() {
     <>
       <Header />
       <Fade left>
-        <Container maxW="container.xxl" bg="white">
+        <Container maxW="container.xl" bg="white" mt="6">
           <Calendar events={events} />
         </Container>
       </Fade>
-      <Footer isCalendar={true} />
+      <Footer />
     </>
   );
 }
