@@ -348,7 +348,12 @@ function CreateAd() {
                           color="black"
                           {...field}
                         >
-                          <option className={"option1"} value="Elegir">
+                          <option
+                            className={
+                              color !== "white" ? "option1" : "option2"
+                            }
+                            value="Elegir"
+                          >
                             Selecciona una localización
                           </option>
                           {locations?.locations.map((location) => {

@@ -120,6 +120,12 @@ function Profile() {
               }),
             }}
             onSubmit={(values) => {
+              let dotPosition;
+
+              if (selectedFile?.name === undefined)
+                dotPosition = selectedFile?.lastIndexOf(".");
+              else dotPosition = selectedFile?.name?.lastIndexOf(".");
+
               if (
                 values.height >= 145 &&
                 values.height <= 230 &&
@@ -127,15 +133,20 @@ function Profile() {
                 values.weigth < 170 &&
                 values.sports.length > 0 &&
                 values.cityResidence !== "" &&
-                values.description !== ""
+                values.description !== "" &&
+                (selectedFile?.name?.substring(dotPosition + 1) === "png" ||
+                  selectedFile?.name?.substring(dotPosition + 1) === "jpg" ||
+                  selectedFile?.name?.substring(dotPosition + 1) === "jpeg" ||
+                  selectedFile?.substring(dotPosition + 1) === "png" ||
+                  selectedFile?.substring(dotPosition + 1) === "jpg" ||
+                  selectedFile?.substring(dotPosition + 1) === "jpeg" ||
+                  selectedFile === undefined)
               ) {
-                if (selectedFile !== null) uploadFile(selectedFile);
+                if (selectedFile !== undefined) uploadFile(selectedFile);
                 let image;
 
-                selectedFile?.name === undefined
-                  ? (image = dataUser?.image)
-                  : (image = selectedFile?.name);
-
+                if (selectedFile !== undefined) image = selectedFile?.name;
+                else image = dataUser?.image;
                 updateProfile({
                   variables: {
                     id: dataUser?.id,

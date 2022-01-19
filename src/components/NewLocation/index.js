@@ -57,7 +57,9 @@ function NewLocation() {
 
             if (
               values.name !== "" &&
-              /C\/\s([A-Za-záéíóú]{1,}\s){1,}[0-9]{1,}/.test(values.direction)
+              /[C|Avda|Pº]\.\s([A-Za-záéíóú]{1,}\s){1,}[0-9]{1,}/.test(
+                values.direction
+              )
             ) {
               locations?.locations.forEach((location) => {
                 if (
@@ -126,7 +128,7 @@ function NewLocation() {
                   <InputGroup>
                     <Input
                       _placeholder={{ color: "#A19E9E" }}
-                      placeholder="C/ Paseo de la Castellana 13"
+                      placeholder="C. Paseo de la Castellana 13"
                       variant="outline"
                       color="black"
                       bg={"primary.300"}
